@@ -1,4 +1,4 @@
-import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 class Portal extends StatefulWidget {
@@ -60,7 +60,7 @@ class _PortalState extends State<Portal> {
                             size: 40,
                             color: Color.fromARGB(255, 158, 157, 157),
                           ),
-                          hintText: "Enter Your Email",
+                          hintText: "Enter Email",
                           filled: true,
                           fillColor: Color.fromARGB(255, 203, 203, 203),
                           // labelText: "LabelText",
@@ -122,7 +122,7 @@ class _PortalState extends State<Portal> {
                       width: 100.0,
                       child: ElevatedButton(
                           onPressed: () {},
-                          child: Text(
+                          child: const Text(
                             "LOG IN",
                             style: TextStyle(
                                 fontFamily: "ananias", fontSize: 15.0),
@@ -154,7 +154,7 @@ class _PortalState extends State<Portal> {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => signup()));
                             },
-                            child: Text(
+                            child: const Text(
                               "sign up",
                               style: TextStyle(
                                   color: Colors.blue,
