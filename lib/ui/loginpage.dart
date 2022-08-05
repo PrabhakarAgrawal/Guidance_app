@@ -27,9 +27,9 @@ class _loginscreenState extends State<loginscreen> {
   }
 
   void loginUser() async {
-    // setState(() {
-    //   _isLoading = true;
-    // });
+    setState(() {
+      _isLoading = true;
+    });
     String res = await AuthMethods().loginUser(
         email: _emailController.text, password: _passwordController.text);
     
@@ -39,9 +39,9 @@ class _loginscreenState extends State<loginscreen> {
     } else {
       showSnackBAr(res, context);
     }
-    // setState(() {
-    //   _isLoading = false;
-    // });
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   void goToLogin() {
