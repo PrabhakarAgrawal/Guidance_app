@@ -15,7 +15,7 @@ class _signupscreenState extends State<signupscreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
-  bool _isLoading= false;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -25,12 +25,13 @@ class _signupscreenState extends State<signupscreen> {
     _bioController.dispose();
     _usernameController.dispose();
   }
+
   void signUpUser() async {
     // set loading to true
     setState(() {
       _isLoading = true;
     });
-  }  
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +45,17 @@ class _signupscreenState extends State<signupscreen> {
             const SizedBox(
               height: 64,
             ),
-            // 
+            //
             Stack(
-            children: [CircleAvatar(radius: 64,backgroundImage: NetworkImage("https://picsum.photos/"),),
-            Positioned(child: IconButton(onPressed: (){},icon:const Icon(Icons.add_a_photo)))],
+              children: [
+                CircleAvatar(
+                  radius: 64,
+                  backgroundImage: NetworkImage("https://picsum.photos/"),
+                ),
+                Positioned(
+                    child: IconButton(
+                        onPressed: () {}, icon: const Icon(Icons.add_a_photo)))
+              ],
             ),
             TextFieldInput(
                 hintText: 'Enter Your Username',
@@ -87,8 +95,8 @@ class _signupscreenState extends State<signupscreen> {
             //         email: _emailController.text,
             //         password: _passwordController.text,
             //         username: _usernameController.text,
-            //         bio: _bioController.text , 
-            //         // file: 
+            //         bio: _bioController.text ,
+            //         // file:
             //         );
             //     print(res);
             //   },

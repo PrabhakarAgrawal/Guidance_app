@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:newapp/responsive/mobile_screen_layout.dart';
+import 'package:newapp/responsive/mobilescreen_layout.dart';
 import 'package:newapp/responsive/web_screen_layout.dart';
 import 'package:newapp/ui/aspirant_guide_selection.dart';
 import 'package:newapp/ui/loginpage.dart';
@@ -32,7 +32,7 @@ void main() async {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
-                return const ResponsiveLayout(
+                return ResponsiveLayout(
                   mobileScreenLayout: MobileScreenLayout(),
                   webScreenLayout: WebScreenLayout(),
                 );

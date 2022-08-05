@@ -1,6 +1,9 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:newapp/responsive/mobilescreen_layout.dart';
+import 'package:newapp/responsive/responsive_layout_screen.dart.dart';
+import 'package:newapp/responsive/web_screen_layout.dart';
 
 import '../resources/auth_methods.dart';
 import '../utils/utils.dart';
@@ -30,7 +33,6 @@ class _guideSignupState extends State<guideSignup> {
     _bioController.dispose();
     _usernameController.dispose();
     _collegeController.dispose();
-    
   }
 
   void selectPic() async {
@@ -45,18 +47,25 @@ class _guideSignupState extends State<guideSignup> {
       _isLoading = true;
     });
     String res = await secondAuthMethods().signUpGuide(
-                    email: _emailController.text,
-                    password: _passwordController.text,
-                    username: _usernameController.text,
-                    college: _collegeController.text,
-                    bio: _bioController.text,
-                    file: _image!);
-                print(res);
+        email: _emailController.text,
+        password: _passwordController.text,
+        username: _usernameController.text,
+        college: _collegeController.text,
+        bio: _bioController.text,
+        file: _image!);
+    print(res);
     setState(() {
       _isLoading = false;
     });
     if (res != "success") {
       showSnackBAr(res, context);
+    } else {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => MobileScreenLayout(),
+        // ResponsiveLayout
+        //       mobileScreenLayout: MobileScreenLayout(),
+        //       webScreenLayout: WebScreenLayout(),
+      ));
     }
   }
 
@@ -141,7 +150,7 @@ class _guideSignupState extends State<guideSignup> {
               height: 24,
             ),
             InkWell(
-              onTap:signUpGuide ,
+              onTap: signUpGuide,
               child: Container(
                 child: Text("Sign up"),
                 height: 40,

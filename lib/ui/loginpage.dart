@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newapp/resources/auth_methods.dart';
+import 'package:newapp/responsive/mobilescreen_layout.dart';
 import 'package:newapp/ui/aspirant_guide_selection.dart';
 import 'package:newapp/ui/aspirant_signup_page.dart';
 import 'package:newapp/ui/signuppage.dart';
@@ -27,21 +28,23 @@ class _loginscreenState extends State<loginscreen> {
   }
 
   void loginUser() async {
-    // setState(() {
-    //   _isLoading = true;
-    // });
+    setState(() {
+      _isLoading = true;
+    });
     String res = await AuthMethods().loginUser(
         email: _emailController.text, password: _passwordController.text);
-    
+
     if (res == "success") {
+      print(res);
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const aspirantSignup()));
+          MaterialPageRoute(builder: (context) => MobileScreenLayout()));
     } else {
+      res = 'failure';
       showSnackBAr(res, context);
     }
-    // setState(() {
-    //   _isLoading = false;
-    // });
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   void goToLogin() {
@@ -50,8 +53,8 @@ class _loginscreenState extends State<loginscreen> {
   }
 
   void goToSign() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const aspirantGuideSelection()));
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const aspirantGuideSelection()));
   }
 
   @override

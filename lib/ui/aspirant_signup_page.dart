@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:newapp/utils/utils.dart';
 
 import '../resources/auth_methods.dart';
+import '../responsive/mobilescreen_layout.dart';
 import '../widgets/text_field_input.dart';
 
 class aspirantSignup extends StatefulWidget {
@@ -54,6 +55,10 @@ class _aspirantSignupState extends State<aspirantSignup> {
     });
     if (res != "success") {
       showSnackBAr(res, context);
+    } else {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => MobileScreenLayout(),
+      ));
     }
   }
 
