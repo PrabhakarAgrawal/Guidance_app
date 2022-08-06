@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:newapp/utils/globalvar.dart';
@@ -10,6 +12,8 @@ class MobileScreenLayout extends StatefulWidget {
 }
 
 class _MobileScreenLayoutState extends State<MobileScreenLayout> {
+  String name = "";
+
   int _page = 0;
   late PageController pageController;
   @override
@@ -17,6 +21,35 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
     // TODO: implement initState
     super.initState();
     pageController = PageController();
+    getName();
+  }
+
+  Future <DocumentSnapshot> getName() async {
+    DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection('aspirant')
+        .doc('aspirant')
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    if (snap.data() == null) {
+      DocumentSnapshot snap = await FirebaseFirestore.instance
+          .collection('guide')
+          .doc('guide')
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .get();
+      print(snap.data());
+      print("guide");
+      return snap;
+    } else {
+      print("aspirant");
+      print(snap.data());
+      return snap;
+    }
+    setState(() {
+      name = (snap.data() as Map<String, dynamic>)["username"];
+    });
+    print("$name");
   }
 
   @override

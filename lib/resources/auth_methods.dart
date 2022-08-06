@@ -3,7 +3,10 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:newapp/manage/forAspirant.dart' as manage;
+import 'package:newapp/manage/forGuide.dart';
 import 'package:newapp/resources/storage.dart';
+
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -30,20 +33,22 @@ class AuthMethods {
         String photURL =
             await StorageMeth().upload_Img("ProfilePics", file, false);
         //add user to database
+        manage.forAspirant aspirant = manage.forAspirant(
+            username: username,
+            uid: cred.user!.uid,
+            photoUrl: photURL,
+            email: email,
+            bio: bio,
+            followers: [],
+            following: []);
+
         await _firestore
             .collection('aspirant')
             .doc('aspirant')
             .collection('users')
             .doc(cred.user!.uid)
-            .set({
-          'username': username,
-          'uid': cred.user!.uid,
-          'email': email,
-          'bio': bio,
-          'followers': [],
-          'following': [],
-          "photoURL": photURL,
-        });
+            .set(aspirant.toJson())
+            ;
         res = "success";
       }
     } catch (err) {
@@ -109,21 +114,24 @@ class secondAuthMethods {
         String photURL =
             await StorageMeth().upload_Img("ProfilePics", file, false);
         //add user to database
+
+        forGuide guide = forGuide(
+            username: username,
+            uid: cred.user!.uid,
+            photoUrl: photURL,
+            email: email,
+            college: college,
+            bio: bio,
+            followers: [],
+            following: []);
         await _firestore
             .collection('guide')
             .doc('guide')
             .collection('users')
             .doc(cred.user!.uid)
-            .set({
-          'username': username,
-          'uid': cred.user!.uid,
-          'email': email,
-          'college': college,
-          'bio': bio,
-          'followers': [],
-          'following': [],
-          "photoURL": photURL
-        });
+            .set(guide.toJson())
+            ;
+        
         res = "success";
       }
     } on FirebaseAuthException catch (e) {
