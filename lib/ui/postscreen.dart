@@ -1,7 +1,10 @@
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:newapp/resources/firestoreMethods.dart';
 import 'package:newapp/utils/utils.dart';
 
 class AddPost extends StatefulWidget {
@@ -12,11 +15,73 @@ class AddPost extends StatefulWidget {
 }
 
 class _AddPostState extends State<AddPost> {
+  String uid = '';
+  String username = '';
+  String profilePic = '';
+  String college = '';
+  String person = '';
   Uint8List? _file;
+  bool _isLoading = false;
   final TextEditingController _addtionalTextController =
       TextEditingController();
   //post question
-  void postDoubt(String id, String username) {}
+  void uploadImage(String uid, String username, String profilePic) async {
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      String res = await firestoreMethods().uploadPost(username, uid,
+          profilePic, _addtionalTextController.text, college, person, _file!);
+      if (res == 'success') {
+        setState(() {
+          _isLoading = false;
+        });
+        showSnackBAr('Posted', context);
+        clearPhotoPosting();
+      } else {
+        showSnackBAr(res, context);
+      }
+    } catch (e) {
+      showSnackBAr(e.toString(), context);
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getdetails();
+  }
+
+  void getdetails() async {
+    DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection('aspirant')
+        .doc('aspirant')
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    if (snap.data() == null) {
+      DocumentSnapshot snap = await FirebaseFirestore.instance
+          .collection('guide')
+          .doc('guide')
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .get();
+      setState(() {
+        username = (snap.data() as Map<String, dynamic>)["username"];
+        uid = (snap.data() as Map<String, dynamic>)["uid"];
+        profilePic = (snap.data() as Map<String, dynamic>)["photoUrl"];
+      });
+    } else {
+      setState(() {
+        username = (snap.data() as Map<String, dynamic>)["username"];
+        uid = (snap.data() as Map<String, dynamic>)["uid"];
+        profilePic = (snap.data() as Map<String, dynamic>)["photoUrl"];
+      });
+    }
+  }
+
   //image picking option
   _imageselect(BuildContext context) async {
     return showDialog(
@@ -69,13 +134,18 @@ class _AddPostState extends State<AddPost> {
     _addtionalTextController.dispose();
   }
 
+  void clearPhotoPosting() {
+    setState(() {
+      _file = null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_file == null) {
       return Scaffold(
           appBar: AppBar(
             backgroundColor: Color.fromARGB(255, 139, 64, 251),
-            leading: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
             title: const Text('Post'),
             centerTitle: false,
           ),
@@ -183,8 +253,14 @@ class _AddPostState extends State<AddPost> {
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 139, 64, 251),
-          leading: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
-          title: const Text('Post'),
+          leading: IconButton(
+              onPressed: () {
+                setState(() {
+                  _file = null;
+                });
+              },
+              icon: Icon(Icons.arrow_back)),
+          title: const Text('Post image of your doubt'),
           centerTitle: false,
         ),
         body: Center(
@@ -222,7 +298,7 @@ class _AddPostState extends State<AddPost> {
                 ),
               ),
               InkWell(
-                  onTap: () {},
+                  onTap: () => uploadImage(uid, username, profilePic),
                   child: Container(
                     alignment: Alignment.center,
                     height: 40.0,
@@ -231,12 +307,18 @@ class _AddPostState extends State<AddPost> {
                       borderRadius: BorderRadiusDirectional.circular(12.0),
                       color: Color.fromARGB(255, 139, 64, 251),
                     ),
-                    child: Text('UPLOAD',
-                        style: TextStyle(
-                          fontFamily: "ananias",
-                          color: Colors.white,
-                          fontSize: 20,
-                        )),
+                    child: _isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          )
+                        : const Text("upload",
+                            style: TextStyle(
+                              fontFamily: "ananias",
+                              color: Colors.white,
+                              fontSize: 20,
+                            )),
                   ))
             ],
           ),

@@ -2,7 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:newapp/providers/providerUser.dart';
 import 'package:newapp/utils/globalvar.dart';
+import 'package:newapp/manage/forAspirant.dart' as manage1;
+import 'package:newapp/manage/forGuide.dart' as manage2;
+import 'package:provider/provider.dart';
 
 class MobileScreenLayout extends StatefulWidget {
   MobileScreenLayout({Key? key}) : super(key: key);
@@ -13,7 +17,7 @@ class MobileScreenLayout extends StatefulWidget {
 
 class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   String name = "";
-
+  int type = 0;
   int _page = 0;
   late PageController pageController;
   @override
@@ -24,7 +28,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
     getName();
   }
 
-  Future <DocumentSnapshot> getName() async {
+  Future<DocumentSnapshot> getName() async {
     DocumentSnapshot snap = await FirebaseFirestore.instance
         .collection('aspirant')
         .doc('aspirant')
@@ -90,15 +94,22 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
                     size: 30.0),
                 label: ''),
             BottomNavigationBarItem(
-                icon: Icon(Icons.add_circle_outline,
+                icon: Icon(Icons.search_rounded,
                     color: _page == 1
                         ? Colors.white
                         : Color.fromARGB(255, 197, 194, 194),
                     size: 30.0),
                 label: ''),
             BottomNavigationBarItem(
-                icon: Icon(Icons.person,
+                icon: Icon(Icons.add_circle_outline,
                     color: _page == 2
+                        ? Colors.white
+                        : Color.fromARGB(255, 197, 194, 194),
+                    size: 30.0),
+                label: ''),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person,
+                    color: _page == 3
                         ? Colors.white
                         : Color.fromARGB(255, 197, 194, 194),
                     size: 30.0),

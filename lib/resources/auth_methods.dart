@@ -3,14 +3,35 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:newapp/manage/forAspirant.dart' as manage;
-import 'package:newapp/manage/forGuide.dart';
+import 'package:newapp/manage/forAspirant.dart' as manage1;
+import 'package:newapp/manage/forGuide.dart' as manage2;
 import 'package:newapp/resources/storage.dart';
-
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<dynamic> getUserDetails() async {
+    User currentUser = _auth.currentUser!;
+    DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection('aspirant')
+        .doc('aspirant')
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    if (snap.data() == null) {
+      DocumentSnapshot snap = await FirebaseFirestore.instance
+          .collection('guide')
+          .doc('guide')
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .get();
+      return manage1.forAspirant.fromSnap(snap);
+    } else {
+      return manage2.forGuide.fromSnap(snap);
+    }
+  }
+
   //sign up user
   Future<String> signUpAspirant({
     required String email,
@@ -33,7 +54,7 @@ class AuthMethods {
         String photURL =
             await StorageMeth().upload_Img("ProfilePics", file, false);
         //add user to database
-        manage.forAspirant aspirant = manage.forAspirant(
+        manage1.forAspirant aspirant = manage1.forAspirant(
             username: username,
             uid: cred.user!.uid,
             photoUrl: photURL,
@@ -47,8 +68,7 @@ class AuthMethods {
             .doc('aspirant')
             .collection('users')
             .doc(cred.user!.uid)
-            .set(aspirant.toJson())
-            ;
+            .set(aspirant.toJson());
         res = "success";
       }
     } catch (err) {
@@ -115,7 +135,7 @@ class secondAuthMethods {
             await StorageMeth().upload_Img("ProfilePics", file, false);
         //add user to database
 
-        forGuide guide = forGuide(
+        manage2.forGuide guide = manage2.forGuide(
             username: username,
             uid: cred.user!.uid,
             photoUrl: photURL,
@@ -129,9 +149,8 @@ class secondAuthMethods {
             .doc('guide')
             .collection('users')
             .doc(cred.user!.uid)
-            .set(guide.toJson())
-            ;
-        
+            .set(guide.toJson());
+
         res = "success";
       }
     } on FirebaseAuthException catch (e) {

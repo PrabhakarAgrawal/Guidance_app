@@ -10,6 +10,8 @@ import '../utils/utils.dart';
 import '../widgets/text_field_input.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'aspirant_guide_selection.dart';
+
 class guideSignup extends StatefulWidget {
   const guideSignup({Key? key}) : super(key: key);
 
@@ -72,6 +74,19 @@ class _guideSignupState extends State<guideSignup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 139, 64, 251),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => aspirantGuideSelection(),
+              ));
+            },
+            icon: Icon(Icons.arrow_back)),
+        title: const Text('Sign up'),
+        centerTitle: false,
+      ),
       body: SafeArea(
           child: Container(
         padding: EdgeInsets.symmetric(horizontal: 32),

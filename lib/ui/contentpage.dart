@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:newapp/widgets/photoposting.dart';
 
@@ -22,7 +23,23 @@ class _contentPageState extends State<contentPage> {
               onPressed: () {}, icon: const Icon(Icons.chat_bubble_outlined))
         ],
       ),
-      body: photoPosting(),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('posts').snapshots(),
+        builder: (context,
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return ListView.builder(
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (context, index) => photoPosting(
+              snap: snapshot.data!.docs[index].data(),
+            ),
+          );
+        },
+      ),
     );
   }
 }

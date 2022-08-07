@@ -7,6 +7,7 @@ import 'package:newapp/utils/utils.dart';
 import '../resources/auth_methods.dart';
 import '../responsive/mobilescreen_layout.dart';
 import '../widgets/text_field_input.dart';
+import 'aspirant_guide_selection.dart';
 
 class aspirantSignup extends StatefulWidget {
   const aspirantSignup({Key? key}) : super(key: key);
@@ -66,6 +67,18 @@ class _aspirantSignupState extends State<aspirantSignup> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 139, 64, 251),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => aspirantGuideSelection(),
+              ));
+            },
+            icon: Icon(Icons.arrow_back)),
+        title: const Text('Sign up'),
+        centerTitle: false,
+      ),
       body: SafeArea(
           child: Container(
         padding: EdgeInsets.symmetric(horizontal: 32),

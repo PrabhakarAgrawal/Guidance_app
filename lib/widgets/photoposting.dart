@@ -2,15 +2,20 @@ import 'dart:html';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class photoPosting extends StatelessWidget {
-  const photoPosting({Key? key}) : super(key: key);
+  final snap;
+  const photoPosting({Key? key, required this.snap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        Container(
+            padding: EdgeInsets.symmetric(vertical: 5),
+            child: Text(DateFormat.yMMMd().format(snap['date'].toDate()))),
         Container(
           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
           margin: EdgeInsets.all(10),
@@ -24,27 +29,36 @@ class photoPosting extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 17,
-                    backgroundImage:
-                        NetworkImage("https://unsplash.com/photos/98HGH2wPaCo"),
+                    backgroundImage: NetworkImage(snap['profilePic']),
                   ),
                   Expanded(
                       child: Padding(
                     padding: EdgeInsets.only(left: 12.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(
-                          'Username',
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              snap['username'],
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                            Text(snap['college'],
+                                style: TextStyle(
+                                    fontSize: 11,
+                                    color: Color.fromARGB(255, 218, 216, 216)))
+                          ],
                         ),
-                        Text('IIT Indore',
+                        Text('.${snap['person']}',
                             style: TextStyle(
+                                fontStyle: FontStyle.italic,
                                 fontSize: 11,
-                                color: Color.fromARGB(255, 218, 216, 216)))
+                                color: Color.fromARGB(255, 102, 158, 255)))
                       ],
                     ),
                   )),
@@ -76,14 +90,14 @@ class photoPosting extends StatelessWidget {
                 padding: EdgeInsets.all(7),
                 child: RichText(
                     text: TextSpan(
-                        text: 'discription to be replaced hehehehehhehe',
+                        text: snap['additionalText'],
                         style: TextStyle(color: Colors.white, fontSize: 12))),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.37,
                 width: double.infinity,
                 child: Image.network(
-                  'https://images.unsplash.com/photo-1659641926134-d80cb09ba024?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
+                  snap['postUrl'],
                   fit: BoxFit.contain,
                 ),
               ),
@@ -113,7 +127,7 @@ class photoPosting extends StatelessWidget {
                   Container(
                       margin: EdgeInsets.only(left: 10),
                       alignment: Alignment.topLeft,
-                      child: Text('420',
+                      child: Text('${snap['likes'].length}',
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,

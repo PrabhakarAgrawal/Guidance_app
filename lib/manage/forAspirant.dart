@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 class forAspirant {
   final String email;
   final String uid;
@@ -5,18 +8,16 @@ class forAspirant {
   final String username;
   final String bio;
   final List followers;
-  final List following ;
+  final List following;
 
-
-   forAspirant({
-    required this.username,
+  forAspirant(
+      {required this.username,
       required this.uid,
       required this.photoUrl,
       required this.email,
       required this.bio,
       required this.followers,
-      required this.following
-  });
+      required this.following});
   Map<String, dynamic> toJson() => {
         "username": username,
         "uid": uid,
@@ -26,4 +27,18 @@ class forAspirant {
         "followers": followers,
         "following": following,
       };
+
+  static forAspirant fromSnap(DocumentSnapshot snap) {
+    var snapshot = snap.data() as Map<String, dynamic>;
+
+    return forAspirant(
+      username: snapshot["username"],
+      uid: snapshot["uid"],
+      email: snapshot["email"],
+      photoUrl: snapshot["photoUrl"],
+      bio: snapshot["bio"],
+      followers: snapshot["followers"],
+      following: snapshot["following"],
+    );
+  }
 }
