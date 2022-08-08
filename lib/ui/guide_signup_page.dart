@@ -26,6 +26,7 @@ class _guideSignupState extends State<guideSignup> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _collegeController = TextEditingController();
   Uint8List? _image;
+  String person = "Guide";
   bool _isLoading = false;
   @override
   void dispose() {
@@ -54,7 +55,8 @@ class _guideSignupState extends State<guideSignup> {
         username: _usernameController.text,
         college: _collegeController.text,
         bio: _bioController.text,
-        file: _image!);
+        file: _image!,
+        person: person);
     print(res);
     setState(() {
       _isLoading = false;

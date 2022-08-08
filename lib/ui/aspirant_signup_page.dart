@@ -22,6 +22,8 @@ class _aspirantSignupState extends State<aspirantSignup> {
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   Uint8List? _image;
+  String person = 'Aspirant';
+  String college = '';
   bool _isLoading = false;
 
   @override
@@ -49,7 +51,9 @@ class _aspirantSignupState extends State<aspirantSignup> {
         password: _passwordController.text,
         username: _usernameController.text,
         bio: _bioController.text,
-        file: _image!);
+        file: _image!,
+        person: person,
+        college: college);
     print(res);
     setState(() {
       _isLoading = false;

@@ -20,25 +20,13 @@ class firestoreMethods {
     Uint8List file,
   ) async {
     DocumentSnapshot snap = await FirebaseFirestore.instance
-        .collection('aspirant')
-        .doc('aspirant')
-        .collection('users')
+        .collection('newusers')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
-    if (snap.data() == null) {
-      DocumentSnapshot snap = await FirebaseFirestore.instance
-          .collection('guide')
-          .doc('guide')
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .get();
-      college = (snap.data() as Map<String, dynamic>)["college"];
+    college = (snap.data() as Map<String, dynamic>)["college"];
+    person = (snap.data() as Map<String, dynamic>)["person"];
+    profilePic = (snap.data() as Map<String, dynamic>)["profilePic"];
 
-      person = "Guide";
-    } else {
-      college = "";
-      person = "Aspirant";
-    }
     String res = 'some error occured';
     try {
       String photoUrl = await StorageMeth().upload_Img("posts", file, true);
@@ -60,5 +48,65 @@ class firestoreMethods {
       res = e.toString();
     }
     return res;
+  }
+
+  //updating likes
+  Future<String> likePost(String postId, String uid, List likes) async {
+    String res = "Some error occurred";
+    try {
+      if (likes.contains(uid)) {
+        _firestore.collection('posts').doc(postId).update({
+          'likes': FieldValue.arrayRemove([uid])
+        });
+      } else {
+        _firestore.collection('posts').doc(postId).update({
+          'likes': FieldValue.arrayUnion([uid])
+        });
+      }
+      res = 'success';
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
+  }
+
+  //comment and answer posting
+  Future<String> postComment(String postId, String text, String uid,
+      String name, String profilePic, String person) async {
+    String res = "Some error occurred";
+    try {
+      if (text.isNotEmpty) {
+        // if the likes list contains the user uid, we need to remove it
+        String commentId = const Uuid().v1();
+        _firestore
+            .collection('posts')
+            .doc(postId)
+            .collection('comments')
+            .doc(commentId)
+            .set({
+          'profilePic': profilePic,
+          'name': name,
+          'uid': uid,
+          'text': text,
+          'commentId': commentId,
+          'datePublished': DateTime.now(),
+          'person': person,
+        });
+        res = 'success';
+      } else {
+        res = "Please enter text";
+      }
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
+  }
+
+  Future<void> deletePost(String postId) async {
+    try {
+      await _firestore.collection('posts').doc(postId).delete();
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }

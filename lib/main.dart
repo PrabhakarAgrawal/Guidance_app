@@ -36,17 +36,7 @@ void main() async {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
-                return MultiProvider(
-                  providers: [
-                    ChangeNotifierProvider(
-                      create: (_) => providerUser(),
-                    ),
-                  ],
-                  child: ResponsiveLayout(
-                    mobileScreenLayout: MobileScreenLayout(),
-                    webScreenLayout: WebScreenLayout(),
-                  ),
-                );
+                return MobileScreenLayout();
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text("${snapshot.error}"),
