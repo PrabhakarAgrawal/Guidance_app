@@ -1,10 +1,13 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:newapp/manage/post.dart';
 import 'package:newapp/resources/storage.dart';
+import 'package:newapp/widgets/selectfile.dart';
 import 'package:uuid/uuid.dart';
+
 
 class firestoreMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -15,6 +18,7 @@ class firestoreMethods {
     String uid,
     String profilePic,
     String additionalText,
+    String type,
     String college,
     String person,
     Uint8List file,
@@ -29,12 +33,56 @@ class firestoreMethods {
 
     String res = 'some error occured';
     try {
-      String photoUrl = await StorageMeth().upload_Img("posts", file, true);
+      String postfileurl = await StorageMeth().upload_Img("posts", file, true);
       String postId = const Uuid().v1();
       Post post = Post(
           username: username,
           uid: uid,
-          postUrl: photoUrl,
+          postfileurl: postfileurl,
+          college: college,
+          person: person,
+          type: type,
+          profilePic: profilePic,
+          date: DateTime.now(),
+          additionalText: additionalText,
+          likes: [],
+          postId: postId);
+      _firestore.collection('posts').doc(postId).set(post.toJson());
+      res = 'success';
+    } catch (e) {
+      res = e.toString();
+    }
+    return res;
+  }
+
+  //upload file as post
+  Future<String> uploadFile(
+    String username,
+    String uid,
+    String profilePic,
+    String type,
+    String additionalText,
+    String college,
+    String person,
+    File file,
+  ) async {
+    DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection('newusers')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    college = (snap.data() as Map<String, dynamic>)["college"];
+    person = (snap.data() as Map<String, dynamic>)["person"];
+    profilePic = (snap.data() as Map<String, dynamic>)["profilePic"];
+
+    String res = 'some error occured';
+    try {
+      String postfileurl = await StorageMeth().upload_File(file);
+      String postId = const Uuid().v1();
+      Post post = Post(
+          username: username,
+          uid: uid,
+          postfileurl: postfileurl,
+          type:type,
           college: college,
           person: person,
           profilePic: profilePic,

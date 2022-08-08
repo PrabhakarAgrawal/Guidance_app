@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:newapp/ui/loginpage.dart';
 import 'package:newapp/widgets/photoposting.dart';
 
 class contentPage extends StatefulWidget {
@@ -20,7 +21,10 @@ class _contentPageState extends State<contentPage> {
         title: Text('feed'),
         actions: [
           IconButton(
-              onPressed: () {}, icon: const Icon(Icons.chat_bubble_outlined))
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => loginscreen()));
+              }, icon: const Icon(Icons.chat_bubble_outlined))
         ],
       ),
       body: StreamBuilder(

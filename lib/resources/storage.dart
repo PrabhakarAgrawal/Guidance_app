@@ -1,4 +1,7 @@
+import 'dart:io';
 import 'dart:typed_data';
+import 'package:newapp/resources/firebaseApi.dart';
+import 'package:path/path.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -6,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class StorageMeth {
+  UploadTask? task;
+
   final FirebaseStorage _storage = FirebaseStorage.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -22,5 +27,16 @@ class StorageMeth {
 
     String downloadURL = await snap.ref.getDownloadURL();
     return downloadURL;
+  }
+  Future upload_File(File file) async {
+    if (file == null) return;
+    final fileName = basename(file!.path);
+    final destination = 'files/$fileName';
+    task = FirebaseApi.uploadFile(destination, file!);
+    if (task == null) return;
+    final snapshot = await task!.whenComplete(() {});
+    final urlDownload = await snapshot.ref.getDownloadURL();
+    return urlDownload;
+    print('success');
   }
 }

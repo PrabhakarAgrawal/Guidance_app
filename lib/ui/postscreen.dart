@@ -20,6 +20,7 @@ class _AddPostState extends State<AddPost> {
   String username = '';
   String profilePic = '';
   String college = '';
+  String type = 'photo';
   String person = '';
   Uint8List? _file;
   bool _isLoading = false;
@@ -31,8 +32,15 @@ class _AddPostState extends State<AddPost> {
       _isLoading = true;
     });
     try {
-      String res = await firestoreMethods().uploadPost(username, uid,
-          profilePic, _addtionalTextController.text, college, person, _file!);
+      String res = await firestoreMethods().uploadPost(
+          username,
+          uid,
+          profilePic,
+          _addtionalTextController.text,
+          type,
+          college,
+          person,
+          _file!);
       if (res == 'success') {
         setState(() {
           _isLoading = false;
@@ -206,6 +214,38 @@ class _AddPostState extends State<AddPost> {
                             fontSize: 20,
                             fontFamily: 'ananias')),
                   ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: 250.0,
+                    alignment: Alignment.center,
+                    child: Text('UPLOAD An image of your doubt',
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 68, 67, 67),
+                            fontSize: 20,
+                            fontFamily: 'ananias')),
+                  ),
+                  Container(
+                      height: 100.0,
+                      width: 100.0,
+                      margin: EdgeInsets.only(top: 50.0, bottom: 10.0),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50.0),
+                          color: Color.fromARGB(255, 139, 64, 251)),
+                      child: IconButton(
+                        alignment: Alignment.center,
+                        onPressed: () {
+                          _imageselect(context);
+                        },
+                        icon: Icon(
+                          Icons.camera_alt_outlined,
+                          size: 60.0,
+                          color: Colors.white,
+                        ),
+                      )),
                 ],
               ),
             ],

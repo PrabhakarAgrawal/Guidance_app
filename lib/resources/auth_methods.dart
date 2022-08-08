@@ -11,26 +11,26 @@ class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Future<dynamic> getUserDetails() async {
-  //   User currentUser = _auth.currentUser!;
-  //   DocumentSnapshot snap = await FirebaseFirestore.instance
-  //       .collection('aspirant')
-  //       .doc('aspirant')
-  //       .collection('users')
-  //       .doc(FirebaseAuth.instance.currentUser!.uid)
-  //       .get();
-  //   if (snap.data() == null) {
-  //     DocumentSnapshot snap = await FirebaseFirestore.instance
-  //         .collection('guide')
-  //         .doc('guide')
-  //         .collection('users')
-  //         .doc(FirebaseAuth.instance.currentUser!.uid)
-  //         .get();
-  //     return manage1.forAspirant.fromSnap(snap);
-  //   } else {
-  //     return manage2.forGuide.fromSnap(snap);
-  //   }
-  // }
+  Future<dynamic> getUserDetails() async {
+    User currentUser = _auth.currentUser!;
+    DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection('aspirant')
+        .doc('aspirant')
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    if (snap.data() == null) {
+      DocumentSnapshot snap = await FirebaseFirestore.instance
+          .collection('guide')
+          .doc('guide')
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .get();
+      return manage1.forAspirant.fromSnap(snap);
+    } else {
+      return manage2.forGuide.fromSnap(snap);
+    }
+  }
 
   //sign up user
   Future<String> signUpAspirant({
