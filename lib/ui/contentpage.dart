@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:newapp/ui/chat_screen.dart';
 import 'package:newapp/ui/loginpage.dart';
 import 'package:newapp/widgets/photoposting.dart';
 
@@ -23,7 +24,7 @@ class _contentPageState extends State<contentPage> {
           IconButton(
               onPressed: () {
                 Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => loginscreen()));
+          MaterialPageRoute(builder: (context) => ChatScreen()));
               }, icon: const Icon(Icons.chat_bubble_outlined))
         ],
       ),

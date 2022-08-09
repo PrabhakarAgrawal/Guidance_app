@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:newapp/responsive/mobilescreen_layout.dart';
 import 'package:newapp/utils/utils.dart';
 import 'package:path/path.dart';
 import '../resources/firebaseApi.dart';
@@ -104,7 +105,7 @@ class _selectFileState extends State<selectFile> {
         leading: IconButton(
             onPressed: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => AddPost()));
+                  MaterialPageRoute(builder: (context) => MobileScreenLayout()));
             },
             icon: Icon(Icons.arrow_back)),
         title: const Text('Post image of your doubt'),

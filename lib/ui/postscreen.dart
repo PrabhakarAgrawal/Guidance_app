@@ -20,7 +20,7 @@ class _AddPostState extends State<AddPost> {
   String username = '';
   String profilePic = '';
   String college = '';
-  String type = 'photo';
+  String type = 'Photo';
   String person = '';
   Uint8List? _file;
   bool _isLoading = false;
@@ -137,7 +137,8 @@ class _AddPostState extends State<AddPost> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    if(_file== null){
+      return Scaffold(
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 139, 64, 251),
           title: const Text('Post'),
@@ -251,5 +252,94 @@ class _AddPostState extends State<AddPost> {
             ],
           ),
         ));
+    }else{
+      return Scaffold(
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 139, 64, 251),
+          leading: IconButton(
+              onPressed: () {
+                setState(() {
+                  _file = null;
+                });
+              },
+              icon: Icon(Icons.arrow_back)),
+          title: const Text('Post image of your doubt'),
+          centerTitle: false,
+        ),
+        body: Container(
+          constraints: BoxConstraints.expand(),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                "assets/images/backgroundimg.png",
+              ),
+              opacity: 200.0,
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  width: MediaQuery.of(context).size.width * 0.55,
+                  child: AspectRatio(
+                    aspectRatio: 250 / 220,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.contain, image: MemoryImage(_file!)),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(10.0),
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12.0),
+                      color: Colors.white),
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    child: TextField(
+                      controller: _addtionalTextController,
+                      decoration: const InputDecoration(
+                          hintText: 'Write addtional text',
+                          border: InputBorder.none),
+                      maxLines: 8,
+                    ),
+                  ),
+                ),
+                InkWell(
+                    onTap: () => uploadImage(uid, username, profilePic),
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 40.0,
+                      width: 100.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadiusDirectional.circular(12.0),
+                        color: Color.fromARGB(255, 139, 64, 251),
+                      ),
+                      child: _isLoading
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            )
+                          : const Text("upload",
+                              style: TextStyle(
+                                fontFamily: "ananias",
+                                color: Colors.white,
+                                fontSize: 20,
+                              )),
+                    ))
+              ],
+            ),
+          ),
+        ),
+      );
+    }
   }
 }

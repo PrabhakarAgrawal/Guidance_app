@@ -6,6 +6,7 @@ import 'package:newapp/providers/providerUser.dart';
 import 'package:newapp/responsive/mobilescreen_layout.dart';
 import 'package:newapp/responsive/web_screen_layout.dart';
 import 'package:newapp/ui/aspirant_guide_selection.dart';
+import 'package:newapp/ui/chat_screen.dart';
 import 'package:newapp/ui/loginpage.dart';
 import 'package:newapp/ui/signuppage.dart';
 import 'package:newapp/responsive/responsive_layout_screen.dart.dart';
