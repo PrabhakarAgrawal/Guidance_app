@@ -8,7 +8,6 @@ import 'package:newapp/resources/storage.dart';
 import 'package:newapp/widgets/selectfile.dart';
 import 'package:uuid/uuid.dart';
 
-
 class firestoreMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -48,6 +47,8 @@ class firestoreMethods {
           likes: [],
           postId: postId);
       _firestore.collection('posts').doc(postId).set(post.toJson());
+      _firestore.collection('photoposts').doc(postId).set(post.toJson());
+
       res = 'success';
     } catch (e) {
       res = e.toString();
@@ -82,7 +83,7 @@ class firestoreMethods {
           username: username,
           uid: uid,
           postfileurl: postfileurl,
-          type:type,
+          type: type,
           college: college,
           person: person,
           profilePic: profilePic,
@@ -91,6 +92,23 @@ class firestoreMethods {
           likes: [],
           postId: postId);
       _firestore.collection('posts').doc(postId).set(post.toJson());
+      if (type == 'Photo') {
+        _firestore.collection('photoposts').doc(postId).set(post.toJson());
+      } else if (type == 'Formulabook') {
+        _firestore
+            .collection('formulabookposts')
+            .doc(postId)
+            .set(post.toJson());
+      } else if (type == 'Books') {
+        _firestore.collection('booksposts').doc(postId).set(post.toJson());
+      } else if (type == 'Video') {
+        _firestore.collection('videoposts').doc(postId).set(post.toJson());
+      } else if (type == 'Handwritten notes') {
+        _firestore
+            .collection('handwrittennotesposts')
+            .doc(postId)
+            .set(post.toJson());
+      }
       res = 'success';
     } catch (e) {
       res = e.toString();

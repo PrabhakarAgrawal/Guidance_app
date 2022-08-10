@@ -20,11 +20,11 @@ void main() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
         options: const FirebaseOptions(
-      apiKey: 'AIzaSyB8l7MZCrYxNwhJgINSCHZ3JbKdKZ2jcw0',
-      appId: '1:551995240894:web:09d812dfd658eb7b95c9ef',
-      messagingSenderId: '551995240894',
-      projectId: 'newapp-c001b',
-      storageBucket: 'newapp-c001b.appspot.com',
+      apiKey: "AIzaSyAZW7PP0FwByTEjd_6Js6r-e7w6llB1BcU",
+      appId: "1:73300636207:web:37fd07af92c8cccf178cda",
+      messagingSenderId: "73300636207",
+      projectId: "devnewapp-b5982",
+      storageBucket: "devnewapp-b5982.appspot.com",
     ));
   } else {
     await Firebase.initializeApp();

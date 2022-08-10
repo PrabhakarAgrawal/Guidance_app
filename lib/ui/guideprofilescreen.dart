@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:newapp/resources/firestoreMethods.dart';
+import 'package:video_player/video_player.dart';
 
 class guideProfileScreen extends StatefulWidget {
   guideProfileScreen({Key? key}) : super(key: key);
@@ -22,12 +23,22 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
   String college = '';
   List followers = [];
   int postlength = 0;
+  String postfileurl = '';
   bool isload = false;
-  String type = 'Photo';
+  String type = 'photoposts';
+  VideoPlayerController? _videoPlayerController;
+
   @override
   void initState() {
     super.initState();
     getdetails();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _videoPlayerController?.dispose();
   }
 
   Future<dynamic> getdetails() async {
@@ -214,13 +225,14 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                             //     )),
                           ],
                         )),
+                    Divider(),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           InkWell(
                               onTap: () {
                                 setState(() {
-                                  type = 'Photo';
+                                  type = 'photoposts';
                                 });
                               },
                               child: Container(
@@ -229,7 +241,7 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                   width: 90,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12),
-                                    color: type == 'Photo'
+                                    color: type == 'photoposts'
                                         ? Colors.purple
                                         : Colors.grey,
                                   ),
@@ -323,10 +335,9 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white)))),
                         ]),
-                    Divider(),
                     FutureBuilder(
                         future: FirebaseFirestore.instance
-                            .collection('posts')
+                            .collection(type)
                             .where('uid',
                                 isEqualTo:
                                     FirebaseAuth.instance.currentUser!.uid)
@@ -341,94 +352,102 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                             );
                           }
                           return GridView.builder(
-                            shrinkWrap: true,
-                            itemCount: (snapshot.data! as dynamic).docs.length,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 1,
-                              crossAxisSpacing: 5,
-                              mainAxisSpacing: 1.5,
-                              childAspectRatio: 1,
-                            ),
-                            itemBuilder: (context, index) {
-                              DocumentSnapshot snap =
-                                  (snapshot.data! as dynamic).docs[index];
+                              shrinkWrap: true,
+                              itemCount:
+                                  (snapshot.data! as dynamic).docs.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 1,
+                                crossAxisSpacing: 0,
+                                mainAxisSpacing: 0,
+                                childAspectRatio: 0.5,
+                              ),
+                              itemBuilder: (context, index) {
+                                DocumentSnapshot snap =
+                                    (snapshot.data! as dynamic).docs[index];
 
-                              return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 5, horizontal: 15),
-                                    margin: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: Color.fromARGB(255, 101, 101, 101),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Row(
+                                if (snap['type'] == 'Photo') {
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 5, horizontal: 15),
+                                        margin: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          color: Color.fromARGB(
+                                              255, 101, 101, 101),
+                                        ),
+                                        child: Column(
                                           children: [
-                                            CircleAvatar(
-                                              radius: 17,
-                                              backgroundImage: NetworkImage(
-                                                  snap['profilePic']),
-                                            ),
-                                            Expanded(
-                                                child: Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 16.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                            Row(
+                                              children: [
+                                                CircleAvatar(
+                                                  radius: 17,
+                                                  backgroundImage: NetworkImage(
+                                                      snap['profilePic']),
+                                                ),
+                                                Expanded(
+                                                    child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 16.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
                                                     children: [
-                                                      Text(
-                                                        snap['username'],
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color:
-                                                                Colors.white),
+                                                      Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            snap['username'],
+                                                            style: TextStyle(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                          Text(snap['college'],
+                                                              style: TextStyle(
+                                                                  fontSize: 11,
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          218,
+                                                                          216,
+                                                                          216)))
+                                                        ],
                                                       ),
-                                                      Text(snap['college'],
+                                                      Text(
+                                                          '~ ${snap['person']}',
                                                           style: TextStyle(
-                                                              fontSize: 11,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 12,
                                                               color: Color
                                                                   .fromARGB(
                                                                       255,
-                                                                      218,
-                                                                      216,
-                                                                      216)))
+                                                                      102,
+                                                                      158,
+                                                                      255)))
                                                     ],
                                                   ),
-                                                  Text('~ ${snap['person']}',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 12,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              102,
-                                                              158,
-                                                              255)))
-                                                ],
-                                              ),
-                                            )),
-                                            IconButton(
-                                                onPressed: () {
-                                                  showDialog(
-                                                      context: context,
-                                                      builder:
-                                                          (context) => Dialog(
+                                                )),
+                                                IconButton(
+                                                    onPressed: () {
+                                                      showDialog(
+                                                          context: context,
+                                                          builder: (context) =>
+                                                              Dialog(
                                                                   child:
                                                                       Container(
                                                                 height: 45,
@@ -449,91 +468,72 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                                                       .toList(),
                                                                 ),
                                                               )));
-                                                },
-                                                icon: Icon(
-                                                    Icons.more_vert_rounded),
-                                                color: Colors.white)
+                                                    },
+                                                    icon: Icon(Icons
+                                                        .more_vert_rounded),
+                                                    color: Colors.white)
+                                              ],
+                                            ),
+                                            Container(
+                                              width: double.infinity,
+                                              child: RichText(
+                                                  text: TextSpan(
+                                                      text: snap[
+                                                          'additionalText'],
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 12))),
+                                            ),
+                                            SizedBox(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.37,
+                                              width: double.infinity,
+                                              child: Image.network(
+                                                snap['postfileurl'],
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Container(
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: Text(
+                                                        DateFormat.yMMMd()
+                                                            .format(snap['date']
+                                                                .toDate()),
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    184,
+                                                                    184,
+                                                                    184)),
+                                                      )),
+                                                ),
+                                                Expanded(
+                                                    child: Align(
+                                                  alignment:
+                                                      Alignment.bottomRight,
+                                                  child: IconButton(
+                                                      onPressed: () {},
+                                                      icon:
+                                                          Icon(Icons.download)),
+                                                ))
+                                              ],
+                                            ),
                                           ],
                                         ),
-                                        Container(
-                                          width: double.infinity,
-                                          child: RichText(
-                                              text: TextSpan(
-                                                  text: snap['additionalText'],
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 12))),
-                                        ),
-                                        SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.37,
-                                          width: double.infinity,
-                                          child: Image.network(
-                                            snap['postfileurl'],
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                                child: Align(
-                                              alignment: Alignment.bottomRight,
-                                              child: IconButton(
-                                                  onPressed: () {},
-                                                  icon: Icon(Icons.download)),
-                                            ))
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: Container(
-                                                  alignment: Alignment.topRight,
-                                                  child: Text(
-                                                    DateFormat.yMMMd().format(
-                                                        snap['date'].toDate()),
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255,
-                                                            184,
-                                                            184,
-                                                            184)),
-                                                  )),
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                          //         return ListView.builder(
-                          //           itemCount: (snapshot.data! as dynamic).docs.length,
-                          //           itemBuilder: ((context, index) {
-                          //             return ListTile(
-                          //                 tileColor: Colors.grey,
-                          //                 leading: Container(
-                          //                   decoration: BoxDecoration(
-                          //                       image: (snapshot.data! as dynamic)
-                          //                           .docs[index]['postfileurl']),
-                          //                 ),
-                          //                 title: Text(
-                          //                     DateFormat.yMMMd().format(
-                          //                         (snapshot.data! as dynamic)
-                          //                             .docs[index]['date']
-                          //                             .toDate()),
-                          //                     style: TextStyle(
-                          //                         fontWeight: FontWeight.bold,
-                          //                         fontSize: 12,
-                          //                         color: Color.fromARGB(
-                          //                             255, 102, 158, 255))),
-                          //                 trailing: Icon(Icons.download));
-                          //           }),
-                          //         );
+                                      ),
+                                    ],
+                                  );
+                                } else {
+                                  return Divider();
+                                }
+                              });
                         }),
                   ]),
             ));
