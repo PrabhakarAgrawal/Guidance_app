@@ -60,7 +60,7 @@ class _loginscreenState extends State<loginscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromARGB(212, 0, 0, 0),
       body: SafeArea(
           child: Container(
         constraints: BoxConstraints.expand(),
@@ -80,16 +80,16 @@ class _loginscreenState extends State<loginscreen> {
             Container(
                 margin:
                     EdgeInsets.only(top: 0.0, left: 20, right: 20, bottom: 20),
-                width: 250,
-                height: 200,
+                width: 350,
+                height: 300,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                     image: const DecorationImage(
                         image: AssetImage("assets/images/taglinelogo.png"),
                         fit: BoxFit.cover))),
-            SizedBox(
-              height: 64,
-            ),
+            // SizedBox(
+            //   height: 64,
+            // ),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),

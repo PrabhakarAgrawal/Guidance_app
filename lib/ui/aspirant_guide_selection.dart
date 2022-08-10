@@ -12,7 +12,7 @@ class aspirantGuideSelection extends StatelessWidget {
     return Material(
       child: Center(
         child: Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor: Color.fromARGB(212, 0, 0, 0),
           appBar: AppBar(
             backgroundColor: Color.fromARGB(255, 139, 64, 251),
             leading: IconButton(
@@ -39,6 +39,14 @@ class aspirantGuideSelection extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        image: const DecorationImage(
+                            image: AssetImage('assets\images\aspirant.png'),
+                            fit: BoxFit.cover))),
+
                 InkWell(
                   onTap: (() {
                     Navigator.of(context).push(MaterialPageRoute(
@@ -58,6 +66,9 @@ class aspirantGuideSelection extends StatelessWidget {
                         color: Colors.purple[400]),
                   ),
                 ),
+
+                // ],
+
                 SizedBox(
                   height: 24,
                 ),

@@ -66,7 +66,7 @@ class _aspirantSignupState extends State<aspirantSignup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromARGB(212, 0, 0, 0),
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
@@ -98,9 +98,9 @@ class _aspirantSignupState extends State<aspirantSignup> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 64,
-                    ),
+                    // const SizedBox(
+                    //   height: 64,
+                    // ),
                     Padding(
                       padding: const EdgeInsets.all(40.0),
                       child: Stack(

@@ -144,7 +144,7 @@ class _AddPostState extends State<AddPost> {
   Widget build(BuildContext context) {
     if (_file == null) {
       return Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor: Color.fromARGB(212, 0, 0, 0),
           appBar: AppBar(
             backgroundColor: Color.fromARGB(255, 139, 64, 251),
             title: const Text('Post'),
@@ -266,7 +266,7 @@ class _AddPostState extends State<AddPost> {
           ));
     } else {
       return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(212, 0, 0, 0),
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 139, 64, 251),
           leading: IconButton(

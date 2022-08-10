@@ -13,7 +13,7 @@ class _contentPageState extends State<contentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromARGB(212, 0, 0, 0),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
         centerTitle: true,
