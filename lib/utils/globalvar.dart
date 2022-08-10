@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newapp/ui/contentpage.dart';
+import 'package:newapp/ui/guideprofilescreen.dart';
 import 'package:newapp/ui/postscreen.dart';
 import 'package:newapp/ui/searchscreen.dart';
 
@@ -7,7 +8,7 @@ var homeScreenItems1 = [
   contentPage(),
   searchScreen(),
   AddPost(),
-  Text('profile'),
+  guideProfileScreen(),
 ];
 var homeScreenItems2 = [
   contentPage(),
