@@ -1,10 +1,15 @@
 import 'dart:html';
+import 'dart:isolate';
+import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:intl/intl.dart';
 import 'package:newapp/resources/firestoreMethods.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:video_player/video_player.dart';
 
 class guideProfileScreen extends StatefulWidget {
@@ -27,11 +32,26 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
   bool isload = false;
   String type = 'photoposts';
   VideoPlayerController? _videoPlayerController;
-
+  ReceivePort receivePort = ReceivePort();
+  int progress = 0;
   @override
   void initState() {
     super.initState();
+    IsolateNameServer.registerPortWithName(receivePort.sendPort, 'downloading');
+    receivePort.listen(
+      (message) {
+        setState(() {
+          progress = message;
+        });
+      },
+    );
     getdetails();
+    FlutterDownloader.registerCallback(downloadCallback);
+  }
+
+  static downloadCallback(id, status, progress) {
+    SendPort? sendPort = IsolateNameServer.lookupPortByName('downloading');
+    sendPort!.send(progress);
   }
 
   @override
@@ -39,6 +59,21 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
     // TODO: implement dispose
     super.dispose();
     _videoPlayerController?.dispose();
+  }
+
+//downloading post
+  Future<String> _downloadFile(String url, String filename) async {
+    final status = await Permission.storage.request();
+    String res = 'success';
+    if (status.isGranted) {
+      final basestorage = await getExternalStorageDirectory();
+      final id = await FlutterDownloader.enqueue(
+          url: url, savedDir: basestorage!.path, fileName: filename);
+    } else {
+      print("you don't have device permission");
+      res = 'failure';
+    }
+    return res;
   }
 
   void buttonpressed() {
@@ -529,7 +564,11 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                                   alignment:
                                                       Alignment.bottomRight,
                                                   child: IconButton(
-                                                      onPressed: () {},
+                                                      onPressed: () async {
+                                                        _downloadFile(
+                                                            snap['postfileurl'],
+                                                            'file');
+                                                      },
                                                       icon:
                                                           Icon(Icons.download)),
                                                 ))

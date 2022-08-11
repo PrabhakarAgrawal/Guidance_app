@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:newapp/providers/providerUser.dart';
 import 'package:newapp/responsive/mobilescreen_layout.dart';
 import 'package:newapp/responsive/web_screen_layout.dart';
@@ -15,6 +16,7 @@ import 'package:provider/provider.dart';
 import 'ui/home.dart';
 
 void main() async {
+  await FlutterDownloader.initialize();
   WidgetsFlutterBinding.ensureInitialized();
 
   if (kIsWeb) {
