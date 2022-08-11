@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:newapp/ui/aspirantpostscreen.dart';
+import 'package:newapp/ui/aspirantprofilescreen.dart';
 import 'package:newapp/ui/contentpage.dart';
 import 'package:newapp/ui/guideprofilescreen.dart';
 import 'package:newapp/ui/postscreen.dart';
@@ -13,5 +15,6 @@ var homeScreenItems1 = [
 var homeScreenItems2 = [
   contentPage(),
   searchScreen(),
-  Text('profile'),
+  aspirantPostScreen(),
+  aspirantProfileScreen(),
 ];

@@ -160,6 +160,13 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
                       size: 30.0),
                   label: ''),
               BottomNavigationBarItem(
+                  icon: Icon(Icons.add_circle_outline,
+                      color: _page == 2
+                          ? Colors.white
+                          : Color.fromARGB(255, 197, 194, 194),
+                      size: 30.0),
+                  label: ''),
+              BottomNavigationBarItem(
                   icon: Icon(Icons.person,
                       color: _page == 3
                           ? Colors.white

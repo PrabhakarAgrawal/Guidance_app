@@ -4,6 +4,8 @@ import 'package:newapp/ui/chat_screen.dart';
 import 'package:newapp/ui/loginpage.dart';
 import 'package:newapp/widgets/photoposting.dart';
 
+import '../widgets/hamburger.dart';
+
 class contentPage extends StatefulWidget {
   contentPage({Key? key}) : super(key: key);
 
@@ -16,6 +18,7 @@ class _contentPageState extends State<contentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      drawer: Hamburger(),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
         centerTitle: true,
@@ -24,8 +27,9 @@ class _contentPageState extends State<contentPage> {
           IconButton(
               onPressed: () {
                 Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => ChatScreen()));
-              }, icon: const Icon(Icons.chat_bubble_outlined))
+                    MaterialPageRoute(builder: (context) => ChatScreen()));
+              },
+              icon: const Icon(Icons.chat_bubble_outlined))
         ],
       ),
       body: StreamBuilder(

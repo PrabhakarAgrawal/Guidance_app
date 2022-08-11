@@ -159,23 +159,6 @@ class _photoPostingState extends State<photoPosting> {
                           text: widget.snap['additionalText'],
                           style: TextStyle(color: Colors.white, fontSize: 12))),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Color.fromARGB(255, 92, 91, 91),
-                  ),
-                  height: 20,
-                  width: 120,
-                  margin: EdgeInsets.only(right: 220, bottom: 10),
-                  alignment: Alignment.center,
-                  child: Text('Type - ${widget.snap['type']}',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'ananias',
-                          letterSpacing: 2,
-                          fontSize: 8,
-                          color: Color.fromARGB(255, 117, 245, 252))),
-                ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.37,
                   width: double.infinity,
@@ -514,31 +497,30 @@ class _photoPostingState extends State<photoPosting> {
                         color: Colors.white)
                   ],
                 ),
-                 Container(
+                Container(
                   width: double.infinity,
                   child: RichText(
                       text: TextSpan(
                           text: widget.snap['additionalText'],
                           style: TextStyle(color: Colors.white, fontSize: 12))),
                 ),
-                 Container(
-                    margin: EdgeInsets.only(top: 10,bottom: 10),
-                      child: _videoPlayerController != null &&
-                        _videoPlayerController!.value.isInitialized
-                    ?AspectRatio(
-                          aspectRatio:
-                              _videoPlayerController!.value.aspectRatio,
-                          child: VideoPlayer(
-                            _videoPlayerController!,
-                          ),
-                        )
-                    
-                    : Container(
-                        child: Text(
-                          "Error...can't load video",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      )),
+                Container(
+                    margin: EdgeInsets.only(top: 10, bottom: 10),
+                    child: _videoPlayerController != null &&
+                            _videoPlayerController!.value.isInitialized
+                        ? AspectRatio(
+                            aspectRatio:
+                                _videoPlayerController!.value.aspectRatio,
+                            child: VideoPlayer(
+                              _videoPlayerController!,
+                            ),
+                          )
+                        : Container(
+                            child: Text(
+                              "Error...can't load video",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          )),
                 Row(
                   children: [
                     IconButton(

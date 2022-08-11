@@ -1,3 +1,5 @@
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'dart:html';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,19 +9,19 @@ import 'package:intl/intl.dart';
 import 'package:newapp/resources/firestoreMethods.dart';
 import 'package:video_player/video_player.dart';
 
-class guideProfileScreen extends StatefulWidget {
-  guideProfileScreen({Key? key}) : super(key: key);
+class searchGuideProfile extends StatefulWidget {
+  final String uid;
+  const searchGuideProfile({Key? key, required this.uid}) : super(key: key);
 
   @override
-  State<guideProfileScreen> createState() => _guideProfileScreenState();
+  State<searchGuideProfile> createState() => _searchGuideProfileState();
 }
 
-class _guideProfileScreenState extends State<guideProfileScreen> {
+class _searchGuideProfileState extends State<searchGuideProfile> {
   String username = '';
   String person = '';
   String profilePic = '';
   String bio = '';
-  String uid = '';
   String college = '';
   List followers = [];
   int postlength = 0;
@@ -57,14 +59,12 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
     });
     DocumentSnapshot snap = await FirebaseFirestore.instance
         .collection('newusers')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(widget.uid)
         .get();
     var postsnap = await FirebaseFirestore.instance
         .collection('posts')
-        .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where('uid', isEqualTo: widget.uid)
         .get();
-
-    postlength = postsnap.docs.length;
 
     setState(() {
       postlength = postsnap.docs.length;
@@ -73,7 +73,6 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
       person = (snap.data() as Map<String, dynamic>)["person"];
       profilePic = (snap.data() as Map<String, dynamic>)["profilePic"];
       bio = (snap.data() as Map<String, dynamic>)["bio"];
-      uid = (snap.data() as Map<String, dynamic>)["uid"];
       college = (snap.data() as Map<String, dynamic>)["college"];
       followers = (snap.data() as Map<String, dynamic>)["followers"];
       isload = false;
@@ -179,21 +178,36 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                             color: Colors.white))),
                               ],
                             ),
-                            // TextButton(
-                            //     onPressed: () {},
-                            //     child: Container(
-                            //       alignment: Alignment.center,
-                            //       width: 70,
-                            //       height: 30,
-                            //       decoration: BoxDecoration(
-                            //           borderRadius: BorderRadius.circular(12),
-                            //           color: Colors.blue),
-                            //       child: Text('Follow',
-                            //           style: TextStyle(
-                            //               fontSize: 16,
-                            //               fontWeight: FontWeight.bold,
-                            //               color: Colors.white)),
-                            //     )),
+                            TextButton(
+                                onPressed: () async {
+                                  firestoreMethods().follow(
+                                      FirebaseAuth.instance.currentUser!.uid,
+                                      widget.uid,
+                                      followers);
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: 80,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: followers.contains(FirebaseAuth
+                                              .instance.currentUser!.uid)
+                                          ? Colors.blue
+                                          : Colors.blue),
+                                  child: followers.contains(FirebaseAuth
+                                          .instance.currentUser!.uid)
+                                      ? Text('Unfollow',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white))
+                                      : Text('Follow',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white)),
+                                )),
                             Column(
                               children: [
                                 Container(
@@ -218,21 +232,21 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                             color: Colors.white))),
                               ],
                             ),
-                            // TextButton(
-                            //     onPressed: () {},
-                            //     child: Container(
-                            //       alignment: Alignment.center,
-                            //       width: 120,
-                            //       height: 30,
-                            //       decoration: BoxDecoration(
-                            //           borderRadius: BorderRadius.circular(12),
-                            //           color: Colors.blue),
-                            //       child: Text('Ask question?',
-                            //           style: TextStyle(
-                            //               fontSize: 16,
-                            //               fontWeight: FontWeight.bold,
-                            //               color: Colors.white)),
-                            //     )),
+                            TextButton(
+                                onPressed: () {},
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: 120,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Colors.blue),
+                                  child: Text('Ask question?',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white)),
+                                )),
                           ],
                         )),
                     Divider(),
@@ -348,9 +362,7 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                     FutureBuilder(
                         future: FirebaseFirestore.instance
                             .collection(type)
-                            .where('uid',
-                                isEqualTo:
-                                    FirebaseAuth.instance.currentUser!.uid)
+                            .where('uid', isEqualTo: widget.uid)
                             .get(),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==

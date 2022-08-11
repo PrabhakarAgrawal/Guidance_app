@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:newapp/manage/post.dart';
 import 'package:newapp/resources/storage.dart';
 import 'package:newapp/widgets/selectfile.dart';
@@ -104,10 +105,7 @@ class firestoreMethods {
       } else if (type == 'Video') {
         _firestore.collection('videoposts').doc(postId).set(post.toJson());
       } else if (type == 'Handwritten notes') {
-        _firestore
-            .collection('handwrittennotesposts')
-            .doc(postId)
-            .set(post.toJson());
+        _firestore.collection('otherposts').doc(postId).set(post.toJson());
       }
       res = 'success';
     } catch (e) {
@@ -127,6 +125,27 @@ class firestoreMethods {
       } else {
         _firestore.collection('posts').doc(postId).update({
           'likes': FieldValue.arrayUnion([uid])
+        });
+      }
+      res = 'success';
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
+  }
+
+  //updating followers
+  Future<String> follow(
+      String currentuseruid, String uid, List followers) async {
+    String res = "Some error occurred";
+    try {
+      if (followers.contains(currentuseruid)) {
+        _firestore.collection('newusers').doc(uid).update({
+          'followers': FieldValue.arrayRemove([currentuseruid])
+        });
+      } else {
+        _firestore.collection('newusers').doc(uid).update({
+          'followers': FieldValue.arrayUnion([currentuseruid])
         });
       }
       res = 'success';
@@ -168,6 +187,8 @@ class firestoreMethods {
     return res;
   }
 
+  //downloading post
+//deleting post
   Future<void> deletePost(String postId) async {
     try {
       await _firestore.collection('posts').doc(postId).delete();
