@@ -17,7 +17,8 @@ class _StudyMaterialState extends State<StudyMaterial> {
         value: type,
         child: Text(
           type,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
         ),
       );
   @override
@@ -59,11 +60,11 @@ class _StudyMaterialState extends State<StudyMaterial> {
                     ),
                   ),
                 ),
-                Container(
-                  color: Color.fromARGB(255, 8, 0, 0),
+                Theme(
+                  data: Theme.of(context).copyWith(canvasColor: Colors.black),
                   // width: 300,
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.all(10),
+                  // margin: EdgeInsets.all(10),
+                  // padding: EdgeInsets.all(10),
                   child: DropdownButton<String>(
                     hint: Center(
                       child: Text(
