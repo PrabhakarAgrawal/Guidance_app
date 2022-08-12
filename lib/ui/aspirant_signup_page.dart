@@ -80,7 +80,10 @@ class _aspirantSignupState extends State<aspirantSignup> {
               ));
             },
             icon: Icon(Icons.arrow_back)),
-        title: const Text('Sign up'),
+        title: const Text(
+          'Sign up',
+          style: TextStyle(fontFamily: 'ananias'),
+        ),
         centerTitle: false,
       ),
       body: SafeArea(
@@ -92,7 +95,7 @@ class _aspirantSignupState extends State<aspirantSignup> {
             image: AssetImage(
               "assets/images/backgroundimg.png",
             ),
-            opacity: 200.0,
+            opacity: 210.0,
             fit: BoxFit.cover,
           ),
         ),
@@ -187,8 +190,8 @@ class _aspirantSignupState extends State<aspirantSignup> {
               InkWell(
                 onTap: signUpAspirant,
                 child: Container(
-                  height: 40,
-                  width: 80,
+                  height: 50,
+                  width: 100,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
@@ -202,7 +205,9 @@ class _aspirantSignupState extends State<aspirantSignup> {
                       : const Text(
                           "Sign Up",
                           style: TextStyle(
-                              color: Color.fromARGB(255, 231, 230, 230)),
+                              color: Color.fromARGB(255, 231, 230, 230),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
                         ),
                 ),
               ),

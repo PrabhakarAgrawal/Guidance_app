@@ -98,7 +98,7 @@ class _guideSignupState extends State<guideSignup> {
             image: AssetImage(
               "assets/images/backgroundimg.png",
             ),
-            opacity: 200.0,
+            opacity: 210.0,
             fit: BoxFit.cover,
           ),
         ),
@@ -207,14 +207,18 @@ class _guideSignupState extends State<guideSignup> {
               child: Container(
                 child: Text(
                   "Sign up",
-                  style: TextStyle(color: Color.fromARGB(255, 231, 230, 230)),
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 231, 230, 230),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
                 ),
-                height: 40,
-                width: 80,
+                height: 50,
+                width: 100,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.purple[400]),
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.purple[400],
+                ),
               ),
             ),
             const SizedBox(

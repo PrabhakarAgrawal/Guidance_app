@@ -22,7 +22,10 @@ class _contentPageState extends State<contentPage> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
         centerTitle: true,
-        title: Text('feed'),
+        title: Text(
+          'Feed',
+          style: TextStyle(fontFamily: 'ananias'),
+        ),
         actions: [
           IconButton(
               onPressed: () {
@@ -32,22 +35,35 @@ class _contentPageState extends State<contentPage> {
               icon: const Icon(Icons.chat_bubble_outlined))
         ],
       ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('posts').snapshots(),
-        builder: (context,
-            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (context, index) => photoPosting(
-              snap: snapshot.data!.docs[index].data(),
+      body: Container(
+        constraints: BoxConstraints.expand(),
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              "assets/images/backgroundimg.png",
             ),
-          );
-        },
+            opacity: 210.0,
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: StreamBuilder(
+          stream: FirebaseFirestore.instance.collection('posts').snapshots(),
+          builder: (context,
+              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) => photoPosting(
+                snap: snapshot.data!.docs[index].data(),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

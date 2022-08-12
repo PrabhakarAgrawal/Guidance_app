@@ -34,9 +34,13 @@ class _selectFileState extends State<selectFile> {
   final items = ['Handwritten notes', 'Formulabook', 'Books', 'Photo', 'Video'];
   DropdownMenuItem<String> buildmenuitem(String item) => DropdownMenuItem(
         value: item,
+        alignment: Alignment.center,
         child: Text(
           item,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: Color.fromARGB(255, 136, 132, 132)),
         ),
       );
 
@@ -100,108 +104,136 @@ class _selectFileState extends State<selectFile> {
   Widget build(BuildContext context) {
     final filename = file != null ? basename(file!.path) : 'No file Selected';
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
         leading: IconButton(
             onPressed: () {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => MobileScreenLayout()));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => MobileScreenLayout()));
             },
             icon: Icon(Icons.arrow_back)),
         title: const Text('Post image of your doubt'),
         centerTitle: false,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // SizedBox(
-            //   height: MediaQuery.of(context).size.height * 0.3,
-            //   width: MediaQuery.of(context).size.width * 0.55,
-            // child: AspectRatio(
-            //   aspectRatio: 250 / 220,
-            // child: Container(
-            //   decoration: BoxDecoration(
-            //       image: DecorationImage(
-            //           fit: BoxFit.contain, image: NetworkImage("")),
-            //       )),
-            Container(
-              width: 150,
-              height: 150,
-              child: file != null
-                  ? Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.contain,
-                              image: NetworkImage(
-                                  "https://images.unsplash.com/photo-1659904825585-2fdf22b3aa73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"))))
-                  : IconButton(
-                      onPressed: fileSelect,
-                      icon: Icon(Icons.upload_file_outlined),
-                    ),
+      body: Container(
+        constraints: BoxConstraints.expand(),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              "assets/images/backgroundimg.png",
             ),
-
-            Text(
-              filename,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: DropdownButton<String>(
-                hint: Text("Select type of file"),
-                value: value,
-                items: items.map(buildmenuitem).toList(),
-                onChanged: (value) => setState(() {
-                  this.value = value;
-                  type = value!;
-                }),
+            opacity: 210.0,
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // SizedBox(
+              //   height: MediaQuery.of(context).size.height * 0.3,
+              //   width: MediaQuery.of(context).size.width * 0.55,
+              // child: AspectRatio(
+              //   aspectRatio: 250 / 220,
+              // child: Container(
+              //   decoration: BoxDecoration(
+              //       image: DecorationImage(
+              //           fit: BoxFit.contain, image: NetworkImage("")),
+              //       )),
+              Container(
+                width: 50,
+                height: 50,
+                child: file != null
+                    ? Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.contain,
+                                image: NetworkImage(
+                                    "https://www.google.com/imgres?imgurl=https%3A%2F%2Ficon-library.com%2Fimages%2Ffile-icon-image%2Ffile-icon-image-5.jpg&imgrefurl=https%3A%2F%2Ficon-library.com%2Ficon%2Ffile-icon-image-5.html&tbnid=cR2MXW9n-0JoZM&vet=10CBoQMyh0ahcKEwj4pKnooMH5AhUAAAAAHQAAAAAQAg..i&docid=q0QwfZKvH6QXMM&w=512&h=512&q=file%20icon&ved=0CBoQMyh0ahcKEwj4pKnooMH5AhUAAAAAHQAAAAAQAg"))))
+                    : IconButton(
+                        onPressed: fileSelect,
+                        icon: Icon(Icons.upload_file_outlined),
+                        color: Colors.white,
+                        iconSize: 50,
+                      ),
               ),
-            ),
 
-            Container(
-              margin: EdgeInsets.all(10.0),
-              width: MediaQuery.of(context).size.width * 0.8,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
-                  color: Color.fromARGB(255, 203, 203, 203)),
-              child: Container(
-                padding: EdgeInsets.all(10.0),
-                child: TextField(
-                  controller: _addtionalTextController,
-                  decoration: const InputDecoration(
-                      hintText: 'Write addtional text',
-                      border: InputBorder.none),
-                  maxLines: 8,
+              Text(
+                'filename - $filename',
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: DropdownButton<String>(
+                  hint: Text(
+                    "Select type of file",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                  iconDisabledColor: Colors.black,
+                  iconEnabledColor: Colors.black,
+                  value: value,
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.white,
+                  ),
+                  items: items.map(buildmenuitem).toList(),
+                  onChanged: (value) => setState(() {
+                    this.value = value;
+                    type = value!;
+                  }),
                 ),
               ),
-            ),
-            InkWell(
-                onTap: () => file == null
-                    ? Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => AddPost()))
-                    : uploadFile(uid, username, profilePic),
+
+              Container(
+                margin: EdgeInsets.all(10.0),
+                width: MediaQuery.of(context).size.width * 0.8,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.0),
+                    color: Color.fromARGB(255, 255, 255, 255)),
                 child: Container(
-                  alignment: Alignment.center,
-                  height: 40.0,
-                  width: 100.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadiusDirectional.circular(12.0),
-                    color: Color.fromARGB(255, 139, 64, 251),
+                  padding: EdgeInsets.all(10.0),
+                  child: TextField(
+                    controller: _addtionalTextController,
+                    decoration: const InputDecoration(
+                        hintText: 'Write addtional text',
+                        border: InputBorder.none),
+                    maxLines: 8,
                   ),
-                  child: _isLoading
-                      ? const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                          ),
-                        )
-                      : const Text("upload",
-                          style: TextStyle(
-                            fontFamily: "ananias",
-                            color: Colors.white,
-                            fontSize: 20,
-                          )),
-                ))
-          ],
+                ),
+              ),
+              InkWell(
+                  onTap: () => file == null
+                      ? Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => AddPost()))
+                      : uploadFile(uid, username, profilePic),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 40.0,
+                    width: 100.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadiusDirectional.circular(12.0),
+                      color: Color.fromARGB(255, 139, 64, 251),
+                    ),
+                    child: _isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          )
+                        : const Text("upload",
+                            style: TextStyle(
+                              fontFamily: "ananias",
+                              color: Colors.white,
+                              fontSize: 20,
+                            )),
+                  ))
+            ],
+          ),
         ),
       ),
     );

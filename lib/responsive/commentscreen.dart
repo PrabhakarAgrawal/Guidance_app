@@ -49,42 +49,56 @@ class _commentScreenState extends State<commentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Color.fromARGB(212, 0, 0, 0),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
         title: const Text(
           'Comments',
+          style: TextStyle(fontFamily: 'ananias'),
         ),
         centerTitle: false,
       ),
-      body: Container(
-        color: Colors.black,
-        child: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection('posts')
-              .doc(widget.snap['postId'])
-              .collection('comments')
-              .orderBy('datePublished', descending: true)
-              .snapshots(),
-          builder: (context,
-              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-
-            return ListView.builder(
-              itemCount: snapshot.data!.docs.length,
-              itemBuilder: (context, index) => commentPosting(
-                snap: snapshot.data!.docs[index].data(),
+      body: SafeArea(
+        child: Container(
+          constraints: BoxConstraints.expand(),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                "assets/images/backgroundimg.png",
               ),
-            );
-          },
+              opacity: 1000.0,
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('posts')
+                .doc(widget.snap['postId'])
+                .collection('comments')
+                .orderBy('datePublished', descending: true)
+                .snapshots(),
+            builder: (context,
+                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              return ListView.builder(
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) => commentPosting(
+                  snap: snapshot.data!.docs[index].data(),
+                ),
+              );
+            },
+          ),
         ),
       ),
       bottomNavigationBar: Container(
         color: Colors.black,
-        height: 50,
+        height: 65,
         margin:
             EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Container(
@@ -92,7 +106,7 @@ class _commentScreenState extends State<commentScreen> {
           margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: Color.fromARGB(255, 101, 101, 101),
+            color: Color.fromARGB(255, 113, 113, 113),
           ),
           child: Row(
             children: [
@@ -104,9 +118,12 @@ class _commentScreenState extends State<commentScreen> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 16, right: 8),
                   child: TextField(
+                    textAlign: TextAlign.justify,
                     controller: _commentctrl,
                     decoration: InputDecoration(
-                      hintText: 'Type your answer',
+                      hintText: 'Type your comment',
+                      hintStyle:
+                          TextStyle(color: Color.fromARGB(255, 228, 224, 224)),
                       border: InputBorder.none,
                     ),
                   ),
@@ -121,15 +138,19 @@ class _commentScreenState extends State<commentScreen> {
                   });
                 },
                 child: Container(
+                  alignment: Alignment.center,
                   height: 40,
-                  width: 100,
+                  width: 80,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: Color.fromARGB(255, 139, 64, 251),
                   ),
                   child: const Text(
                     'Post',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               )

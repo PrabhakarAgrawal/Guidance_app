@@ -3,6 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:newapp/resources/auth_methods.dart';
 import 'package:newapp/ui/loginpage.dart';
+import 'package:newapp/ui/chat_screen.dart';
+import 'package:newapp/ui/postscreen.dart';
+import 'package:newapp/ui/guideprofilescreen.dart';
+import 'package:newapp/ui/study_material.dart';
+import 'package:newapp/ui/searchscreen.dart';
 // import 'package:flutter';
 
 class Hamburger extends StatefulWidget {
@@ -71,10 +76,16 @@ class _HamburgerState extends State<Hamburger> {
             padding: EdgeInsets.zero,
             children: [
               Container(
-                color: Colors.grey,
+                color: Color.fromARGB(255, 161, 75, 210),
                 child: UserAccountsDrawerHeader(
-                  accountName: Text(username),
-                  accountEmail: Text(email),
+                  accountName: Text(
+                    username,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                  accountEmail: Text(
+                    email,
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
+                  ),
                   currentAccountPicture: CircleAvatar(
                     child: ClipOval(
                       child: Image.network(
@@ -85,32 +96,43 @@ class _HamburgerState extends State<Hamburger> {
                       ),
                     ),
                   ),
-                  decoration: BoxDecoration(color: Colors.grey),
+                  decoration:
+                      BoxDecoration(color: Color.fromARGB(255, 161, 75, 210)),
                 ),
               ),
+              // Container(
+              //   color: Colors.black,
+              //   child: ListTile(
+              //     leading: TextButton(
+              //       child: Text(
+              //         'Profile',
+              //         style: TextStyle(
+              //             color: Colors.white, fontWeight: FontWeight.bold),
+              //       ),
+              //       onPressed: () {
+              //         Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //                 builder: (context) => guideProfileScreen()));
+              //       },
+              //     ),
+              //   ),
+              // ),
               Container(
                 color: Colors.black,
                 child: ListTile(
                   leading: TextButton(
                     child: Text(
-                      'Profile',
+                      'Search',
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
-                    onPressed: null,
-                  ),
-                ),
-              ),
-              Container(
-                color: Colors.black,
-                child: ListTile(
-                  leading: TextButton(
-                    child: Text(
-                      'Profile',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                    onPressed: null,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => searchScreen()));
+                    },
                   ),
                 ),
               ),
@@ -123,7 +145,12 @@ class _HamburgerState extends State<Hamburger> {
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
-                    onPressed: null,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StudyMaterial()));
+                    },
                   ),
                 ),
               ),

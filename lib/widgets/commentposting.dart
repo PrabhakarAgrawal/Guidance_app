@@ -17,7 +17,7 @@ class _commentPostingState extends State<commentPosting> {
     return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: Color.fromARGB(255, 165, 165, 165),
+          color: Color.fromARGB(186, 91, 90, 90),
         ),
         margin: EdgeInsets.all(10),
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
@@ -31,14 +31,14 @@ class _commentPostingState extends State<commentPosting> {
                 Text(widget.snap['name'],
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 75, 99, 252))),
+                        color: Colors.greenAccent)),
                 Container(
                   alignment: Alignment.topRight,
                   child: Text('~ ${widget.snap['person']}',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 12,
-                          color: Color.fromARGB(255, 102, 158, 255))),
+                          color: Colors.greenAccent)),
                 ),
                 //   text: TextSpan(
                 //     children: [
@@ -65,7 +65,7 @@ class _commentPostingState extends State<commentPosting> {
                 Expanded(
                   child: Text(
                     '  ${widget.snap['text']}',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Color.fromARGB(255, 187, 185, 185)),
                   ),
                 ),
                 //   text: TextSpan(
@@ -89,7 +89,7 @@ class _commentPostingState extends State<commentPosting> {
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
-                      color: Color.fromARGB(255, 104, 103, 103),
+                      color: Color.fromARGB(255, 184, 183, 183),
                     ),
                   ),
                 ),

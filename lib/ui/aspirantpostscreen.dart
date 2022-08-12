@@ -139,49 +139,70 @@ class _aspirantPostScreenState extends State<aspirantPostScreen> {
   Widget build(BuildContext context) {
     if (_file == null) {
       return Scaffold(
+          backgroundColor: Colors.black,
           appBar: AppBar(
             backgroundColor: Color.fromARGB(255, 139, 64, 251),
-            title: const Text('Post'),
+            title: const Text('Post', style: TextStyle(fontFamily: 'quick')),
             centerTitle: false,
           ),
-          body: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      width: 250.0,
-                      alignment: Alignment.center,
-                      child: Text('UPLOAD An image of your doubt',
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 68, 67, 67),
-                              fontSize: 20,
-                              fontFamily: 'ananias')),
-                    ),
-                    Container(
-                        height: 100.0,
-                        width: 100.0,
-                        margin: EdgeInsets.only(top: 50.0, bottom: 10.0),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.0),
-                            color: Color.fromARGB(255, 139, 64, 251)),
-                        child: IconButton(
-                          alignment: Alignment.center,
-                          onPressed: () {
-                            _imageselect(context);
-                          },
-                          icon: Icon(
-                            Icons.camera_alt_outlined,
-                            size: 60.0,
-                            color: Colors.white,
-                          ),
-                        )),
-                  ],
+          body: Container(
+            constraints: BoxConstraints.expand(),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  "assets/images/backgroundimg.png",
                 ),
-              ],
+                opacity: 210.0,
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: Color.fromARGB(255, 72, 72, 72),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          width: 250.0,
+                          alignment: Alignment.center,
+                          child: Text('UPLOAD An image of your doubt',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  fontSize: 20,
+                                  fontFamily: 'ananias')),
+                        ),
+                        Container(
+                            height: 100.0,
+                            width: 100.0,
+                            margin: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0),
+                                color: Color.fromARGB(255, 139, 64, 251)),
+                            child: IconButton(
+                              alignment: Alignment.center,
+                              onPressed: () {
+                                _imageselect(context);
+                              },
+                              icon: Icon(
+                                Icons.camera_alt_outlined,
+                                size: 60.0,
+                                color: Colors.white,
+                              ),
+                            )),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ));
     } else {
@@ -196,7 +217,10 @@ class _aspirantPostScreenState extends State<aspirantPostScreen> {
                 });
               },
               icon: Icon(Icons.arrow_back)),
-          title: const Text('Post image of your doubt'),
+          title: const Text(
+            'Upload',
+            style: TextStyle(fontFamily: 'ananias'),
+          ),
           centerTitle: false,
         ),
         body: Container(
@@ -206,7 +230,7 @@ class _aspirantPostScreenState extends State<aspirantPostScreen> {
               image: AssetImage(
                 "assets/images/backgroundimg.png",
               ),
-              opacity: 200.0,
+              opacity: 210.0,
               fit: BoxFit.cover,
             ),
           ),

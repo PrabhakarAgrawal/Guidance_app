@@ -60,6 +60,7 @@ class _loginscreenState extends State<loginscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromARGB(212, 0, 0, 0),
       body: SafeArea(
           child: Container(
@@ -69,7 +70,7 @@ class _loginscreenState extends State<loginscreen> {
             image: AssetImage(
               "assets/images/backgroundimg.png",
             ),
-            opacity: 1000.0,
+            opacity: 1010.0,
             fit: BoxFit.cover,
           ),
         ),
@@ -121,8 +122,8 @@ class _loginscreenState extends State<loginscreen> {
             InkWell(
               onTap: loginUser,
               child: Container(
-                height: 40,
-                width: 70,
+                height: 50,
+                width: 100,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
@@ -136,7 +137,9 @@ class _loginscreenState extends State<loginscreen> {
                     : const Text(
                         "Log in",
                         style: TextStyle(
-                            color: Color.fromARGB(255, 231, 230, 230)),
+                            color: Color.fromARGB(255, 231, 230, 230),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
                       ),
               ),
             ),
@@ -159,9 +162,9 @@ class _loginscreenState extends State<loginscreen> {
                   },
                   child: Container(
                     child: Text(
-                      "SIGN UP",
+                      " SIGN UP",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white),
+                          fontWeight: FontWeight.bold, color: Colors.blue),
                     ),
                     padding: EdgeInsets.symmetric(vertical: 8),
                   ),
