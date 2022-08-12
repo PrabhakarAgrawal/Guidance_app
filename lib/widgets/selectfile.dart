@@ -123,7 +123,7 @@ class _selectFileState extends State<selectFile> {
             image: AssetImage(
               "assets/images/backgroundimg.png",
             ),
-            opacity: 210.0,
+            opacity: 220.0,
             fit: BoxFit.cover,
           ),
         ),

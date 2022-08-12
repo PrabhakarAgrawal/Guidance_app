@@ -47,7 +47,7 @@ class ChatRoom extends StatelessWidget {
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/backgroundimg.png'),
-              opacity: 200.0,
+              opacity: 220.0,
               fit: BoxFit.cover,
             ),
           ),

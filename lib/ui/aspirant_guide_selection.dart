@@ -35,7 +35,7 @@ class aspirantGuideSelection extends StatelessWidget {
                 image: AssetImage(
                   "assets/images/backgroundimg.png",
                 ),
-                opacity: 210.0,
+                opacity: 230.0,
                 fit: BoxFit.cover,
               ),
             ),

@@ -134,7 +134,7 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/backgroundimg.png'),
-                  opacity: 210.0,
+                  opacity: 220.0,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -410,7 +410,7 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                     crossAxisCount: 1,
                                     crossAxisSpacing: 0,
                                     mainAxisSpacing: 0,
-                                    childAspectRatio: 1.25,
+                                    childAspectRatio: 0.9,
                                   ),
                                   itemBuilder: (context, index) {
                                     DocumentSnapshot snap =

@@ -152,7 +152,7 @@ class _aspirantPostScreenState extends State<aspirantPostScreen> {
                 image: AssetImage(
                   "assets/images/backgroundimg.png",
                 ),
-                opacity: 210.0,
+                opacity: 230.0,
                 fit: BoxFit.cover,
               ),
             ),
@@ -230,7 +230,7 @@ class _aspirantPostScreenState extends State<aspirantPostScreen> {
               image: AssetImage(
                 "assets/images/backgroundimg.png",
               ),
-              opacity: 210.0,
+              opacity: 220.0,
               fit: BoxFit.cover,
             ),
           ),

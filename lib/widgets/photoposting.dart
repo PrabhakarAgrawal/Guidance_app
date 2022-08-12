@@ -81,8 +81,8 @@ class _photoPostingState extends State<photoPosting> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            margin: EdgeInsets.all(5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: Color.fromARGB(186, 91, 90, 90),
@@ -430,8 +430,8 @@ class _photoPostingState extends State<photoPosting> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            margin: EdgeInsets.all(5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: Color.fromARGB(186, 91, 90, 90),

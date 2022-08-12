@@ -78,7 +78,7 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/backgroundimg.png'),
-                  opacity: 210.0,
+                  opacity: 230.0,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -246,7 +246,7 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
                                 crossAxisCount: 1,
                                 crossAxisSpacing: 0,
                                 mainAxisSpacing: 0,
-                                childAspectRatio: 1.25,
+                                childAspectRatio: 0.9,
                               ),
                               itemBuilder: (context, index) {
                                 DocumentSnapshot snap =

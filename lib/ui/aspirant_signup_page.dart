@@ -70,6 +70,7 @@ class _aspirantSignupState extends State<aspirantSignup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
@@ -95,7 +96,7 @@ class _aspirantSignupState extends State<aspirantSignup> {
             image: AssetImage(
               "assets/images/backgroundimg.png",
             ),
-            opacity: 210.0,
+            opacity: 230.0,
             fit: BoxFit.cover,
           ),
         ),

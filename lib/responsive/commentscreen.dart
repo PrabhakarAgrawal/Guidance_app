@@ -67,7 +67,7 @@ class _commentScreenState extends State<commentScreen> {
               image: AssetImage(
                 "assets/images/backgroundimg.png",
               ),
-              opacity: 1000.0,
+              opacity: 230.0,
               fit: BoxFit.cover,
             ),
           ),
