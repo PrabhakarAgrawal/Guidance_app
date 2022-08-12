@@ -89,6 +89,16 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
         .get();
 
     postlength = postsnap.docs.length;
+    @override
+    void initState() {
+      super.initState();
+
+      _videoPlayerController =
+          VideoPlayerController.network(snap['postfileurl'])
+            ..initialize().then((_) {
+              setState(() {});
+            });
+    }
 
     setState(() {
       postlength = postsnap.docs.length;
@@ -287,27 +297,6 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                           InkWell(
                               onTap: () {
                                 setState(() {
-                                  type = 'videoposts';
-                                });
-                              },
-                              child: Container(
-                                  alignment: Alignment.center,
-                                  height: 40,
-                                  width: 90,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    color: type == 'videoposts'
-                                        ? Colors.purple
-                                        : Colors.grey,
-                                  ),
-                                  child: Text('Videos',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white)))),
-                          InkWell(
-                              onTap: () {
-                                setState(() {
                                   type = 'booksposts';
                                 });
                               },
@@ -385,587 +374,397 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                               ),
                             );
                           }
-                          return GridView.builder(
-                              shrinkWrap: true,
-                              itemCount:
-                                  (snapshot.data! as dynamic).docs.length,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 1,
-                                crossAxisSpacing: 0,
-                                mainAxisSpacing: 0,
-                                childAspectRatio: 0.5,
-                              ),
-                              itemBuilder: (context, index) {
-                                DocumentSnapshot snap =
-                                    (snapshot.data! as dynamic).docs[index];
+                          return SingleChildScrollView(
+                            child: GridView.builder(
+                                shrinkWrap: true,
+                                itemCount:
+                                    (snapshot.data! as dynamic).docs.length,
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 1,
+                                  crossAxisSpacing: 0,
+                                  mainAxisSpacing: 0,
+                                  childAspectRatio: 1.25,
+                                ),
+                                itemBuilder: (context, index) {
+                                  DocumentSnapshot snap =
+                                      (snapshot.data! as dynamic).docs[index];
 
-                                if (snap['type'] == 'Photo') {
-                                  return Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 5, horizontal: 15),
-                                        margin: EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          color: Color.fromARGB(
-                                              255, 101, 101, 101),
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CircleAvatar(
-                                                  radius: 17,
-                                                  backgroundImage: NetworkImage(
-                                                      snap['profilePic']),
-                                                ),
-                                                Expanded(
-                                                    child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 16.0),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            snap['username'],
-                                                            style: TextStyle(
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: Colors
-                                                                    .white),
-                                                          ),
-                                                          Text(snap['college'],
-                                                              style: TextStyle(
-                                                                  fontSize: 11,
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          218,
-                                                                          216,
-                                                                          216)))
-                                                        ],
-                                                      ),
-                                                      Text(
-                                                          '~ ${snap['person']}',
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 12,
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      102,
-                                                                      158,
-                                                                      255)))
-                                                    ],
-                                                  ),
-                                                )),
-                                                IconButton(
-                                                    onPressed: () {
-                                                      showDialog(
-                                                          context: context,
-                                                          builder: (context) =>
-                                                              Dialog(
-                                                                  child:
-                                                                      Container(
-                                                                height: 45,
-                                                                child: ListView(
-                                                                  children: [
-                                                                    'Report'
-                                                                  ]
-                                                                      .map((e) =>
-                                                                          InkWell(
-                                                                            onTap:
-                                                                                () {},
-                                                                            child:
-                                                                                Container(
-                                                                              padding: EdgeInsets.symmetric(vertical: 13, horizontal: 17),
-                                                                              child: Text(e),
-                                                                            ),
-                                                                          ))
-                                                                      .toList(),
-                                                                ),
-                                                              )));
-                                                    },
-                                                    icon: Icon(Icons
-                                                        .more_vert_rounded),
-                                                    color: Colors.white)
-                                              ],
-                                            ),
-                                            Container(
-                                              width: double.infinity,
-                                              child: RichText(
-                                                  text: TextSpan(
-                                                      text: snap[
-                                                          'additionalText'],
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 12))),
-                                            ),
-                                            SizedBox(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.37,
-                                              width: double.infinity,
-                                              child: Image.network(
-                                                snap['postfileurl'],
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                  child: Container(
-                                                      alignment:
-                                                          Alignment.centerLeft,
-                                                      child: Text(
-                                                        DateFormat.yMMMd()
-                                                            .format(snap['date']
-                                                                .toDate()),
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    184,
-                                                                    184,
-                                                                    184)),
-                                                      )),
-                                                ),
-                                                Expanded(
-                                                    child: Align(
-                                                  alignment:
-                                                      Alignment.bottomRight,
-                                                  child: IconButton(
-                                                      onPressed: () async {
-                                                        downloadfile(
-                                                            snap['postfileurl'],
-                                                            'newfile');
-                                                      },
-                                                      icon:
-                                                          Icon(Icons.download)),
-                                                ))
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                } else if (snap['type'] == 'Video') {
-                                  void initState() {
-                                    // TODO: implement initState
-                                    super.initState();
-                                    _videoPlayerController =
-                                        VideoPlayerController.network(
-                                            snap['postfileurl'])
-                                          ..initialize().then((_) {
-                                            setState(() {});
-                                          });
-                                  }
-
-                                  return Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 5, horizontal: 15),
-                                        margin: EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          color: Color.fromARGB(
-                                              255, 101, 101, 101),
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CircleAvatar(
-                                                  radius: 17,
-                                                  backgroundImage: NetworkImage(
-                                                      snap['profilePic']),
-                                                ),
-                                                Expanded(
-                                                    child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 16.0),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            snap['username'],
-                                                            style: TextStyle(
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: Colors
-                                                                    .white),
-                                                          ),
-                                                          Text(snap['college'],
-                                                              style: TextStyle(
-                                                                  fontSize: 11,
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          218,
-                                                                          216,
-                                                                          216)))
-                                                        ],
-                                                      ),
-                                                      Text(
-                                                          '~ ${snap['person']}',
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 12,
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      102,
-                                                                      158,
-                                                                      255)))
-                                                    ],
-                                                  ),
-                                                )),
-                                                IconButton(
-                                                    onPressed: () {
-                                                      showDialog(
-                                                          context: context,
-                                                          builder: (context) =>
-                                                              Dialog(
-                                                                  child:
-                                                                      Container(
-                                                                height: 45,
-                                                                child: ListView(
-                                                                  children: [
-                                                                    'Report'
-                                                                  ]
-                                                                      .map((e) =>
-                                                                          InkWell(
-                                                                            onTap:
-                                                                                () {},
-                                                                            child:
-                                                                                Container(
-                                                                              padding: EdgeInsets.symmetric(vertical: 13, horizontal: 17),
-                                                                              child: Text(e),
-                                                                            ),
-                                                                          ))
-                                                                      .toList(),
-                                                                ),
-                                                              )));
-                                                    },
-                                                    icon: Icon(Icons
-                                                        .more_vert_rounded),
-                                                    color: Colors.white)
-                                              ],
-                                            ),
-                                            Container(
-                                              width: double.infinity,
-                                              child: RichText(
-                                                  text: TextSpan(
-                                                      text: snap[
-                                                          'additionalText'],
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 12))),
-                                            ),
-                                            Container(
-                                                margin: EdgeInsets.only(
-                                                    top: 10, bottom: 10),
-                                                child: _videoPlayerController !=
-                                                            null &&
-                                                        _videoPlayerController!
-                                                            .value.isInitialized
-                                                    ? AspectRatio(
-                                                        aspectRatio:
-                                                            _videoPlayerController!
-                                                                .value
-                                                                .aspectRatio,
-                                                        child: VideoPlayer(
-                                                          _videoPlayerController!,
-                                                        ),
-                                                      )
-                                                    : Container(
-                                                        child: Text(
-                                                          "Error...can't load video",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white),
-                                                        ),
-                                                      )),
-                                            Row(
-                                              children: [
-                                                FloatingActionButton(
-                                                  onPressed: buttonpressed,
-                                                  child: Icon(_videoPlayerController !=
-                                                              null &&
-                                                          _videoPlayerController!
-                                                              .value.isPlaying
-                                                      ? Icons.pause
-                                                      : Icons
-                                                          .play_arrow_rounded),
-                                                ),
-                                                Expanded(
-                                                    child: Align(
-                                                  alignment:
-                                                      Alignment.bottomRight,
-                                                  child: IconButton(
-                                                      onPressed: () {},
-                                                      icon:
-                                                          Icon(Icons.download)),
-                                                ))
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                  child: Container(
-                                                      alignment:
-                                                          Alignment.topRight,
-                                                      child: Text(
-                                                        DateFormat.yMMMd()
-                                                            .format(snap['date']
-                                                                .toDate()),
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    184,
-                                                                    184,
-                                                                    184)),
-                                                      )),
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                } else {
-                                  return Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 5, horizontal: 15),
-                                        margin: EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          color: Color.fromARGB(
-                                              255, 101, 101, 101),
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CircleAvatar(
-                                                  radius: 17,
-                                                  backgroundImage: NetworkImage(
-                                                      snap['profilePic']),
-                                                ),
-                                                Expanded(
-                                                    child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 16.0),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            snap['username'],
-                                                            style: TextStyle(
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: Colors
-                                                                    .white),
-                                                          ),
-                                                          Text(snap['college'],
-                                                              style: TextStyle(
-                                                                  fontSize: 11,
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          218,
-                                                                          216,
-                                                                          216)))
-                                                        ],
-                                                      ),
-                                                      Text(
-                                                          '~ ${snap['person']}',
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 12,
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      102,
-                                                                      158,
-                                                                      255)))
-                                                    ],
-                                                  ),
-                                                )),
-                                                IconButton(
-                                                    onPressed: () {
-                                                      showDialog(
-                                                          context: context,
-                                                          builder: (context) =>
-                                                              Dialog(
-                                                                  child:
-                                                                      Container(
-                                                                height: 45,
-                                                                child: ListView(
-                                                                  children: [
-                                                                    'Report'
-                                                                  ]
-                                                                      .map((e) =>
-                                                                          InkWell(
-                                                                            onTap:
-                                                                                () {},
-                                                                            child:
-                                                                                Container(
-                                                                              padding: EdgeInsets.symmetric(vertical: 13, horizontal: 17),
-                                                                              child: Text(e),
-                                                                            ),
-                                                                          ))
-                                                                      .toList(),
-                                                                ),
-                                                              )));
-                                                    },
-                                                    icon: Icon(Icons
-                                                        .more_vert_rounded),
-                                                    color: Colors.white)
-                                              ],
-                                            ),
-                                            Container(
-                                              width: double.infinity,
-                                              child: RichText(
-                                                  text: TextSpan(
-                                                      text: snap[
-                                                          'additionalText'],
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 12))),
-                                            ),
-                                            Container(
-                                              width: double.infinity,
-                                              margin: EdgeInsets.only(top: 5),
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 10, vertical: 7),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                color: Color.fromARGB(
-                                                    255, 92, 91, 91),
-                                              ),
-                                              height: 100,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
+                                  if (snap['type'] == 'Photo') {
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 15),
+                                          margin: EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            color: Color.fromARGB(
+                                                255, 101, 101, 101),
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Row(
                                                 children: [
-                                                  Icon(
-                                                    Icons.file_copy_outlined,
-                                                    color: Colors.white,
-                                                    size: 70,
+                                                  CircleAvatar(
+                                                    radius: 17,
+                                                    backgroundImage:
+                                                        NetworkImage(
+                                                            snap['profilePic']),
                                                   ),
-                                                  Text(snap['type'],
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily: 'ananias',
-                                                          letterSpacing: 2,
-                                                          fontSize: 13,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              117,
-                                                              245,
-                                                              252))),
+                                                  Expanded(
+                                                      child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 16.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              snap['username'],
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            Text(
+                                                                snap['college'],
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        11,
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            218,
+                                                                            216,
+                                                                            216)))
+                                                          ],
+                                                        ),
+                                                        Text(
+                                                            '~ ${snap['person']}',
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 12,
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        102,
+                                                                        158,
+                                                                        255)))
+                                                      ],
+                                                    ),
+                                                  )),
+                                                  IconButton(
+                                                      onPressed: () {
+                                                        showDialog(
+                                                            context: context,
+                                                            builder: (context) =>
+                                                                Dialog(
+                                                                    child:
+                                                                        Container(
+                                                                  height: 45,
+                                                                  child:
+                                                                      ListView(
+                                                                    children: [
+                                                                      'Report'
+                                                                    ]
+                                                                        .map((e) =>
+                                                                            InkWell(
+                                                                              onTap: () {},
+                                                                              child: Container(
+                                                                                padding: EdgeInsets.symmetric(vertical: 13, horizontal: 17),
+                                                                                child: Text(e),
+                                                                              ),
+                                                                            ))
+                                                                        .toList(),
+                                                                  ),
+                                                                )));
+                                                      },
+                                                      icon: Icon(Icons
+                                                          .more_vert_rounded),
+                                                      color: Colors.white)
                                                 ],
                                               ),
-                                            ),
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                    child: Align(
-                                                  alignment:
-                                                      Alignment.bottomRight,
-                                                  child: IconButton(
-                                                      onPressed: () {},
-                                                      icon:
-                                                          Icon(Icons.download)),
-                                                ))
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                  child: Container(
-                                                      alignment:
-                                                          Alignment.topRight,
-                                                      child: Text(
-                                                        DateFormat.yMMMd()
-                                                            .format(snap['date']
-                                                                .toDate()),
+                                              Container(
+                                                width: double.infinity,
+                                                child: RichText(
+                                                    text: TextSpan(
+                                                        text: snap[
+                                                            'additionalText'],
                                                         style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 12))),
+                                              ),
+                                              SizedBox(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.37,
+                                                width: double.infinity,
+                                                child: Image.network(
+                                                  snap['postfileurl'],
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: Container(
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        child: Text(
+                                                          DateFormat.yMMMd()
+                                                              .format(snap[
+                                                                      'date']
+                                                                  .toDate()),
+                                                          style: TextStyle(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      184,
+                                                                      184,
+                                                                      184)),
+                                                        )),
+                                                  ),
+                                                  Expanded(
+                                                      child: Align(
+                                                    alignment:
+                                                        Alignment.bottomRight,
+                                                    child: IconButton(
+                                                        onPressed: () async {
+                                                          downloadfile(
+                                                              snap[
+                                                                  'postfileurl'],
+                                                              'newfile');
+                                                        },
+                                                        icon: Icon(
+                                                            Icons.download)),
+                                                  ))
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  } else {
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 15),
+                                          margin: EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            color: Color.fromARGB(
+                                                255, 101, 101, 101),
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  CircleAvatar(
+                                                    radius: 17,
+                                                    backgroundImage:
+                                                        NetworkImage(
+                                                            snap['profilePic']),
+                                                  ),
+                                                  Expanded(
+                                                      child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 16.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              snap['username'],
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            Text(
+                                                                snap['college'],
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        11,
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            218,
+                                                                            216,
+                                                                            216)))
+                                                          ],
+                                                        ),
+                                                        Text(
+                                                            '~ ${snap['person']}',
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 12,
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        102,
+                                                                        158,
+                                                                        255)))
+                                                      ],
+                                                    ),
+                                                  )),
+                                                  IconButton(
+                                                      onPressed: () {
+                                                        showDialog(
+                                                            context: context,
+                                                            builder: (context) =>
+                                                                Dialog(
+                                                                    child:
+                                                                        Container(
+                                                                  height: 45,
+                                                                  child:
+                                                                      ListView(
+                                                                    children: [
+                                                                      'Report'
+                                                                    ]
+                                                                        .map((e) =>
+                                                                            InkWell(
+                                                                              onTap: () {},
+                                                                              child: Container(
+                                                                                padding: EdgeInsets.symmetric(vertical: 13, horizontal: 17),
+                                                                                child: Text(e),
+                                                                              ),
+                                                                            ))
+                                                                        .toList(),
+                                                                  ),
+                                                                )));
+                                                      },
+                                                      icon: Icon(Icons
+                                                          .more_vert_rounded),
+                                                      color: Colors.white)
+                                                ],
+                                              ),
+                                              Container(
+                                                width: double.infinity,
+                                                child: RichText(
+                                                    text: TextSpan(
+                                                        text: snap[
+                                                            'additionalText'],
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 12))),
+                                              ),
+                                              Container(
+                                                width: double.infinity,
+                                                margin: EdgeInsets.only(top: 5),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10,
+                                                    vertical: 7),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  color: Color.fromARGB(
+                                                      255, 92, 91, 91),
+                                                ),
+                                                height: 100,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.file_copy_outlined,
+                                                      color: Colors.white,
+                                                      size: 70,
+                                                    ),
+                                                    Text(snap['type'],
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontFamily:
+                                                                'ananias',
+                                                            letterSpacing: 2,
+                                                            fontSize: 13,
                                                             color:
                                                                 Color.fromARGB(
                                                                     255,
-                                                                    184,
-                                                                    184,
-                                                                    184)),
-                                                      )),
-                                                )
-                                              ],
-                                            )
-                                          ],
+                                                                    117,
+                                                                    245,
+                                                                    252))),
+                                                  ],
+                                                ),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                      child: Align(
+                                                    alignment:
+                                                        Alignment.bottomRight,
+                                                    child: IconButton(
+                                                        onPressed: () {},
+                                                        icon: Icon(
+                                                            Icons.download)),
+                                                  ))
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: Container(
+                                                        alignment:
+                                                            Alignment.topRight,
+                                                        child: Text(
+                                                          DateFormat.yMMMd()
+                                                              .format(snap[
+                                                                      'date']
+                                                                  .toDate()),
+                                                          style: TextStyle(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      184,
+                                                                      184,
+                                                                      184)),
+                                                        )),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  );
-                                }
-                              });
+                                      ],
+                                    );
+                                  }
+                                }),
+                          );
                         }),
                   ]),
             ));

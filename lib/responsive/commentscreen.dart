@@ -33,7 +33,7 @@ class _commentScreenState extends State<commentScreen> {
 
     setState(() {
       username = (snap.data() as Map<String, dynamic>)["username"];
-      profilePic = (snap.data() as Map<String, dynamic>)["photoUrl"];
+      profilePic = (snap.data() as Map<String, dynamic>)["profilePic"];
       uid = (snap.data() as Map<String, dynamic>)["uid"];
       person = (snap.data() as Map<String, dynamic>)["person"];
     });
