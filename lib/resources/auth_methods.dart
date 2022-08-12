@@ -38,7 +38,9 @@ class AuthMethods {
     required String password,
     required String username,
     required String bio,
+    required String college,
     required Uint8List file,
+    required String person,
   }) async {
     String res = "Some error occured";
     try {
@@ -51,24 +53,24 @@ class AuthMethods {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
         print(cred.user!.uid);
-        String photURL =
+        String profilePic =
             await StorageMeth().upload_Img("ProfilePics", file, false);
         //add user to database
-        manage1.forAspirant aspirant = manage1.forAspirant(
+        manage1.forAspirant _newuser = manage1.forAspirant(
             username: username,
             uid: cred.user!.uid,
-            photoUrl: photURL,
+            profilePic: profilePic,
             email: email,
             bio: bio,
+            college: college,
+            person: person,
             followers: [],
             following: []);
 
         await _firestore
-            .collection('aspirant')
-            .doc('aspirant')
-            .collection('users')
+            .collection('newusers')
             .doc(cred.user!.uid)
-            .set(aspirant.toJson());
+            .set(_newuser.toJson());
         res = "success";
       }
     } catch (err) {
@@ -105,6 +107,10 @@ class AuthMethods {
     }
     return res;
   }
+
+  Future<void> signout() async {
+    _auth.signOut();
+  }
 }
 
 class secondAuthMethods {
@@ -117,6 +123,7 @@ class secondAuthMethods {
     required String username,
     required String college,
     required String bio,
+    required String person,
     required Uint8List file,
   }) async {
     String res = "Some error occured";
@@ -131,25 +138,24 @@ class secondAuthMethods {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
         print(cred.user!.uid);
-        String photURL =
+        String profilePic =
             await StorageMeth().upload_Img("ProfilePics", file, false);
         //add user to database
 
-        manage2.forGuide guide = manage2.forGuide(
+        manage2.forGuide _newuser = manage2.forGuide(
             username: username,
             uid: cred.user!.uid,
-            photoUrl: photURL,
+            profilePic: profilePic,
             email: email,
             college: college,
             bio: bio,
+            person: person,
             followers: [],
             following: []);
         await _firestore
-            .collection('guide')
-            .doc('guide')
-            .collection('users')
+            .collection('newusers')
             .doc(cred.user!.uid)
-            .set(guide.toJson());
+            .set(_newuser.toJson());
 
         res = "success";
       }

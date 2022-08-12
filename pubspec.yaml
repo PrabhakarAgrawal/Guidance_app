@@ -29,6 +29,8 @@ environment:
 dependencies:
   cloud_firestore: ^3.4.2
   cupertino_icons: ^1.0.2
+  dio: ^4.0.6
+  file_picker: ^5.0.1
   firebase_auth: ^3.6.1
   firebase_core: ^1.20.0
   firebase_storage: ^10.3.4
@@ -36,8 +38,10 @@ dependencies:
     sdk: flutter
   image_picker: ^0.8.5+3
   intl: ^0.17.0
+  path_provider: ^2.0.11
   provider: ^6.0.3
   uuid: ^3.0.6
+  video_player: ^2.4.6
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -58,8 +62,8 @@ flutter:
   assets:
     - assets/images/backgroundimg.png
     - assets/images/taglinelogo.png
-    - assets/images/aspirant.png
     - assets/images/guide.png
+    - assets/images/aspirant.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -74,6 +78,9 @@ flutter:
     - family: ananias
       fonts:
         - asset: assets/fonts/Ananias.ttf
+    - family: quick
+      fonts:
+        - asset: assets/fonts/Quicksand-Light.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

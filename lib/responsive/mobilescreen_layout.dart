@@ -17,6 +17,7 @@ class MobileScreenLayout extends StatefulWidget {
 
 class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   String name = "";
+  String person = '';
   int type = 0;
   int _page = 0;
   late PageController pageController;
@@ -24,37 +25,37 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    getdetails();
     pageController = PageController();
-    getName();
   }
 
-  Future<DocumentSnapshot> getName() async {
-    DocumentSnapshot snap = await FirebaseFirestore.instance
-        .collection('aspirant')
-        .doc('aspirant')
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
-    if (snap.data() == null) {
-      DocumentSnapshot snap = await FirebaseFirestore.instance
-          .collection('guide')
-          .doc('guide')
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .get();
-      print(snap.data());
-      print("guide");
-      return snap;
-    } else {
-      print("aspirant");
-      print(snap.data());
-      return snap;
-    }
-    setState(() {
-      name = (snap.data() as Map<String, dynamic>)["username"];
-    });
-    print("$name");
-  }
+  // Future<DocumentSnapshot> getName() async {
+  //   DocumentSnapshot snap = await FirebaseFirestore.instance
+  //       .collection('aspirant')
+  //       .doc('aspirant')
+  //       .collection('users')
+  //       .doc(FirebaseAuth.instance.currentUser!.uid)
+  //       .get();
+  //   if (snap.data() == null) {
+  //     DocumentSnapshot snap = await FirebaseFirestore.instance
+  //         .collection('guide')
+  //         .doc('guide')
+  //         .collection('users')
+  //         .doc(FirebaseAuth.instance.currentUser!.uid)
+  //         .get();
+  //     print(snap.data());
+  //     print("guide");
+  //     return snap;
+  //   } else {
+  //     print("aspirant");
+  //     print(snap.data());
+  //     return snap;
+  //   }
+  //   setState(() {
+  //     name = (snap.data() as Map<String, dynamic>)["username"];
+  //   });
+  //   print("$name");
+  // }
 
   @override
   void dispose() {
@@ -73,52 +74,111 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
     });
   }
 
+  void getdetails() async {
+    DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection('newusers')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    setState(() {
+      person = (snap.data() as Map<String, dynamic>)["person"];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: PageView(
-          children: homeScreenItems,
-          physics: NeverScrollableScrollPhysics(),
-          controller: pageController,
-          onPageChanged: onPageChanged,
+    if (person == 'Guide') {
+      return Material(
+        child: Scaffold(
+          backgroundColor: Colors.black,
+          body: PageView(
+            children: homeScreenItems1,
+            physics: NeverScrollableScrollPhysics(),
+            controller: pageController,
+            onPageChanged: onPageChanged,
+          ),
+          bottomNavigationBar: CupertinoTabBar(
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.home,
+                      color: _page == 0
+                          ? Colors.white
+                          : Color.fromARGB(255, 197, 194, 194),
+                      size: 30.0),
+                  label: ''),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.search_rounded,
+                      color: _page == 1
+                          ? Colors.white
+                          : Color.fromARGB(255, 197, 194, 194),
+                      size: 30.0),
+                  label: ''),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.add_circle_outline,
+                      color: _page == 2
+                          ? Colors.white
+                          : Color.fromARGB(255, 197, 194, 194),
+                      size: 30.0),
+                  label: ''),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person,
+                      color: _page == 3
+                          ? Colors.white
+                          : Color.fromARGB(255, 197, 194, 194),
+                      size: 30.0),
+                  label: ''),
+            ],
+            backgroundColor: Color.fromARGB(255, 139, 64, 251),
+            onTap: navigationTapped,
+          ),
         ),
-        bottomNavigationBar: CupertinoTabBar(
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home,
-                    color: _page == 0
-                        ? Colors.white
-                        : Color.fromARGB(255, 197, 194, 194),
-                    size: 30.0),
-                label: ''),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.search_rounded,
-                    color: _page == 1
-                        ? Colors.white
-                        : Color.fromARGB(255, 197, 194, 194),
-                    size: 30.0),
-                label: ''),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.add_circle_outline,
-                    color: _page == 2
-                        ? Colors.white
-                        : Color.fromARGB(255, 197, 194, 194),
-                    size: 30.0),
-                label: ''),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person,
-                    color: _page == 3
-                        ? Colors.white
-                        : Color.fromARGB(255, 197, 194, 194),
-                    size: 30.0),
-                label: ''),
-          ],
-          backgroundColor: Color.fromARGB(255, 139, 64, 251),
-          onTap: navigationTapped,
+      );
+    } else {
+      return Material(
+        child: Scaffold(
+          backgroundColor: Colors.black,
+          body: PageView(
+            children: homeScreenItems2,
+            physics: NeverScrollableScrollPhysics(),
+            controller: pageController,
+            onPageChanged: onPageChanged,
+          ),
+          bottomNavigationBar: CupertinoTabBar(
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.home,
+                      color: _page == 0
+                          ? Colors.white
+                          : Color.fromARGB(255, 197, 194, 194),
+                      size: 30.0),
+                  label: ''),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.search_rounded,
+                      color: _page == 1
+                          ? Colors.white
+                          : Color.fromARGB(255, 197, 194, 194),
+                      size: 30.0),
+                  label: ''),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.add_circle_outline,
+                      color: _page == 2
+                          ? Colors.white
+                          : Color.fromARGB(255, 197, 194, 194),
+                      size: 30.0),
+                  label: ''),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person,
+                      color: _page == 3
+                          ? Colors.white
+                          : Color.fromARGB(255, 197, 194, 194),
+                      size: 30.0),
+                  label: ''),
+            ],
+            backgroundColor: Color.fromARGB(255, 139, 64, 251),
+            onTap: navigationTapped,
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 }

@@ -36,7 +36,6 @@ class _signupscreenState extends State<signupscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       body: SafeArea(
           child: Container(
         padding: EdgeInsets.symmetric(horizontal: 32),

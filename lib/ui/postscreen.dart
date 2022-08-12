@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:newapp/resources/firestoreMethods.dart';
 import 'package:newapp/utils/utils.dart';
+import 'package:newapp/widgets/selectfile.dart';
 
 class AddPost extends StatefulWidget {
   AddPost({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class _AddPostState extends State<AddPost> {
   String username = '';
   String profilePic = '';
   String college = '';
+  String type = 'Photo';
   String person = '';
   Uint8List? _file;
   bool _isLoading = false;
@@ -30,8 +32,15 @@ class _AddPostState extends State<AddPost> {
       _isLoading = true;
     });
     try {
-      String res = await firestoreMethods().uploadPost(username, uid,
-          profilePic, _addtionalTextController.text, college, person, _file!);
+      String res = await firestoreMethods().uploadPost(
+          username,
+          uid,
+          profilePic,
+          _addtionalTextController.text,
+          type,
+          college,
+          person,
+          _file!);
       if (res == 'success') {
         setState(() {
           _isLoading = false;
@@ -55,31 +64,17 @@ class _AddPostState extends State<AddPost> {
 
   void getdetails() async {
     DocumentSnapshot snap = await FirebaseFirestore.instance
-        .collection('aspirant')
-        .doc('aspirant')
-        .collection('users')
+        .collection('newusers')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
 
-    if (snap.data() == null) {
-      DocumentSnapshot snap = await FirebaseFirestore.instance
-          .collection('guide')
-          .doc('guide')
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .get();
-      setState(() {
-        username = (snap.data() as Map<String, dynamic>)["username"];
-        uid = (snap.data() as Map<String, dynamic>)["uid"];
-        profilePic = (snap.data() as Map<String, dynamic>)["photoUrl"];
-      });
-    } else {
-      setState(() {
-        username = (snap.data() as Map<String, dynamic>)["username"];
-        uid = (snap.data() as Map<String, dynamic>)["uid"];
-        profilePic = (snap.data() as Map<String, dynamic>)["photoUrl"];
-      });
-    }
+    setState(() {
+      username = (snap.data() as Map<String, dynamic>)["username"];
+      uid = (snap.data() as Map<String, dynamic>)["uid"];
+      profilePic = (snap.data() as Map<String, dynamic>)["profilePic"];
+      college = (snap.data() as Map<String, dynamic>)["college"];
+      person = (snap.data() as Map<String, dynamic>)["person"];
+    });
   }
 
   //image picking option
@@ -144,129 +139,171 @@ class _AddPostState extends State<AddPost> {
   Widget build(BuildContext context) {
     if (_file == null) {
       return Scaffold(
-          backgroundColor: Color.fromARGB(212, 0, 0, 0),
-          appBar: AppBar(
-            backgroundColor: Color.fromARGB(255, 139, 64, 251),
-            title: const Text('Post'),
-            centerTitle: false,
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 139, 64, 251),
+          title: const Text(
+            'Post',
+            style: TextStyle(fontFamily: 'quick'),
           ),
-          body: Container(
-            constraints: BoxConstraints.expand(),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  "assets/images/backgroundimg.png",
+          centerTitle: false,
+        ),
+        body: Container(
+          child: Center(
+            child: Container(
+              constraints: BoxConstraints.expand(),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/backgroundimg.png'),
+                  opacity: 200.0,
+                  fit: BoxFit.cover,
                 ),
-                opacity: 200.0,
-                fit: BoxFit.cover,
               ),
-            ),
-            child: Center(
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                            height: 100.0,
-                            width: 100.0,
-                            margin: EdgeInsets.only(top: 50.0, bottom: 10.0),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50.0),
-                                color: Color.fromARGB(255, 139, 64, 251)),
-                            child: IconButton(
-                              alignment: Alignment.center,
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.upload_file,
-                                size: 60.0,
-                                color: Colors.white,
-                              ),
-                            )),
-                        Container(
-                          width: 250.0,
-                          alignment: Alignment.center,
-                          child: Text('UPLOAD A FILE',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 255, 253, 253),
-                                  fontSize: 20,
-                                  fontFamily: 'ananias')),
-                        ),
-                      ],
+                    SizedBox(
+                      height: 5,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          width: 250.0,
-                          alignment: Alignment.center,
-                          child: Text('UPLOAD An image of your doubt',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 255, 253, 253),
-                                  fontSize: 20,
-                                  fontFamily: 'ananias')),
-                        ),
-                        Container(
-                            height: 100.0,
-                            width: 100.0,
-                            margin: EdgeInsets.only(top: 50.0, bottom: 10.0),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50.0),
-                                color: Color.fromARGB(255, 139, 64, 251)),
-                            child: IconButton(
-                              alignment: Alignment.center,
-                              onPressed: () {
-                                _imageselect(context);
-                              },
-                              icon: Icon(
-                                Icons.camera_alt_outlined,
-                                size: 60.0,
-                                color: Colors.white,
-                              ),
-                            )),
-                      ],
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.0),
+                        color: Color.fromARGB(128, 52, 51, 51),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                              height: 100.0,
+                              width: 100.0,
+                              margin: EdgeInsets.only(top: 50.0, bottom: 10.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  color: Color.fromARGB(255, 139, 64, 251)),
+                              child: IconButton(
+                                alignment: Alignment.center,
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) => selectFile()));
+                                },
+                                icon: Icon(
+                                  Icons.upload_file,
+                                  size: 60.0,
+                                  color: Colors.white,
+                                ),
+                              )),
+                          Container(
+                            padding: EdgeInsets.only(top: 25),
+                            width: 250.0,
+                            alignment: Alignment.center,
+                            child: Text('UPLOAD A FILE',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 228, 228, 228),
+                                    fontSize: 20,
+                                    fontFamily: 'aninas')),
+                          ),
+                        ],
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                            height: 100.0,
-                            width: 100.0,
-                            margin: EdgeInsets.only(top: 50.0, bottom: 10.0),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50.0),
-                                color: Color.fromARGB(255, 139, 64, 251)),
-                            child: IconButton(
-                              alignment: Alignment.center,
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.question_mark_outlined,
-                                size: 60.0,
-                                color: Colors.white,
-                              ),
-                            )),
-                        Container(
-                          width: 250.0,
-                          alignment: Alignment.center,
-                          child: Text('Type your question',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 255, 253, 253),
-                                  fontSize: 20,
-                                  fontFamily: 'ananias')),
-                        ),
-                      ],
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.0),
+                        color: Color.fromARGB(128, 52, 51, 51),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(top: 25),
+                            width: 250.0,
+                            alignment: Alignment.center,
+                            child: Text('Upload a video',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 228, 228, 228),
+                                    fontSize: 20,
+                                    fontFamily: 'ananias')),
+                          ),
+                          Container(
+                              height: 100.0,
+                              width: 100.0,
+                              margin: EdgeInsets.only(top: 50.0, bottom: 10.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  color: Color.fromARGB(255, 139, 64, 251)),
+                              child: IconButton(
+                                alignment: Alignment.center,
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) => selectFile()));
+                                },
+                                icon: Icon(
+                                  Icons.video_call_rounded,
+                                  size: 60.0,
+                                  color: Colors.white,
+                                ),
+                              )),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.0),
+                        color: Color.fromARGB(128, 52, 51, 51),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                              height: 100.0,
+                              width: 100.0,
+                              margin: EdgeInsets.only(top: 50.0, bottom: 10.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  color: Color.fromARGB(255, 139, 64, 251)),
+                              child: IconButton(
+                                alignment: Alignment.center,
+                                onPressed: () {
+                                  _imageselect(context);
+                                },
+                                icon: Icon(
+                                  Icons.camera_alt_outlined,
+                                  size: 60.0,
+                                  color: Colors.white,
+                                ),
+                              )),
+                          Container(
+                            padding: EdgeInsets.only(top: 20),
+                            width: 250.0,
+                            alignment: Alignment.center,
+                            child: Text('UPLOAD An image of your doubt',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 228, 228, 228),
+                                    fontSize: 20,
+                                    fontFamily: 'ananias')),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
-          ));
+          ),
+        ),
+      );
     } else {
       return Scaffold(
-        backgroundColor: Color.fromARGB(212, 0, 0, 0),
+        backgroundColor: Colors.black,
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 139, 64, 251),
           leading: IconButton(
@@ -280,6 +317,7 @@ class _AddPostState extends State<AddPost> {
           centerTitle: false,
         ),
         body: Container(
+          // color: Colors.black,
           constraints: BoxConstraints.expand(),
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -352,10 +390,6 @@ class _AddPostState extends State<AddPost> {
           ),
         ),
       );
-      @override
-      Widget build(BuildContext context) {
-        return Container();
-      }
     }
   }
 }

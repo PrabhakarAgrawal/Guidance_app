@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:newapp/ui/chat_screen.dart';
+import 'package:newapp/ui/loginpage.dart';
 import 'package:newapp/widgets/photoposting.dart';
+
+import '../widgets/hamburger.dart';
 
 class contentPage extends StatefulWidget {
   contentPage({Key? key}) : super(key: key);
@@ -13,18 +17,27 @@ class _contentPageState extends State<contentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(212, 0, 0, 0),
+      backgroundColor: Colors.black,
+      drawer: Hamburger(),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
         centerTitle: true,
-        title: Text('feed'),
+        title: Text(
+          'Feed',
+          style: TextStyle(fontFamily: 'quick'),
+        ),
         actions: [
           IconButton(
-              onPressed: () {}, icon: const Icon(Icons.chat_bubble_outlined))
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => ChatScreen()));
+              },
+              icon: const Icon(Icons.chat_bubble_outlined))
         ],
       ),
       body: Container(
         constraints: BoxConstraints.expand(),
+        padding: EdgeInsets.symmetric(horizontal: 32),
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
