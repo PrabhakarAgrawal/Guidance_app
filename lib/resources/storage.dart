@@ -28,11 +28,12 @@ class StorageMeth {
     String downloadURL = await snap.ref.getDownloadURL();
     return downloadURL;
   }
+
   Future upload_File(File file) async {
     if (file == null) return;
-    final fileName = basename(file!.path);
+    final fileName = basename(file.path);
     final destination = 'files/$fileName';
-    task = FirebaseApi.uploadFile(destination, file!);
+    task = FirebaseApi.uploadFile(destination, file);
     if (task == null) return;
     final snapshot = await task!.whenComplete(() {});
     final urlDownload = await snapshot.ref.getDownloadURL();
