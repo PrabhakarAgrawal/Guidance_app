@@ -199,11 +199,11 @@ class _AddPostState extends State<AddPost> {
                             padding: EdgeInsets.only(top: 25),
                             width: 250.0,
                             alignment: Alignment.center,
-                            child: Text('UPLOAD A FILE',
+                            child: Text('Upload a File',
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 228, 228, 228),
                                     fontSize: 20,
-                                    fontFamily: 'aninas')),
+                                    fontFamily: 'ananias')),
                           ),
                         ],
                       ),
@@ -223,7 +223,7 @@ class _AddPostState extends State<AddPost> {
                             padding: EdgeInsets.only(top: 25),
                             width: 250.0,
                             alignment: Alignment.center,
-                            child: Text('Upload a video',
+                            child: Text('Upload a Video',
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 228, 228, 228),
                                     fontSize: 20,
@@ -285,7 +285,7 @@ class _AddPostState extends State<AddPost> {
                             padding: EdgeInsets.only(top: 20),
                             width: 250.0,
                             alignment: Alignment.center,
-                            child: Text('UPLOAD An image of your doubt',
+                            child: Text('Upload a Quote',
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 228, 228, 228),
                                     fontSize: 20,

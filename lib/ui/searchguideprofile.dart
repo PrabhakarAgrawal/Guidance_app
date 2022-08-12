@@ -150,6 +150,9 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                               child: Text(college,
                                   style: TextStyle(
                                       fontSize: 15, color: Colors.white)))),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Container(
                           height: 60,
                           width: double.infinity,
@@ -161,6 +164,9 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                           child: Center(
                               child:
                                   Text(bio, style: TextStyle(fontSize: 15)))),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Container(
                           height: 45,
                           width: double.infinity,

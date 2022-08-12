@@ -36,7 +36,8 @@ class _selectFileState extends State<selectFile> {
         value: item,
         child: Text(
           item,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
         ),
       );
 
@@ -109,7 +110,7 @@ class _selectFileState extends State<selectFile> {
                   builder: (context) => MobileScreenLayout()));
             },
             icon: Icon(Icons.arrow_back)),
-        title: const Text('Post image of your doubt'),
+        title: const Text('Post'),
         centerTitle: false,
       ),
       body: Container(
@@ -138,15 +139,15 @@ class _selectFileState extends State<selectFile> {
               //           fit: BoxFit.contain, image: NetworkImage("")),
               //       )),
               Container(
-                width: 150,
-                height: 150,
+                width: 50,
+                height: 50,
                 child: file != null
                     ? Container(
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 fit: BoxFit.contain,
                                 image: NetworkImage(
-                                    "https://images.unsplash.com/photo-1659904825585-2fdf22b3aa73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"))))
+                                    "https://www.google.com/imgres?imgurl=https%3A%2F%2Ficon-library.com%2Fimages%2Ffile-icon-image%2Ffile-icon-image-5.jpg&imgrefurl=https%3A%2F%2Ficon-library.com%2Ficon%2Ffile-icon-image-5.html&tbnid=cR2MXW9n-0JoZM&vet=10CBoQMyh0ahcKEwj4pKnooMH5AhUAAAAAHQAAAAAQAg..i&docid=q0QwfZKvH6QXMM&w=512&h=512&q=file%20icon&ved=0CBoQMyh0ahcKEwj4pKnooMH5AhUAAAAAHQAAAAAQAg"))))
                     : IconButton(
                         onPressed: fileSelect,
                         icon: Icon(Icons.upload_file_outlined),
@@ -160,10 +161,10 @@ class _selectFileState extends State<selectFile> {
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
               ),
-              Container(
-                color: Color.fromARGB(255, 8, 0, 0),
+              Theme(
+                data: Theme.of(context).copyWith(canvasColor: Colors.black),
                 // width: 300,
-                margin: EdgeInsets.all(10),
+
                 child: DropdownButton<String>(
                   hint: Text(
                     "Select type of file",
@@ -174,7 +175,7 @@ class _selectFileState extends State<selectFile> {
                   onChanged: (value) => setState(() {
                     this.value = value;
                     type = value!;
-                    // Colors.white;
+                    // Colors.black;
                   }),
                 ),
               ),
