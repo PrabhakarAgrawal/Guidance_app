@@ -116,16 +116,23 @@ class firestoreMethods {
   }
 
   //updating likes
-  Future<String> likePost(String postId, String uid, List likes) async {
+  Future<String> likePost(
+      String postId, String postuseruid, String uid, List likes) async {
     String res = "Some error occurred";
     try {
       if (likes.contains(uid)) {
         _firestore.collection('posts').doc(postId).update({
           'likes': FieldValue.arrayRemove([uid])
         });
+        _firestore.collection('newusers').doc(postuseruid).update({
+          'following': FieldValue.arrayRemove([uid])
+        });
       } else {
         _firestore.collection('posts').doc(postId).update({
           'likes': FieldValue.arrayUnion([uid])
+        });
+        _firestore.collection('newusers').doc(postuseruid).update({
+          'following': FieldValue.arrayUnion([uid])
         });
       }
       res = 'success';

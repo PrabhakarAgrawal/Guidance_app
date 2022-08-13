@@ -33,7 +33,7 @@ class _commentScreenState extends State<commentScreen> {
 
     setState(() {
       username = (snap.data() as Map<String, dynamic>)["username"];
-      profilePic = (snap.data() as Map<String, dynamic>)["profilePic"];
+      profilePic = (snap.data() as Map<String, dynamic>)["photoUrl"];
       uid = (snap.data() as Map<String, dynamic>)["uid"];
       person = (snap.data() as Map<String, dynamic>)["person"];
     });
@@ -49,56 +49,50 @@ class _commentScreenState extends State<commentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromARGB(212, 0, 0, 0),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
         title: const Text(
           'Comments',
-          style: TextStyle(fontFamily: 'ananias'),
         ),
         centerTitle: false,
       ),
-      body: SafeArea(
-        child: Container(
-          constraints: BoxConstraints.expand(),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                "assets/images/backgroundimg.png",
-              ),
-              opacity: 230.0,
-              fit: BoxFit.cover,
-            ),
+      body: Container(
+        constraints: BoxConstraints.expand(),
+        decoration: const BoxDecoration(
+          color: Colors.black,
+          image: DecorationImage(
+            image: AssetImage('assets/images/backgroundimg.png'),
+            opacity: 200.0,
+            fit: BoxFit.cover,
           ),
-          child: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('posts')
-                .doc(widget.snap['postId'])
-                .collection('comments')
-                .orderBy('datePublished', descending: true)
-                .snapshots(),
-            builder: (context,
-                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-
-              return ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) => commentPosting(
-                  snap: snapshot.data!.docs[index].data(),
-                ),
+        ),
+        child: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection('posts')
+              .doc(widget.snap['postId'])
+              .collection('comments')
+              .orderBy('datePublished', descending: true)
+              .snapshots(),
+          builder: (context,
+              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
               );
-            },
-          ),
+            }
+
+            return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) => commentPosting(
+                snap: snapshot.data!.docs[index].data(),
+              ),
+            );
+          },
         ),
       ),
       bottomNavigationBar: Container(
         color: Colors.black,
-        height: 65,
+        height: 50,
         margin:
             EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Container(
@@ -106,7 +100,7 @@ class _commentScreenState extends State<commentScreen> {
           margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: Color.fromARGB(255, 113, 113, 113),
+            color: Color.fromARGB(84, 101, 101, 101),
           ),
           child: Row(
             children: [
@@ -118,12 +112,11 @@ class _commentScreenState extends State<commentScreen> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 16, right: 8),
                   child: TextField(
-                    textAlign: TextAlign.justify,
                     controller: _commentctrl,
                     decoration: InputDecoration(
-                      hintText: 'Type your comment',
+                      hintText: 'Type your answer',
                       hintStyle:
-                          TextStyle(color: Color.fromARGB(255, 228, 224, 224)),
+                          TextStyle(color: Color.fromARGB(157, 255, 255, 255)),
                       border: InputBorder.none,
                     ),
                   ),
@@ -138,19 +131,16 @@ class _commentScreenState extends State<commentScreen> {
                   });
                 },
                 child: Container(
-                  alignment: Alignment.center,
-                  height: 40,
-                  width: 80,
+                  height: 50,
+                  width: 60,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(20),
                     color: Color.fromARGB(255, 139, 64, 251),
                   ),
                   child: const Text(
                     'Post',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               )

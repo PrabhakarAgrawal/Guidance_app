@@ -46,12 +46,12 @@ class _StudyMaterialState extends State<StudyMaterial> {
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w400,
-                        fontSize: 20,
+                        fontSize: MediaQuery.of(context).size.height * 0.038,
                         fontFamily: 'ananias'),
                   ),
                 ),
                 Container(
-                  height: 60,
+                  height: MediaQuery.of(context).size.height * 0.12,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(12),
@@ -70,12 +70,12 @@ class _StudyMaterialState extends State<StudyMaterial> {
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18),
+                          fontSize: MediaQuery.of(context).size.height * 0.032),
                     ),
                   ),
                 ),
                 Container(
-                  height: 60,
+                  height: MediaQuery.of(context).size.height * 0.12,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(12),
@@ -94,12 +94,12 @@ class _StudyMaterialState extends State<StudyMaterial> {
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18),
+                          fontSize: MediaQuery.of(context).size.height * 0.032),
                     ),
                   ),
                 ),
                 Container(
-                  height: 60,
+                  height: MediaQuery.of(context).size.height * 0.12,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(12),
@@ -118,7 +118,7 @@ class _StudyMaterialState extends State<StudyMaterial> {
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18),
+                          fontSize: MediaQuery.of(context).size.height * 0.032),
                     ),
                   ),
                 ),

@@ -172,8 +172,8 @@ class _AddPostState extends State<AddPost> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Container(
-                            height: 100.0,
-                            width: 100.0,
+                            height: MediaQuery.of(context).size.height * 0.16,
+                            width: MediaQuery.of(context).size.width * 0.18,
                             margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50.0),
@@ -187,12 +187,12 @@ class _AddPostState extends State<AddPost> {
                               },
                               icon: Icon(
                                 Icons.upload_file,
-                                size: 60.0,
+                                size: MediaQuery.of(context).size.width * 0.14,
                                 color: Colors.white,
                               ),
                             )),
                         Container(
-                          width: 250.0,
+                          width: MediaQuery.of(context).size.width * 0.45,
                           alignment: Alignment.center,
                           child: Text('UPLOAD A FILE',
                               style: TextStyle(
@@ -214,7 +214,7 @@ class _AddPostState extends State<AddPost> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Container(
-                          width: 250.0,
+                          width: MediaQuery.of(context).size.width * 0.45,
                           alignment: Alignment.center,
                           child: Text('Upload a video',
                               style: TextStyle(
@@ -223,8 +223,8 @@ class _AddPostState extends State<AddPost> {
                                   fontFamily: 'ananias')),
                         ),
                         Container(
-                            height: 100.0,
-                            width: 100.0,
+                            height: MediaQuery.of(context).size.height * 0.16,
+                            width: MediaQuery.of(context).size.width * 0.18,
                             margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50.0),
@@ -238,7 +238,7 @@ class _AddPostState extends State<AddPost> {
                               },
                               icon: Icon(
                                 Icons.video_call_rounded,
-                                size: 60.0,
+                                size: MediaQuery.of(context).size.width * 0.14,
                                 color: Colors.white,
                               ),
                             )),
@@ -256,8 +256,8 @@ class _AddPostState extends State<AddPost> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Container(
-                            height: 100.0,
-                            width: 100.0,
+                            height: MediaQuery.of(context).size.height * 0.16,
+                            width: MediaQuery.of(context).size.width * 0.18,
                             margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50.0),
@@ -269,12 +269,12 @@ class _AddPostState extends State<AddPost> {
                               },
                               icon: Icon(
                                 Icons.camera_alt_outlined,
-                                size: 60.0,
+                                size: MediaQuery.of(context).size.width * 0.14,
                                 color: Colors.white,
                               ),
                             )),
                         Container(
-                          width: 250.0,
+                          width: MediaQuery.of(context).size.width * 0.45,
                           alignment: Alignment.center,
                           child: Text('Upload a quote',
                               style: TextStyle(
@@ -353,8 +353,8 @@ class _AddPostState extends State<AddPost> {
                     onTap: () => uploadImage(uid, username, profilePic),
                     child: Container(
                       alignment: Alignment.center,
-                      height: 40.0,
-                      width: 100.0,
+                      height: MediaQuery.of(context).size.height * 0.08,
+                      width: MediaQuery.of(context).size.width * 0.18,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadiusDirectional.circular(12.0),
                         color: Color.fromARGB(255, 139, 64, 251),
@@ -365,11 +365,12 @@ class _AddPostState extends State<AddPost> {
                                 color: Colors.white,
                               ),
                             )
-                          : const Text("upload",
+                          : Text("upload",
                               style: TextStyle(
                                 fontFamily: "ananias",
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.035,
                               )),
                     ))
               ],

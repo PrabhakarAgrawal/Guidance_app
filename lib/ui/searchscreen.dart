@@ -26,7 +26,7 @@ class _searchScreenState extends State<searchScreen> {
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 179, 64, 251),
           title: Container(
-            height: 50,
+            height: MediaQuery.of(context).size.height * 0.08,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: Color.fromARGB(255, 255, 255, 255),
@@ -80,7 +80,9 @@ class _searchScreenState extends State<searchScreen> {
                                   (snapshot.data! as dynamic).docs[index]
                                       ['username'],
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.028,
                                       fontWeight: FontWeight.bold,
                                       color:
                                           Color.fromARGB(255, 255, 255, 255)),
@@ -89,7 +91,9 @@ class _searchScreenState extends State<searchScreen> {
                                     (snapshot.data! as dynamic).docs[index]
                                         ['college'],
                                     style: TextStyle(
-                                        fontSize: 11,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.02,
                                         color:
                                             Color.fromARGB(255, 115, 115, 115)))
                               ],
@@ -98,7 +102,9 @@ class _searchScreenState extends State<searchScreen> {
                                 '~ ${(snapshot.data! as dynamic).docs[index]['person']}',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 12,
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            0.022,
                                     color: Colors.greenAccent)),
                           ),
                         );
@@ -110,8 +116,8 @@ class _searchScreenState extends State<searchScreen> {
                 })
             : Center(
                 child: Container(
-                    height: 200,
-                    width: 200,
+                    height: MediaQuery.of(context).size.height * 0.32,
+                    width: MediaQuery.of(context).size.width * 0.36,
                     child: Icon(Icons.search_outlined,
                         color: Colors.blueGrey, size: 80)),
               ));

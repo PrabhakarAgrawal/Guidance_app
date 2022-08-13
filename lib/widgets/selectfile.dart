@@ -113,7 +113,7 @@ class _selectFileState extends State<selectFile> {
                   builder: (context) => MobileScreenLayout()));
             },
             icon: Icon(Icons.arrow_back)),
-        title: const Text('Post image of your doubt'),
+        title: const Text('Post '),
         centerTitle: false,
       ),
       body: Container(
@@ -142,8 +142,8 @@ class _selectFileState extends State<selectFile> {
               //           fit: BoxFit.contain, image: NetworkImage("")),
               //       )),
               Container(
-                width: 50,
-                height: 50,
+                height: MediaQuery.of(context).size.height * 0.08,
+                width: MediaQuery.of(context).size.width * 0.09,
                 child: file != null
                     ? Container(
                         decoration: BoxDecoration(
@@ -158,34 +158,43 @@ class _selectFileState extends State<selectFile> {
                         iconSize: 50,
                       ),
               ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.008,
+              ),
 
               Text(
                 'filename - $filename',
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
               ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.001,
+              ),
               Container(
                 margin: EdgeInsets.all(10),
-                child: DropdownButton<String>(
-                  hint: Text(
-                    "Select type of file",
-                    style: TextStyle(
-                      fontSize: 16,
+                child: Theme(
+                  data: Theme.of(context).copyWith(canvasColor: Colors.black),
+                  child: DropdownButton<String>(
+                    hint: Text(
+                      "Select type of file",
+                      style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.height * 0.035,
+                        color: Colors.white,
+                      ),
+                    ),
+                    iconDisabledColor: Colors.black,
+                    iconEnabledColor: Colors.black,
+                    value: value,
+                    icon: Icon(
+                      Icons.arrow_drop_down,
                       color: Colors.white,
                     ),
+                    items: items.map(buildmenuitem).toList(),
+                    onChanged: (value) => setState(() {
+                      this.value = value;
+                      type = value!;
+                    }),
                   ),
-                  iconDisabledColor: Colors.black,
-                  iconEnabledColor: Colors.black,
-                  value: value,
-                  icon: Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.white,
-                  ),
-                  items: items.map(buildmenuitem).toList(),
-                  onChanged: (value) => setState(() {
-                    this.value = value;
-                    type = value!;
-                  }),
                 ),
               ),
 
@@ -213,8 +222,8 @@ class _selectFileState extends State<selectFile> {
                       : uploadFile(uid, username, profilePic),
                   child: Container(
                     alignment: Alignment.center,
-                    height: 40.0,
-                    width: 100.0,
+                    height: MediaQuery.of(context).size.height * 0.08,
+                    width: MediaQuery.of(context).size.width * 0.18,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadiusDirectional.circular(12.0),
                       color: Color.fromARGB(255, 139, 64, 251),
@@ -225,11 +234,12 @@ class _selectFileState extends State<selectFile> {
                               color: Colors.white,
                             ),
                           )
-                        : const Text("upload",
+                        : Text("upload",
                             style: TextStyle(
                               fontFamily: "ananias",
                               color: Colors.white,
-                              fontSize: 20,
+                              fontSize:
+                                  MediaQuery.of(context).size.height * 0.035,
                             )),
                   ))
             ],

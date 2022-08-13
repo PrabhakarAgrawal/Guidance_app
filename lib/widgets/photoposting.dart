@@ -174,7 +174,10 @@ class _photoPostingState extends State<photoPosting> {
                     IconButton(
                         onPressed: () async {
                           await firestoreMethods().likePost(
-                              widget.snap['postId'], uid, widget.snap['likes']);
+                              widget.snap['postId'],
+                              widget.snap['uid'],
+                              uid,
+                              widget.snap['likes']);
                           // print(
                           //   getDetails().getdetails("uid"),
                           // );
@@ -351,7 +354,10 @@ class _photoPostingState extends State<photoPosting> {
                     IconButton(
                         onPressed: () async {
                           await firestoreMethods().likePost(
-                              widget.snap['postId'], uid, widget.snap['likes']);
+                              widget.snap['postId'],
+                              widget.snap['uid'],
+                              uid,
+                              widget.snap['likes']);
                           // print(
                           //   getDetails().getdetails("uid"),
                           // );
@@ -532,7 +538,10 @@ class _photoPostingState extends State<photoPosting> {
                     IconButton(
                         onPressed: () async {
                           await firestoreMethods().likePost(
-                              widget.snap['postId'], uid, widget.snap['likes']);
+                              widget.snap['postId'],
+                              widget.snap['uid'],
+                              uid,
+                              widget.snap['likes']);
                           // print(
                           //   getDetails().getdetails("uid"),
                           // );

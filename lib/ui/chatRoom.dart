@@ -69,8 +69,9 @@ class ChatRoom extends StatelessWidget {
                             padding: const EdgeInsets.only(
                                 left: 10.0, right: 10.0, top: 20),
                             child: SizedBox(
-                                height: 640,
-                                width: 400,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.8,
+                                width: MediaQuery.of(context).size.width * 0.9,
                                 child: ListView.builder(
                                     itemCount: snapshot.data!.docs.length,
                                     itemBuilder: (context, index) {

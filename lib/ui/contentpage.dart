@@ -48,7 +48,10 @@ class _contentPageState extends State<contentPage> {
           ),
         ),
         child: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('posts').snapshots(),
+          stream: FirebaseFirestore.instance
+              .collection('posts')
+              .orderBy('date', descending: true)
+              .snapshots(),
           builder: (context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {

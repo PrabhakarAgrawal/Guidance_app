@@ -95,7 +95,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: TextField(
                       controller: _search,
                       decoration: InputDecoration(
-                          hintText: ("Search"),
+                          hintText: ("Search by email"),
                           hintStyle:
                               TextStyle(color: Color.fromARGB(154, 34, 33, 33)),
                           border: OutlineInputBorder(

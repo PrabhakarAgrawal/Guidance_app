@@ -69,7 +69,7 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
         : Scaffold(
             backgroundColor: Colors.black,
             appBar: AppBar(
-              backgroundColor: Colors.purple,
+              backgroundColor: Color.fromARGB(255, 139, 64, 251),
               title: Text('Profile', style: TextStyle(fontFamily: 'ananias')),
               centerTitle: false,
             ),
@@ -88,8 +88,8 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      height: 100,
-                      width: 100,
+                      height: MediaQuery.of(context).size.height * 0.16,
+                      width: MediaQuery.of(context).size.width * 0.2,
                       margin: EdgeInsets.all(15),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
@@ -106,14 +106,16 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
                           Text(
                             '${person} -',
                             style: TextStyle(
-                                fontSize: 30,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.04,
                                 color: Colors.greenAccent,
                                 fontFamily: 'ananias'),
                           ),
                           Text(
                             ' ${username}',
                             style: TextStyle(
-                                fontSize: 30,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.04,
                                 color: Colors.white,
                                 fontFamily: 'ananias'),
                           ),
@@ -121,10 +123,10 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 5,
+                      height: MediaQuery.of(context).size.height * 0.008,
                     ),
                     Container(
-                        height: 60,
+                        height: MediaQuery.of(context).size.height * 0.1,
                         width: double.infinity,
                         margin:
                             EdgeInsets.symmetric(vertical: 2, horizontal: 15),
@@ -134,72 +136,94 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
                         child: Center(
                           child: Column(
                             children: [
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.008,
+                              ),
                               Text(
                                 'Bio - $bio',
                                 style: TextStyle(
-                                    fontSize: 15, color: Colors.white),
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            0.028,
+                                    color: Colors.white),
                               ),
                               Text(
                                 'Email - $email',
                                 style: TextStyle(
-                                    fontSize: 15, color: Colors.white),
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            0.028,
+                                    color: Colors.white),
                               )
                             ],
                           ),
                         )),
                     Container(
-                        height: 45,
+                        height: MediaQuery.of(context).size.height * 0.08,
                         width: double.infinity,
                         margin: EdgeInsets.only(
                             left: 10, right: 10, top: 3, bottom: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
-                          color: Colors.purple,
+                          color: Color.fromARGB(255, 139, 64, 251),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
+                            // Column(
+                            //   children: [
+                            //     // Container(
+                            //     //     width: 45,
+                            //     //     padding:
+                            //     //         EdgeInsets.symmetric(horizontal: 7),
+                            //     //     child: Text('${followers.length}',
+                            //     //         style: TextStyle(
+                            //     //             fontSize: 16,
+                            //     //             fontWeight: FontWeight.bold,
+                            //     //             color: Colors.white))),
+                            //     Container(
+                            //         width: 90,
+                            //         alignment: Alignment.topLeft,
+                            //         child: Text('Followers',
+                            //             style: TextStyle(
+                            //                 fontSize: 12,
+                            //                 fontWeight: FontWeight.bold,
+                            //                 color: Colors.white))),
+                            //   ],
+                            // ),
                             Column(
                               children: [
                                 Container(
-                                    width: 45,
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 7),
-                                    child: Text('${followers.length}',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white))),
-                                Container(
-                                    width: 90,
-                                    alignment: Alignment.topLeft,
-                                    child: Text('Followers',
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white))),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Container(
-                                    width: 45,
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 7),
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal:
+                                            MediaQuery.of(context).size.width *
+                                                0.034),
                                     alignment: Alignment.topLeft,
                                     child: Text('${postlength}',
                                         style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.03,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white))),
                                 Container(
-                                    width: 60,
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 7),
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal:
+                                            MediaQuery.of(context).size.width *
+                                                0.02),
                                     alignment: Alignment.topLeft,
                                     child: Text('Posts',
                                         style: TextStyle(
-                                            fontSize: 12,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.025,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white))),
                               ],
@@ -210,15 +234,16 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
                     Container(
                         alignment: Alignment.center,
                         margin: EdgeInsets.all(8),
-                        height: 50,
-                        width: 180,
+                        height: MediaQuery.of(context).size.height * 0.08,
+                        width: MediaQuery.of(context).size.width * 0.34,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
-                          color: Colors.purple,
+                          color: Color.fromARGB(255, 139, 64, 251),
                         ),
                         child: Text('Questions Asked',
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.035,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white))),
                     FutureBuilder(

@@ -172,32 +172,32 @@ class _aspirantPostScreenState extends State<aspirantPostScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Container(
-                          width: 250.0,
+                          width: MediaQuery.of(context).size.width * 0.45,
                           alignment: Alignment.center,
                           child: Text('UPLOAD An image of your doubt',
                               style: TextStyle(
                                   color: Color.fromARGB(255, 255, 255, 255),
-                                  fontSize: 20,
+                                  fontSize: MediaQuery.of(context).size.height *
+                                      0.035,
                                   fontFamily: 'ananias')),
                         ),
                         Container(
-                            height: 100.0,
-                            width: 100.0,
-                            margin: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50.0),
-                                color: Color.fromARGB(255, 139, 64, 251)),
-                            child: IconButton(
-                              alignment: Alignment.center,
-                              onPressed: () {
-                                _imageselect(context);
-                              },
-                              icon: Icon(
-                                Icons.camera_alt_outlined,
-                                size: 60.0,
-                                color: Colors.white,
-                              ),
-                            )),
+                          height: MediaQuery.of(context).size.height * 0.16,
+                          width: MediaQuery.of(context).size.width * 0.18,
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50.0),
+                              color: Color.fromARGB(255, 139, 64, 251)),
+                          child: IconButton(
+                            alignment: Alignment.center,
+                            onPressed: () {
+                              _imageselect(context);
+                            },
+                            icon: Icon(Icons.camera_alt_outlined,
+                                size: MediaQuery.of(context).size.width * 0.14),
+                            color: Colors.white,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -272,8 +272,8 @@ class _aspirantPostScreenState extends State<aspirantPostScreen> {
                     onTap: () => uploadImage(uid, username, profilePic),
                     child: Container(
                       alignment: Alignment.center,
-                      height: 40.0,
-                      width: 100.0,
+                      height: MediaQuery.of(context).size.height * 0.08,
+                      width: MediaQuery.of(context).size.width * 0.18,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadiusDirectional.circular(12.0),
                         color: Color.fromARGB(255, 139, 64, 251),
@@ -284,11 +284,12 @@ class _aspirantPostScreenState extends State<aspirantPostScreen> {
                                 color: Colors.white,
                               ),
                             )
-                          : const Text("upload",
+                          : Text("upload",
                               style: TextStyle(
                                 fontFamily: "ananias",
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.035,
                               )),
                     ))
               ],

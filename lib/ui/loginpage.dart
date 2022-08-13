@@ -59,31 +59,33 @@ class _loginscreenState extends State<loginscreen> {
 
   @override
   Widget build(BuildContext context) {
+    final fsize = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromARGB(212, 0, 0, 0),
-      body: SingleChildScrollView(
-        child: SafeArea(
-            child: Container(
-          constraints: BoxConstraints.expand(),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                "assets/images/backgroundimg.png",
-              ),
-              opacity: 220.0,
-              fit: BoxFit.cover,
+      body: SafeArea(
+          child: Container(
+        constraints: BoxConstraints.expand(),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              "assets/images/backgroundimg.png",
             ),
+            opacity: 220.0,
+            fit: BoxFit.cover,
           ),
-          padding: EdgeInsets.symmetric(horizontal: 32),
-          width: double.infinity,
+        ),
+        padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.06),
+        width: double.infinity,
+        child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
                   margin: EdgeInsets.only(
                       top: 0.0, left: 20, right: 20, bottom: 20),
-                  width: 350,
-                  height: 300,
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: MediaQuery.of(context).size.height * 0.5,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       image: const DecorationImage(
@@ -104,7 +106,7 @@ class _loginscreenState extends State<loginscreen> {
                     textInputType: TextInputType.emailAddress),
               ),
               SizedBox(
-                height: 24,
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -118,13 +120,13 @@ class _loginscreenState extends State<loginscreen> {
                     textInputType: TextInputType.emailAddress),
               ),
               SizedBox(
-                height: 24,
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               InkWell(
                 onTap: loginUser,
                 child: Container(
-                  height: 50,
-                  width: 100,
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  width: MediaQuery.of(context).size.width * 0.18,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
@@ -135,17 +137,18 @@ class _loginscreenState extends State<loginscreen> {
                             color: Colors.white,
                           ),
                         )
-                      : const Text(
+                      : Text(
                           "Log in",
                           style: TextStyle(
                               color: Color.fromARGB(255, 231, 230, 230),
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize:
+                                  MediaQuery.of(context).size.height * 0.03),
                         ),
                 ),
               ),
               SizedBox(
-                height: 24,
+                height: MediaQuery.of(context).size.height * 0.05,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -174,8 +177,8 @@ class _loginscreenState extends State<loginscreen> {
               )
             ],
           ),
-        )),
-      ),
+        ),
+      )),
     );
   }
 }
