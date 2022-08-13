@@ -64,10 +64,9 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
     return isload
         ? Center(
             child: CircularProgressIndicator(
-            color: Colors.blue,
+            color: Color.fromARGB(255, 161, 67, 215),
           ))
         : Scaffold(
-            backgroundColor: Colors.black,
             appBar: AppBar(
               backgroundColor: Color.fromARGB(255, 139, 64, 251),
               title: Text('Profile', style: TextStyle(fontFamily: 'ananias')),
@@ -78,7 +77,6 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/backgroundimg.png'),
-                  opacity: 230.0,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -88,14 +86,12 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.16,
-                      width: MediaQuery.of(context).size.width * 0.2,
                       margin: EdgeInsets.all(15),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Colors.grey),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
                       child: CircleAvatar(
-                        radius: 45,
+                        radius: 49,
                         backgroundImage: NetworkImage(profilePic),
                       ),
                     ),
@@ -107,7 +103,7 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
                             '${person} -',
                             style: TextStyle(
                                 fontSize:
-                                    MediaQuery.of(context).size.height * 0.04,
+                                    MediaQuery.of(context).size.height * 0.03,
                                 color: Colors.greenAccent,
                                 fontFamily: 'ananias'),
                           ),
@@ -115,7 +111,7 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
                             ' ${username}',
                             style: TextStyle(
                                 fontSize:
-                                    MediaQuery.of(context).size.height * 0.04,
+                                    MediaQuery.of(context).size.height * 0.03,
                                 color: Colors.white,
                                 fontFamily: 'ananias'),
                           ),
@@ -126,35 +122,36 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
                       height: MediaQuery.of(context).size.height * 0.008,
                     ),
                     Container(
-                        height: MediaQuery.of(context).size.height * 0.1,
+                        height: MediaQuery.of(context).size.height * 0.15,
                         width: double.infinity,
                         margin:
-                            EdgeInsets.symmetric(vertical: 2, horizontal: 15),
+                            EdgeInsets.symmetric(vertical: 2, horizontal: 10),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
                             color: Color.fromARGB(186, 91, 90, 90)),
                         child: Center(
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.008,
-                              ),
+                              // SizedBox(
+                              //   height:
+                              //       MediaQuery.of(context).size.height * 0.008,
+                              // ),
                               Text(
                                 'Bio - $bio',
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.height *
-                                            0.028,
-                                    color: Colors.white),
+                                            0.022,
+                                    color: Color.fromARGB(255, 202, 200, 200)),
                               ),
                               Text(
                                 'Email - $email',
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.height *
-                                            0.028,
-                                    color: Colors.white),
+                                            0.022,
+                                    color: Color.fromARGB(255, 202, 200, 200)),
                               )
                             ],
                           ),
@@ -168,74 +165,33 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
                           borderRadius: BorderRadius.circular(12),
                           color: Color.fromARGB(255, 139, 64, 251),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // Column(
-                            //   children: [
-                            //     // Container(
-                            //     //     width: 45,
-                            //     //     padding:
-                            //     //         EdgeInsets.symmetric(horizontal: 7),
-                            //     //     child: Text('${followers.length}',
-                            //     //         style: TextStyle(
-                            //     //             fontSize: 16,
-                            //     //             fontWeight: FontWeight.bold,
-                            //     //             color: Colors.white))),
-                            //     Container(
-                            //         width: 90,
-                            //         alignment: Alignment.topLeft,
-                            //         child: Text('Followers',
-                            //             style: TextStyle(
-                            //                 fontSize: 12,
-                            //                 fontWeight: FontWeight.bold,
-                            //                 color: Colors.white))),
-                            //   ],
-                            // ),
-                            Column(
-                              children: [
-                                Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.15,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal:
-                                            MediaQuery.of(context).size.width *
-                                                0.034),
-                                    alignment: Alignment.topLeft,
-                                    child: Text('${postlength}',
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.03,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white))),
-                                Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.15,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal:
-                                            MediaQuery.of(context).size.width *
-                                                0.02),
-                                    alignment: Alignment.topLeft,
-                                    child: Text('Posts',
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.025,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white))),
-                              ],
-                            ),
+                            Text('${postlength}',
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            0.03,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
+                            Text('Posts',
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            0.025,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
                           ],
                         )),
-                    Divider(),
+                    Divider(
+                      color: Colors.white,
+                    ),
                     Container(
                         alignment: Alignment.center,
                         margin: EdgeInsets.all(8),
                         height: MediaQuery.of(context).size.height * 0.08,
-                        width: MediaQuery.of(context).size.width * 0.34,
+                        width: MediaQuery.of(context).size.width * 0.45,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           color: Color.fromARGB(255, 139, 64, 251),
@@ -243,7 +199,7 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
                         child: Text('Questions Asked',
                             style: TextStyle(
                                 fontSize:
-                                    MediaQuery.of(context).size.height * 0.035,
+                                    MediaQuery.of(context).size.height * 0.025,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white))),
                     FutureBuilder(
@@ -286,8 +242,7 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
                                       margin: EdgeInsets.all(10),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(8),
-                                        color:
-                                            Color.fromARGB(255, 101, 101, 101),
+                                        color: Color.fromARGB(186, 91, 90, 90),
                                       ),
                                       child: Column(
                                         children: [

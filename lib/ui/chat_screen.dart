@@ -49,7 +49,6 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 139, 64, 251),
           centerTitle: true,
@@ -68,7 +67,7 @@ class _ChatScreenState extends State<ChatScreen> {
               Expanded(
                 child: Text(
                   'Messages',
-                  style: TextStyle(fontFamily: 'quick'),
+                  style: TextStyle(fontFamily: 'ananias'),
                 ),
               ),
             ],

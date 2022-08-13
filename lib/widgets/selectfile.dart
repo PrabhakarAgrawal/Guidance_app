@@ -40,7 +40,7 @@ class _selectFileState extends State<selectFile> {
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
-              color: Color.fromARGB(255, 136, 132, 132)),
+              color: Color.fromARGB(255, 205, 201, 201)),
         ),
       );
 
@@ -104,7 +104,6 @@ class _selectFileState extends State<selectFile> {
   Widget build(BuildContext context) {
     final filename = file != null ? basename(file!.path) : 'No file Selected';
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
         leading: IconButton(
@@ -113,7 +112,10 @@ class _selectFileState extends State<selectFile> {
                   builder: (context) => MobileScreenLayout()));
             },
             icon: Icon(Icons.arrow_back)),
-        title: const Text('Post '),
+        title: const Text(
+          'Post ',
+          style: TextStyle(fontFamily: 'ananias'),
+        ),
         centerTitle: false,
       ),
       body: Container(
@@ -123,7 +125,6 @@ class _selectFileState extends State<selectFile> {
             image: AssetImage(
               "assets/images/backgroundimg.png",
             ),
-            opacity: 220.0,
             fit: BoxFit.cover,
           ),
         ),
@@ -144,6 +145,7 @@ class _selectFileState extends State<selectFile> {
               Container(
                 height: MediaQuery.of(context).size.height * 0.08,
                 width: MediaQuery.of(context).size.width * 0.09,
+                alignment: Alignment.topLeft,
                 child: file != null
                     ? Container(
                         decoration: BoxDecoration(
@@ -164,21 +166,28 @@ class _selectFileState extends State<selectFile> {
 
               Text(
                 'filename - $filename',
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    color: Color.fromARGB(255, 193, 193, 193)),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.001,
               ),
               Container(
+                width: MediaQuery.of(context).size.width * 0.50,
+                alignment: Alignment.center,
                 margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadiusDirectional.circular(8),
+                    color: Color.fromARGB(186, 91, 90, 90)),
                 child: Theme(
                   data: Theme.of(context).copyWith(canvasColor: Colors.black),
                   child: DropdownButton<String>(
                     hint: Text(
                       "Select type of file",
                       style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.height * 0.035,
+                        fontSize: MediaQuery.of(context).size.height * 0.025,
                         color: Colors.white,
                       ),
                     ),
@@ -222,8 +231,8 @@ class _selectFileState extends State<selectFile> {
                       : uploadFile(uid, username, profilePic),
                   child: Container(
                     alignment: Alignment.center,
-                    height: MediaQuery.of(context).size.height * 0.08,
-                    width: MediaQuery.of(context).size.width * 0.18,
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    width: MediaQuery.of(context).size.width * 0.28,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadiusDirectional.circular(12.0),
                       color: Color.fromARGB(255, 139, 64, 251),
@@ -239,7 +248,7 @@ class _selectFileState extends State<selectFile> {
                               fontFamily: "ananias",
                               color: Colors.white,
                               fontSize:
-                                  MediaQuery.of(context).size.height * 0.035,
+                                  MediaQuery.of(context).size.height * 0.025,
                             )),
                   ))
             ],

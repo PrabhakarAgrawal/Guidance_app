@@ -118,24 +118,7 @@ class _HamburgerState extends State<Hamburger> {
               //     ),
               //   ),
               // ),
-              Container(
-                color: Colors.black,
-                child: ListTile(
-                  leading: TextButton(
-                    child: Text(
-                      'Search',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => searchScreen()));
-                    },
-                  ),
-                ),
-              ),
+
               Container(
                 color: Colors.black,
                 child: ListTile(

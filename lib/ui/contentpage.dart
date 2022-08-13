@@ -17,7 +17,6 @@ class _contentPageState extends State<contentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       drawer: Hamburger(),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
@@ -43,7 +42,6 @@ class _contentPageState extends State<contentPage> {
             image: AssetImage(
               "assets/images/backgroundimg.png",
             ),
-            opacity: 220.0,
             fit: BoxFit.cover,
           ),
         ),

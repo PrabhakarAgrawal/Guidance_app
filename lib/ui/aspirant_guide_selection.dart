@@ -12,7 +12,6 @@ class aspirantGuideSelection extends StatelessWidget {
     return Material(
       child: Center(
         child: Scaffold(
-          backgroundColor: Colors.black,
           appBar: AppBar(
             backgroundColor: Color.fromARGB(255, 139, 64, 251),
             leading: IconButton(
@@ -35,7 +34,6 @@ class aspirantGuideSelection extends StatelessWidget {
                 image: AssetImage(
                   "assets/images/backgroundimg.png",
                 ),
-                opacity: 230.0,
                 fit: BoxFit.cover,
               ),
             ),
@@ -56,7 +54,7 @@ class aspirantGuideSelection extends StatelessWidget {
                 Container(
                     margin: EdgeInsets.only(
                         top: 0.0, left: 20, right: 20, bottom: 20),
-                    width: MediaQuery.of(context).size.width * 0.2,
+                    width: MediaQuery.of(context).size.width * 0.3,
                     height: MediaQuery.of(context).size.height * 0.2,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
@@ -74,11 +72,12 @@ class aspirantGuideSelection extends StatelessWidget {
                   child: Container(
                     child: Text(
                       "Aspirant",
-                      style:
-                          TextStyle(color: Color.fromARGB(255, 246, 233, 233)),
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 246, 233, 233),
+                          fontWeight: FontWeight.bold),
                     ),
                     height: MediaQuery.of(context).size.height * 0.07,
-                    width: MediaQuery.of(context).size.width * 0.2,
+                    width: MediaQuery.of(context).size.width * 0.3,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
@@ -102,7 +101,7 @@ class aspirantGuideSelection extends StatelessWidget {
                 Container(
                     margin: EdgeInsets.only(
                         top: 0.0, left: 20, right: 20, bottom: 20),
-                    width: MediaQuery.of(context).size.width * 0.2,
+                    width: MediaQuery.of(context).size.width * 0.3,
                     height: MediaQuery.of(context).size.height * 0.2,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
@@ -120,11 +119,12 @@ class aspirantGuideSelection extends StatelessWidget {
                   child: Container(
                     child: Text(
                       "Guide",
-                      style:
-                          TextStyle(color: Color.fromARGB(255, 246, 233, 233)),
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 246, 233, 233),
+                          fontWeight: FontWeight.bold),
                     ),
                     height: MediaQuery.of(context).size.height * 0.07,
-                    width: MediaQuery.of(context).size.width * 0.2,
+                    width: MediaQuery.of(context).size.width * 0.3,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),

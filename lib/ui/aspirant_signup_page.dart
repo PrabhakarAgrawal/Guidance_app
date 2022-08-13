@@ -25,6 +25,7 @@ class _aspirantSignupState extends State<aspirantSignup> {
   String person = 'Aspirant';
   String college = '';
   bool _isLoading = false;
+  bool hidepassword = true;
 
   @override
   void dispose() {
@@ -40,6 +41,15 @@ class _aspirantSignupState extends State<aspirantSignup> {
     setState(() {
       _image = im;
     });
+  }
+
+  void togglepassword() {
+    if (hidepassword == true) {
+      hidepassword = false;
+    } else {
+      hidepassword = true;
+    }
+    setState(() {});
   }
 
   void signUpAspirant() async {
@@ -70,7 +80,6 @@ class _aspirantSignupState extends State<aspirantSignup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
@@ -96,7 +105,6 @@ class _aspirantSignupState extends State<aspirantSignup> {
             image: AssetImage(
               "assets/images/backgroundimg.png",
             ),
-            opacity: 230.0,
             fit: BoxFit.cover,
           ),
         ),
@@ -125,7 +133,7 @@ class _aspirantSignupState extends State<aspirantSignup> {
                         onPressed: selectPic,
                         icon: const Icon(
                           Icons.add_a_photo,
-                          color: Colors.black,
+                          color: Colors.grey,
                         ),
                       ),
                     )
@@ -165,11 +173,24 @@ class _aspirantSignupState extends State<aspirantSignup> {
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.white,
                 ),
-                child: TextFieldInput(
-                    hintText: 'Enter Your Password',
-                    isPass: true,
-                    textEditingController: _passwordController,
-                    textInputType: TextInputType.text),
+                child: Column(
+                  children: [
+                    TextFieldInput(
+                        hintText: 'Enter Your Password',
+                        isPass: hidepassword,
+                        textEditingController: _passwordController,
+                        textInputType: TextInputType.text),
+                    InkWell(
+                      onTap: togglepassword,
+                      child: Icon(
+                        Icons.visibility,
+                        color: hidepassword
+                            ? Color.fromARGB(255, 109, 108, 108)
+                            : Colors.blue,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
@@ -191,8 +212,8 @@ class _aspirantSignupState extends State<aspirantSignup> {
               InkWell(
                 onTap: signUpAspirant,
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  width: MediaQuery.of(context).size.width * 0.18,
+                  height: MediaQuery.of(context).size.height * 0.07,
+                  width: MediaQuery.of(context).size.width * 0.25,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
@@ -208,7 +229,7 @@ class _aspirantSignupState extends State<aspirantSignup> {
                               color: Color.fromARGB(255, 231, 230, 230),
                               fontWeight: FontWeight.bold,
                               fontSize:
-                                  MediaQuery.of(context).size.height * 0.03)),
+                                  MediaQuery.of(context).size.height * 0.02)),
                 ),
               ),
               SizedBox(

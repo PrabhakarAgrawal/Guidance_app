@@ -37,9 +37,9 @@ class ChatRoom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
         appBar: AppBar(
-          title: Text(userMap["username"]),
+          title: Text(userMap["username"],
+              style: TextStyle(fontFamily: 'ananias')),
           backgroundColor: Color.fromARGB(255, 139, 64, 251),
         ),
         body: Container(
@@ -47,7 +47,6 @@ class ChatRoom extends StatelessWidget {
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/backgroundimg.png'),
-              opacity: 220.0,
               fit: BoxFit.cover,
             ),
           ),
@@ -70,7 +69,7 @@ class ChatRoom extends StatelessWidget {
                                 left: 10.0, right: 10.0, top: 20),
                             child: SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.8,
+                                    MediaQuery.of(context).size.height * 0.75,
                                 width: MediaQuery.of(context).size.width * 0.9,
                                 child: ListView.builder(
                                     itemCount: snapshot.data!.docs.length,

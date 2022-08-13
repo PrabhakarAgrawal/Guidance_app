@@ -18,6 +18,7 @@ class _loginscreenState extends State<loginscreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isLoading = false;
+  bool hidepassword = true;
 
   @override
   void dispose() {
@@ -47,6 +48,15 @@ class _loginscreenState extends State<loginscreen> {
     });
   }
 
+  void togglepassword() {
+    if (hidepassword == true) {
+      hidepassword = false;
+    } else {
+      hidepassword = true;
+    }
+    setState(() {});
+  }
+
   void goToLogin() {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => const loginscreen()));
@@ -62,7 +72,6 @@ class _loginscreenState extends State<loginscreen> {
     final fsize = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromARGB(212, 0, 0, 0),
       body: SafeArea(
           child: Container(
         constraints: BoxConstraints.expand(),
@@ -71,7 +80,6 @@ class _loginscreenState extends State<loginscreen> {
             image: AssetImage(
               "assets/images/backgroundimg.png",
             ),
-            opacity: 220.0,
             fit: BoxFit.cover,
           ),
         ),
@@ -113,11 +121,24 @@ class _loginscreenState extends State<loginscreen> {
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.white,
                 ),
-                child: TextFieldInput(
-                    hintText: 'Enter Your Password',
-                    isPass: true,
-                    textEditingController: _passwordController,
-                    textInputType: TextInputType.emailAddress),
+                child: Column(
+                  children: [
+                    TextFieldInput(
+                        hintText: 'Enter Your Password',
+                        isPass: hidepassword,
+                        textEditingController: _passwordController,
+                        textInputType: TextInputType.emailAddress),
+                    InkWell(
+                      onTap: togglepassword,
+                      child: Icon(
+                        Icons.visibility,
+                        color: hidepassword
+                            ? Color.fromARGB(255, 109, 108, 108)
+                            : Colors.blue,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
@@ -125,8 +146,8 @@ class _loginscreenState extends State<loginscreen> {
               InkWell(
                 onTap: loginUser,
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  width: MediaQuery.of(context).size.width * 0.18,
+                  height: MediaQuery.of(context).size.height * 0.07,
+                  width: MediaQuery.of(context).size.width * 0.25,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
@@ -143,7 +164,7 @@ class _loginscreenState extends State<loginscreen> {
                               color: Color.fromARGB(255, 231, 230, 230),
                               fontWeight: FontWeight.bold,
                               fontSize:
-                                  MediaQuery.of(context).size.height * 0.03),
+                                  MediaQuery.of(context).size.height * 0.02),
                         ),
                 ),
               ),

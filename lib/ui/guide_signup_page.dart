@@ -28,6 +28,8 @@ class _guideSignupState extends State<guideSignup> {
   Uint8List? _image;
   String person = "Guide";
   bool _isLoading = false;
+  bool hidepassword = true;
+
   @override
   void dispose() {
     super.dispose();
@@ -73,10 +75,18 @@ class _guideSignupState extends State<guideSignup> {
     }
   }
 
+  void togglepassword() {
+    if (hidepassword == true) {
+      hidepassword = false;
+    } else {
+      hidepassword = true;
+    }
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(212, 0, 0, 0),
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
@@ -87,7 +97,10 @@ class _guideSignupState extends State<guideSignup> {
               ));
             },
             icon: Icon(Icons.arrow_back)),
-        title: const Text('Sign up'),
+        title: const Text(
+          'Sign up',
+          style: TextStyle(fontFamily: 'ananias'),
+        ),
         centerTitle: false,
       ),
       body: SafeArea(
@@ -98,7 +111,6 @@ class _guideSignupState extends State<guideSignup> {
             image: AssetImage(
               "assets/images/backgroundimg.png",
             ),
-            opacity: 220.0,
             fit: BoxFit.cover,
           ),
         ),
@@ -127,7 +139,7 @@ class _guideSignupState extends State<guideSignup> {
                       onPressed: selectPic,
                       icon: const Icon(
                         Icons.add_a_photo,
-                        color: Colors.black,
+                        color: Colors.grey,
                       ),
                     ),
                   )
@@ -166,11 +178,24 @@ class _guideSignupState extends State<guideSignup> {
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.white,
                 ),
-                child: TextFieldInput(
-                    hintText: 'Enter Your Password',
-                    isPass: true,
-                    textEditingController: _passwordController,
-                    textInputType: TextInputType.text),
+                child: Column(
+                  children: [
+                    TextFieldInput(
+                        hintText: 'Enter Your Password',
+                        isPass: hidepassword,
+                        textEditingController: _passwordController,
+                        textInputType: TextInputType.text),
+                    InkWell(
+                      onTap: togglepassword,
+                      child: Icon(
+                        Icons.visibility,
+                        color: hidepassword
+                            ? Color.fromARGB(255, 109, 108, 108)
+                            : Colors.blue,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
@@ -211,10 +236,10 @@ class _guideSignupState extends State<guideSignup> {
                     style: TextStyle(
                         color: Color.fromARGB(255, 231, 230, 230),
                         fontWeight: FontWeight.bold,
-                        fontSize: MediaQuery.of(context).size.height * 0.03),
+                        fontSize: MediaQuery.of(context).size.height * 0.02),
                   ),
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  width: MediaQuery.of(context).size.width * 0.18,
+                  height: MediaQuery.of(context).size.height * 0.07,
+                  width: MediaQuery.of(context).size.width * 0.25,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),

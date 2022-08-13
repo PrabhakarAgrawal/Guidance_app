@@ -33,7 +33,7 @@ class _commentScreenState extends State<commentScreen> {
 
     setState(() {
       username = (snap.data() as Map<String, dynamic>)["username"];
-      profilePic = (snap.data() as Map<String, dynamic>)["photoUrl"];
+      profilePic = (snap.data() as Map<String, dynamic>)["profilePic"];
       uid = (snap.data() as Map<String, dynamic>)["uid"];
       person = (snap.data() as Map<String, dynamic>)["person"];
     });
@@ -53,6 +53,7 @@ class _commentScreenState extends State<commentScreen> {
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
         title: const Text(
           'Comments',
+          style: TextStyle(fontFamily: 'ananias'),
         ),
         centerTitle: false,
       ),
@@ -62,7 +63,6 @@ class _commentScreenState extends State<commentScreen> {
           color: Colors.black,
           image: DecorationImage(
             image: AssetImage('assets/images/backgroundimg.png'),
-            opacity: 200.0,
             fit: BoxFit.cover,
           ),
         ),
@@ -92,11 +92,9 @@ class _commentScreenState extends State<commentScreen> {
       ),
       bottomNavigationBar: Container(
         color: Colors.black,
-        height: 50,
-        margin:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        height: MediaQuery.of(context).size.height * 0.10,
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
@@ -106,7 +104,7 @@ class _commentScreenState extends State<commentScreen> {
             children: [
               CircleAvatar(
                 backgroundImage: NetworkImage(profilePic),
-                radius: 18,
+                radius: 20,
               ),
               Expanded(
                 child: Padding(
@@ -119,6 +117,7 @@ class _commentScreenState extends State<commentScreen> {
                           TextStyle(color: Color.fromARGB(157, 255, 255, 255)),
                       border: InputBorder.none,
                     ),
+                    style: TextStyle(color: Color.fromARGB(255, 212, 211, 211)),
                   ),
                 ),
               ),
@@ -131,15 +130,19 @@ class _commentScreenState extends State<commentScreen> {
                   });
                 },
                 child: Container(
-                  height: 50,
-                  width: 60,
+                  alignment: Alignment.center,
+                  height: MediaQuery.of(context).size.height * 0.06,
+                  width: MediaQuery.of(context).size.height * 0.10,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Color.fromARGB(255, 139, 64, 251),
                   ),
                   child: const Text(
                     'Post',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
                 ),

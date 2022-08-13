@@ -81,8 +81,8 @@ class _photoPostingState extends State<photoPosting> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-            margin: EdgeInsets.all(5),
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 2),
+            margin: EdgeInsets.only(bottom: 5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: Color.fromARGB(186, 91, 90, 90),
@@ -122,7 +122,7 @@ class _photoPostingState extends State<photoPosting> {
                           Text('~ ${widget.snap['person']}',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 12,
+                                  fontSize: 10,
                                   color: Colors.greenAccent))
                         ],
                       ),
@@ -171,53 +171,53 @@ class _photoPostingState extends State<photoPosting> {
                 ),
                 Row(
                   children: [
-                    IconButton(
-                        onPressed: () async {
-                          await firestoreMethods().likePost(
-                              widget.snap['postId'],
-                              widget.snap['uid'],
-                              uid,
-                              widget.snap['likes']);
-                          // print(
-                          //   getDetails().getdetails("uid"),
-                          // );
-                        },
-                        icon: Icon(Icons.thumb_up_alt_rounded,
-                            color: widget.snap['likes'].contains(uid)
-                                ? Colors.greenAccent
-                                : Colors.white)),
-                    IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => commentScreen(
-                                    snap: widget.snap,
-                                  )));
-                        },
-                        icon: Icon(Icons.question_answer_rounded,
-                            color: Colors.white)),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                            onPressed: () async {
+                              await firestoreMethods().likePost(
+                                  widget.snap['postId'],
+                                  widget.snap['uid'],
+                                  uid,
+                                  widget.snap['likes']);
+                              // print(
+                              //   getDetails().getdetails("uid"),
+                              // );
+                            },
+                            icon: Icon(Icons.thumb_up_alt_rounded,
+                                color: widget.snap['likes'].contains(uid)
+                                    ? Colors.greenAccent
+                                    : Colors.white)),
+                        Text('${widget.snap['likes'].length}',
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => commentScreen(
+                                        snap: widget.snap,
+                                      )));
+                            },
+                            icon: Icon(Icons.question_answer_rounded,
+                                color: Colors.white)),
+                        Text('$commentcount',
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
+                      ],
+                    ),
                   ],
                 ),
                 Row(
                   children: [
-                    Container(
-                        width: 45,
-                        margin: EdgeInsets.only(left: 10),
-                        padding: EdgeInsets.symmetric(horizontal: 7),
-                        alignment: Alignment.topLeft,
-                        child: Text('${widget.snap['likes'].length}',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white))),
-                    Container(
-                        width: 37,
-                        padding: EdgeInsets.symmetric(horizontal: 5),
-                        alignment: Alignment.topLeft,
-                        child: Text('$commentcount',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white))),
                     Expanded(
                       child: Container(
                           alignment: Alignment.topRight,
@@ -242,8 +242,8 @@ class _photoPostingState extends State<photoPosting> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 2),
+            margin: EdgeInsets.only(bottom: 5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: Color.fromARGB(186, 91, 90, 90),
@@ -263,19 +263,18 @@ class _photoPostingState extends State<photoPosting> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
-                            mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 widget.snap['username'],
                                 style: TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
                               ),
                               Text(widget.snap['college'],
                                   style: TextStyle(
-                                      fontSize: 11,
+                                      fontSize: 10,
                                       color:
                                           Color.fromARGB(255, 218, 216, 216)))
                             ],
@@ -283,7 +282,7 @@ class _photoPostingState extends State<photoPosting> {
                           Text('~ ${widget.snap['person']}',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 12,
+                                  fontSize: 10,
                                   color: Colors.greenAccent))
                         ],
                       ),
@@ -343,38 +342,58 @@ class _photoPostingState extends State<photoPosting> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontFamily: 'ananias',
-                              letterSpacing: 2,
-                              fontSize: 13,
+                              letterSpacing: 1,
+                              fontSize: 12,
                               color: Color.fromARGB(255, 117, 245, 252))),
                     ],
                   ),
                 ),
                 Row(
                   children: [
-                    IconButton(
-                        onPressed: () async {
-                          await firestoreMethods().likePost(
-                              widget.snap['postId'],
-                              widget.snap['uid'],
-                              uid,
-                              widget.snap['likes']);
-                          // print(
-                          //   getDetails().getdetails("uid"),
-                          // );
-                        },
-                        icon: Icon(Icons.thumb_up_alt_rounded,
-                            color: widget.snap['likes'].contains(uid)
-                                ? Colors.greenAccent
-                                : Colors.white)),
-                    IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => commentScreen(
-                                    snap: widget.snap,
-                                  )));
-                        },
-                        icon: Icon(Icons.question_answer_rounded,
-                            color: Colors.white)),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                            onPressed: () async {
+                              await firestoreMethods().likePost(
+                                  widget.snap['postId'],
+                                  widget.snap['uid'],
+                                  uid,
+                                  widget.snap['likes']);
+                              // print(
+                              //   getDetails().getdetails("uid"),
+                              // );
+                            },
+                            icon: Icon(Icons.thumb_up_alt_rounded,
+                                color: widget.snap['likes'].contains(uid)
+                                    ? Colors.greenAccent
+                                    : Colors.white)),
+                        Text('${widget.snap['likes'].length}',
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white))
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => commentScreen(
+                                        snap: widget.snap,
+                                      )));
+                            },
+                            icon: Icon(Icons.question_answer_rounded,
+                                color: Colors.white)),
+                        Text('$commentcount',
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
+                      ],
+                    ),
                     Expanded(
                         child: Align(
                       alignment: Alignment.bottomRight,
@@ -395,25 +414,6 @@ class _photoPostingState extends State<photoPosting> {
                 ),
                 Row(
                   children: [
-                    Container(
-                        width: 45,
-                        margin: EdgeInsets.only(left: 10),
-                        padding: EdgeInsets.symmetric(horizontal: 7),
-                        alignment: Alignment.topLeft,
-                        child: Text('${widget.snap['likes'].length}',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white))),
-                    Container(
-                        width: 37,
-                        padding: EdgeInsets.symmetric(horizontal: 7),
-                        alignment: Alignment.topLeft,
-                        child: Text('$commentcount',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white))),
                     Expanded(
                       child: Container(
                           alignment: Alignment.topRight,
@@ -436,8 +436,8 @@ class _photoPostingState extends State<photoPosting> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-            margin: EdgeInsets.all(5),
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 2),
+            margin: EdgeInsets.only(bottom: 5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: Color.fromARGB(186, 91, 90, 90),
@@ -469,7 +469,7 @@ class _photoPostingState extends State<photoPosting> {
                               ),
                               Text(widget.snap['college'],
                                   style: TextStyle(
-                                      fontSize: 11,
+                                      fontSize: 10,
                                       color:
                                           Color.fromARGB(255, 218, 216, 216)))
                             ],
@@ -477,7 +477,7 @@ class _photoPostingState extends State<photoPosting> {
                           Text('~ ${widget.snap['person']}',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 12,
+                                  fontSize: 10,
                                   color: Colors.greenAccent))
                         ],
                       ),
@@ -535,30 +535,50 @@ class _photoPostingState extends State<photoPosting> {
                           )),
                 Row(
                   children: [
-                    IconButton(
-                        onPressed: () async {
-                          await firestoreMethods().likePost(
-                              widget.snap['postId'],
-                              widget.snap['uid'],
-                              uid,
-                              widget.snap['likes']);
-                          // print(
-                          //   getDetails().getdetails("uid"),
-                          // );
-                        },
-                        icon: Icon(Icons.thumb_up_alt_rounded,
-                            color: widget.snap['likes'].contains(uid)
-                                ? Colors.greenAccent
-                                : Colors.white)),
-                    IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => commentScreen(
-                                    snap: widget.snap,
-                                  )));
-                        },
-                        icon: Icon(Icons.question_answer_rounded,
-                            color: Colors.white)),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                            onPressed: () async {
+                              await firestoreMethods().likePost(
+                                  widget.snap['postId'],
+                                  widget.snap['uid'],
+                                  uid,
+                                  widget.snap['likes']);
+                              // print(
+                              //   getDetails().getdetails("uid"),
+                              // );
+                            },
+                            icon: Icon(Icons.thumb_up_alt_rounded,
+                                color: widget.snap['likes'].contains(uid)
+                                    ? Colors.greenAccent
+                                    : Colors.white)),
+                        Text('${widget.snap['likes'].length}',
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => commentScreen(
+                                        snap: widget.snap,
+                                      )));
+                            },
+                            icon: Icon(Icons.question_answer_rounded,
+                                color: Colors.white)),
+                        Text('$commentcount',
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
+                      ],
+                    ),
                     FloatingActionButton(
                       onPressed: buttonpressed,
                       child: Icon(_videoPlayerController != null &&
@@ -570,25 +590,6 @@ class _photoPostingState extends State<photoPosting> {
                 ),
                 Row(
                   children: [
-                    Container(
-                        width: 45,
-                        margin: EdgeInsets.only(left: 10),
-                        padding: EdgeInsets.symmetric(horizontal: 7),
-                        alignment: Alignment.topLeft,
-                        child: Text('${widget.snap['likes'].length}',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white))),
-                    Container(
-                        width: 37,
-                        padding: EdgeInsets.symmetric(horizontal: 7),
-                        alignment: Alignment.topLeft,
-                        child: Text('$commentcount',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white))),
                     Expanded(
                       child: Container(
                           alignment: Alignment.topRight,

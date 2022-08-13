@@ -125,7 +125,6 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
             color: Colors.blue,
           ))
         : Scaffold(
-            backgroundColor: Colors.black,
             appBar: AppBar(
               backgroundColor: Color.fromARGB(255, 139, 64, 251),
               title: Text('Profile', style: TextStyle(fontFamily: 'ananias')),
@@ -136,7 +135,6 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/backgroundimg.png'),
-                  opacity: 220.0,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -146,14 +144,12 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.16,
-                        width: MediaQuery.of(context).size.width * 0.2,
-                        margin: EdgeInsets.all(15),
+                        margin: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: Colors.grey),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
                         child: CircleAvatar(
-                          radius: 45,
+                          radius: 49,
                           backgroundImage: NetworkImage(profilePic),
                         ),
                       ),
@@ -165,7 +161,7 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                               '${person} -',
                               style: TextStyle(
                                   fontSize:
-                                      MediaQuery.of(context).size.height * 0.04,
+                                      MediaQuery.of(context).size.height * 0.03,
                                   color: Colors.greenAccent,
                                   fontFamily: 'ananias'),
                             ),
@@ -173,49 +169,50 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.height *
-                                            0.04,
+                                            0.03,
                                     color: Colors.white,
                                     fontFamily: 'ananias')),
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.008,
-                      ),
                       Container(
-                          height: MediaQuery.of(context).size.height * 0.13,
+                          height: MediaQuery.of(context).size.height * 0.18,
                           width: double.infinity,
                           margin:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 15),
+                              EdgeInsets.symmetric(vertical: 2, horizontal: 10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: Color.fromARGB(186, 91, 90, 90)),
                           child: Center(
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text(
                                   'Bio - $bio',
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height *
-                                              0.028,
-                                      color: Colors.white),
+                                              0.022,
+                                      color:
+                                          Color.fromARGB(255, 218, 216, 216)),
                                 ),
                                 Text(
                                   'College - $college',
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height *
-                                              0.028,
-                                      color: Colors.white),
+                                              0.022,
+                                      color:
+                                          Color.fromARGB(255, 218, 216, 216)),
                                 ),
                                 Text(
                                   'Email - $email',
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height *
-                                              0.028,
-                                      color: Colors.white),
+                                              0.022,
+                                      color:
+                                          Color.fromARGB(255, 218, 216, 216)),
                                 )
                               ],
                             ),
@@ -236,40 +233,24 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: MediaQuery.of(context)
+                                  Text('${followers.length}',
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
                                                   .size
-                                                  .width *
-                                              0.02),
-                                      child: Text('${followers.length}',
-                                          style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.03,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white))),
-                                  Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: MediaQuery.of(context)
+                                                  .height *
+                                              0.03,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white)),
+                                  Text('Followers',
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
                                                   .size
-                                                  .width *
-                                              0.065),
-                                      alignment: Alignment.topLeft,
-                                      child: Text('Followers',
-                                          style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.02,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white))),
+                                                  .height *
+                                              0.02,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white)),
                                 ],
                               ),
                               // TextButton(
@@ -288,41 +269,24 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                               //               color: Colors.white)),
                               //     )),
                               Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: MediaQuery.of(context)
+                                  Text('${postlength}',
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
                                                   .size
-                                                  .width *
-                                              0.02),
-                                      alignment: Alignment.topLeft,
-                                      child: Text('${postlength}',
-                                          style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.03,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white))),
-                                  Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: MediaQuery.of(context)
+                                                  .height *
+                                              0.03,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white)),
+                                  Text('Posts',
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
                                                   .size
-                                                  .width *
-                                              0.075),
-                                      alignment: Alignment.topLeft,
-                                      child: Text('Posts',
-                                          style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.02,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white))),
+                                                  .height *
+                                              0.02,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white)),
                                 ],
                               ),
                               // TextButton(
@@ -348,18 +312,24 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
-                                    width: 100,
-                                    height: 30,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.23,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.038,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
-                                        color: Colors.greenAccent),
+                                        borderRadius: BorderRadius.circular(8),
+                                        color:
+                                            Color.fromARGB(255, 80, 188, 136)),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
                                         Text('Rewards',
                                             style: TextStyle(
-                                                fontSize: 16,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.02,
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.white)),
                                         Container(
@@ -373,7 +343,9 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                   )),
                             ],
                           )),
-                      Divider(),
+                      Divider(
+                        color: Colors.white,
+                      ),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -386,11 +358,11 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                 child: Container(
                                     alignment: Alignment.center,
                                     height: MediaQuery.of(context).size.height *
-                                        0.07,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.2,
+                                        0.06,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.21,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
+                                      borderRadius: BorderRadius.circular(10),
                                       color: type == 'photoposts'
                                           ? Color.fromARGB(255, 139, 64, 251)
                                           : Color.fromARGB(186, 91, 90, 90),
@@ -400,7 +372,7 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                             fontSize: MediaQuery.of(context)
                                                     .size
                                                     .height *
-                                                0.03,
+                                                0.025,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white)))),
                             InkWell(
@@ -412,11 +384,11 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                 child: Container(
                                     alignment: Alignment.center,
                                     height: MediaQuery.of(context).size.height *
-                                        0.07,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.2,
+                                        0.06,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.21,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
+                                      borderRadius: BorderRadius.circular(10),
                                       color: type == 'booksposts'
                                           ? Color.fromARGB(255, 139, 64, 251)
                                           : Color.fromARGB(186, 91, 90, 90),
@@ -426,7 +398,7 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                             fontSize: MediaQuery.of(context)
                                                     .size
                                                     .height *
-                                                0.03,
+                                                0.025,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white)))),
                             InkWell(
@@ -438,16 +410,16 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                 child: Container(
                                     alignment: Alignment.center,
                                     height: MediaQuery.of(context).size.height *
-                                        0.07,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.2,
+                                        0.06,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.21,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
+                                      borderRadius: BorderRadius.circular(10),
                                       color: type == 'formulabookposts'
                                           ? Color.fromARGB(255, 139, 64, 251)
                                           : Color.fromARGB(186, 91, 90, 90),
                                     ),
-                                    child: Text('Formulabooks',
+                                    child: Text('Formula',
                                         style: TextStyle(
                                             fontSize: MediaQuery.of(context)
                                                     .size
@@ -464,9 +436,9 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                 child: Container(
                                     alignment: Alignment.center,
                                     height: MediaQuery.of(context).size.height *
-                                        0.07,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.2,
+                                        0.06,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.21,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
                                       color: type == 'otherposts'
@@ -478,7 +450,7 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                             fontSize: MediaQuery.of(context)
                                                     .size
                                                     .height *
-                                                0.03,
+                                                0.025,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white)))),
                           ]),
@@ -526,7 +498,7 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                               borderRadius:
                                                   BorderRadius.circular(8),
                                               color: Color.fromARGB(
-                                                  255, 101, 101, 101),
+                                                  186, 91, 90, 90),
                                             ),
                                             child: Column(
                                               children: [
@@ -680,13 +652,13 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                         children: [
                                           Container(
                                             padding: EdgeInsets.symmetric(
-                                                vertical: 5, horizontal: 15),
+                                                vertical: 5, horizontal: 10),
                                             margin: EdgeInsets.all(10),
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(8),
                                               color: Color.fromARGB(
-                                                  255, 101, 101, 101),
+                                                  186, 91, 90, 90),
                                             ),
                                             child: Column(
                                               children: [
@@ -841,52 +813,39 @@ class _guideProfileScreenState extends State<guideProfileScreen> {
                                                   ),
                                                 ),
                                                 Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
-                                                    Expanded(
-                                                        child: Align(
-                                                      alignment:
-                                                          Alignment.bottomRight,
-                                                      child: IconButton(
-                                                        onPressed: () {
-                                                          Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) =>
-                                                                          loadpdf(
-                                                                            url:
-                                                                                snap['postfileurl'],
-                                                                          )));
-                                                        },
-                                                        icon: Icon(Icons
-                                                            .remove_red_eye),
-                                                        color: Colors.white,
-                                                      ),
-                                                    ))
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: Container(
-                                                          alignment: Alignment
-                                                              .topRight,
-                                                          child: Text(
-                                                            DateFormat.yMMMd()
-                                                                .format(snap[
-                                                                        'date']
-                                                                    .toDate()),
-                                                            style: TextStyle(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        184,
-                                                                        184,
-                                                                        184)),
-                                                          )),
+                                                    Text(
+                                                      DateFormat.yMMMd().format(
+                                                          snap['date']
+                                                              .toDate()),
+                                                      style: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              184,
+                                                              184,
+                                                              184)),
+                                                    ),
+                                                    IconButton(
+                                                      onPressed: () {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        loadpdf(
+                                                                          url: snap[
+                                                                              'postfileurl'],
+                                                                        )));
+                                                      },
+                                                      icon: Icon(
+                                                          Icons.remove_red_eye),
+                                                      color: Colors.white,
                                                     )
                                                   ],
-                                                )
+                                                ),
                                               ],
                                             ),
                                           ),

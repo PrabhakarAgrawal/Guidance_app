@@ -90,7 +90,6 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
     if (person == 'Guide') {
       return Material(
         child: Scaffold(
-          backgroundColor: Colors.black,
           body: PageView(
             children: homeScreenItems1,
             physics: NeverScrollableScrollPhysics(),
