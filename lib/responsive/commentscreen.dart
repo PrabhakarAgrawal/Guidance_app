@@ -49,6 +49,7 @@ class _commentScreenState extends State<commentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
         title: const Text(
@@ -57,37 +58,40 @@ class _commentScreenState extends State<commentScreen> {
         ),
         centerTitle: false,
       ),
-      body: Container(
-        constraints: BoxConstraints.expand(),
-        decoration: const BoxDecoration(
-          color: Colors.black,
-          image: DecorationImage(
-            image: AssetImage('assets/images/backgroundimg.png'),
-            fit: BoxFit.cover,
+      body: SingleChildScrollView(
+        child: Container(
+          constraints: BoxConstraints.expand(),
+          decoration: const BoxDecoration(
+            color: Colors.black,
+            image: DecorationImage(
+              image: AssetImage('assets/images/backgroundimg.png'),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        child: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection('posts')
-              .doc(widget.snap['postId'])
-              .collection('comments')
-              .orderBy('datePublished', descending: true)
-              .snapshots(),
-          builder: (context,
-              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
+          child: StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('posts')
+                .doc(widget.snap['postId'])
+                .collection('comments')
+                .orderBy('datePublished', descending: true)
+                .snapshots(),
+            builder: (context,
+                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
 
-            return ListView.builder(
-              itemCount: snapshot.data!.docs.length,
-              itemBuilder: (context, index) => commentPosting(
-                snap: snapshot.data!.docs[index].data(),
-              ),
-            );
-          },
+              return ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) => commentPosting(
+                  snap: snapshot.data!.docs[index].data(),
+                ),
+              );
+            },
+          ),
         ),
       ),
       bottomNavigationBar: Container(

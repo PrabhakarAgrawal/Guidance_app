@@ -118,11 +118,11 @@ class _aspirantSignupState extends State<aspirantSignup> {
                   children: [
                     _image != null
                         ? CircleAvatar(
-                            radius: MediaQuery.of(context).size.height * 1.5,
+                            radius: MediaQuery.of(context).size.height * 0.09,
                             backgroundImage: MemoryImage(_image!),
                           )
-                        : const CircleAvatar(
-                            radius: 64,
+                        : CircleAvatar(
+                            radius: MediaQuery.of(context).size.height * 0.09,
                             backgroundImage: NetworkImage(
                                 "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"),
                           ),

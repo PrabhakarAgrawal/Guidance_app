@@ -68,6 +68,7 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
           ))
         : Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               backgroundColor: Color.fromARGB(255, 139, 64, 251),
               title: Text('Profile', style: TextStyle(fontFamily: 'ananias')),
               centerTitle: false,
@@ -219,6 +220,7 @@ class _aspirantProfileScreenState extends State<aspirantProfileScreen> {
                             );
                           }
                           return GridView.builder(
+                              physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount:
                                   (snapshot.data! as dynamic).docs.length,

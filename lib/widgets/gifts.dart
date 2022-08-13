@@ -83,7 +83,7 @@ class _giftsState extends State<gifts> {
               height: MediaQuery.of(context).size.height * 0.04,
               width: MediaQuery.of(context).size.width * 0.2,
               child: Text(
-                'Ratio>10',
+                'Ratio>5',
                 style:
                     TextStyle(fontWeight: FontWeight.w500, color: Colors.white),
               ),

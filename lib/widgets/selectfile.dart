@@ -225,10 +225,13 @@ class _selectFileState extends State<selectFile> {
                 ),
               ),
               InkWell(
-                  onTap: () => file == null
-                      ? Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => AddPost()))
-                      : uploadFile(uid, username, profilePic),
+                  onTap: () => () {
+                        if (file != null) {
+                          uploadFile(uid, username, profilePic);
+                        }
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => AddPost()));
+                      },
                   child: Container(
                     alignment: Alignment.center,
                     height: MediaQuery.of(context).size.height * 0.07,

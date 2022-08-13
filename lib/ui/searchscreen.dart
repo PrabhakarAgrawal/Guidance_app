@@ -23,6 +23,7 @@ class _searchScreenState extends State<searchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Color.fromARGB(255, 179, 64, 251),
           title: Container(
             height: MediaQuery.of(context).size.height * 0.08,

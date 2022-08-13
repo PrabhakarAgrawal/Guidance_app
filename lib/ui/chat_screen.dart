@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:newapp/responsive/mobilescreen_layout.dart';
 import 'package:newapp/ui/chatRoom.dart';
 import 'package:newapp/ui/contentpage.dart';
 
@@ -51,14 +52,15 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 139, 64, 251),
+          automaticallyImplyLeading: false,
           centerTitle: true,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => contentPage()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => MobileScreenLayout()));
                   },
                   icon: Icon(
                     Icons.keyboard_arrow_left,
@@ -78,7 +80,6 @@ class _ChatScreenState extends State<ChatScreen> {
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/backgroundimg.png'),
-              opacity: 220.0,
               fit: BoxFit.cover,
             ),
           ),
