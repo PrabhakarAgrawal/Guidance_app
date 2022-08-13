@@ -59,7 +59,9 @@ class _loginscreenState extends State<loginscreen> {
 
   @override
   Widget build(BuildContext context) {
+    final fsize = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromARGB(212, 0, 0, 0),
       body: SafeArea(
           child: Container(
@@ -69,106 +71,112 @@ class _loginscreenState extends State<loginscreen> {
             image: AssetImage(
               "assets/images/backgroundimg.png",
             ),
-            opacity: 1000.0,
+            opacity: 220.0,
             fit: BoxFit.cover,
           ),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 32),
+        padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.06),
         width: double.infinity,
-        child: Column(
-          children: [
-            Container(
-                margin:
-                    EdgeInsets.only(top: 0.0, left: 20, right: 20, bottom: 20),
-                width: 350,
-                height: 300,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                  margin: EdgeInsets.only(
+                      top: 0.0, left: 20, right: 20, bottom: 20),
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      image: const DecorationImage(
+                          image: AssetImage("assets/images/taglinelogo.png"),
+                          fit: BoxFit.cover))),
+              // SizedBox(
+              //   height: 64,
+              // ),
+              Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    image: const DecorationImage(
-                        image: AssetImage("assets/images/taglinelogo.png"),
-                        fit: BoxFit.cover))),
-            // SizedBox(
-            //   height: 64,
-            // ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-              ),
-              child: TextFieldInput(
-                  hintText: 'Enter Your Email',
-                  isPass: false,
-                  textEditingController: _emailController,
-                  textInputType: TextInputType.emailAddress),
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-              ),
-              child: TextFieldInput(
-                  hintText: 'Enter Your Password',
-                  isPass: true,
-                  textEditingController: _passwordController,
-                  textInputType: TextInputType.emailAddress),
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            InkWell(
-              onTap: loginUser,
-              child: Container(
-                height: 40,
-                width: 70,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.purple[400]),
-                child: _isLoading
-                    ? const Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
-                      )
-                    : const Text(
-                        "Log in",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 231, 230, 230)),
-                      ),
-              ),
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  child: Text(
-                    "Don't have an account?",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 8),
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
                 ),
-                GestureDetector(
-                  onTap: () {
-                    goToSign();
-                  },
-                  child: Container(
+                child: TextFieldInput(
+                    hintText: 'Enter Your Email',
+                    isPass: false,
+                    textEditingController: _emailController,
+                    textInputType: TextInputType.emailAddress),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.03,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
+                ),
+                child: TextFieldInput(
+                    hintText: 'Enter Your Password',
+                    isPass: true,
+                    textEditingController: _passwordController,
+                    textInputType: TextInputType.emailAddress),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.03,
+              ),
+              InkWell(
+                onTap: loginUser,
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  width: MediaQuery.of(context).size.width * 0.18,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.purple[400]),
+                  child: _isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        )
+                      : Text(
+                          "Log in",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 231, 230, 230),
+                              fontWeight: FontWeight.bold,
+                              fontSize:
+                                  MediaQuery.of(context).size.height * 0.03),
+                        ),
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
                     child: Text(
-                      "SIGN UP",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white),
+                      "Don't have an account?",
+                      style: TextStyle(color: Colors.white),
                     ),
                     padding: EdgeInsets.symmetric(vertical: 8),
                   ),
-                ),
-              ],
-            )
-          ],
+                  GestureDetector(
+                    onTap: () {
+                      goToSign();
+                    },
+                    child: Container(
+                      child: Text(
+                        " SIGN UP",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.blue),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       )),
     );

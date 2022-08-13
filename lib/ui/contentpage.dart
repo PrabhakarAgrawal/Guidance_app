@@ -24,7 +24,7 @@ class _contentPageState extends State<contentPage> {
         centerTitle: true,
         title: Text(
           'Feed',
-          style: TextStyle(fontFamily: 'quick'),
+          style: TextStyle(fontFamily: 'ananias'),
         ),
         actions: [
           IconButton(
@@ -37,13 +37,13 @@ class _contentPageState extends State<contentPage> {
       ),
       body: Container(
         constraints: BoxConstraints.expand(),
-        padding: EdgeInsets.symmetric(horizontal: 32),
+        padding: EdgeInsets.symmetric(horizontal: 20),
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
               "assets/images/backgroundimg.png",
             ),
-            opacity: 200.0,
+            opacity: 220.0,
             fit: BoxFit.cover,
           ),
         ),

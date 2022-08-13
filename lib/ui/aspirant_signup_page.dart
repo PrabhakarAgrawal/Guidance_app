@@ -81,7 +81,10 @@ class _aspirantSignupState extends State<aspirantSignup> {
               ));
             },
             icon: Icon(Icons.arrow_back)),
-        title: const Text('Sign up'),
+        title: const Text(
+          'Sign up',
+          style: TextStyle(fontFamily: 'ananias'),
+        ),
         centerTitle: false,
       ),
       body: SafeArea(
@@ -93,7 +96,7 @@ class _aspirantSignupState extends State<aspirantSignup> {
             image: AssetImage(
               "assets/images/backgroundimg.png",
             ),
-            opacity: 200.0,
+            opacity: 230.0,
             fit: BoxFit.cover,
           ),
         ),
@@ -102,12 +105,12 @@ class _aspirantSignupState extends State<aspirantSignup> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(40.0),
+                padding: const EdgeInsets.all(40),
                 child: Stack(
                   children: [
                     _image != null
                         ? CircleAvatar(
-                            radius: 64,
+                            radius: MediaQuery.of(context).size.height * 1.5,
                             backgroundImage: MemoryImage(_image!),
                           )
                         : const CircleAvatar(
@@ -141,7 +144,7 @@ class _aspirantSignupState extends State<aspirantSignup> {
                     textInputType: TextInputType.text),
               ),
               SizedBox(
-                height: 24,
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -155,7 +158,7 @@ class _aspirantSignupState extends State<aspirantSignup> {
                     textInputType: TextInputType.emailAddress),
               ),
               SizedBox(
-                height: 24,
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -169,7 +172,7 @@ class _aspirantSignupState extends State<aspirantSignup> {
                     textInputType: TextInputType.text),
               ),
               SizedBox(
-                height: 24,
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -183,13 +186,13 @@ class _aspirantSignupState extends State<aspirantSignup> {
                     textInputType: TextInputType.text),
               ),
               SizedBox(
-                height: 24,
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               InkWell(
                 onTap: signUpAspirant,
                 child: Container(
-                  height: 40,
-                  width: 80,
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  width: MediaQuery.of(context).size.width * 0.18,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
@@ -200,15 +203,16 @@ class _aspirantSignupState extends State<aspirantSignup> {
                             color: Colors.white,
                           ),
                         )
-                      : const Text(
-                          "Sign Up",
+                      : Text("Sign Up",
                           style: TextStyle(
-                              color: Color.fromARGB(255, 231, 230, 230)),
-                        ),
+                              color: Color.fromARGB(255, 231, 230, 230),
+                              fontWeight: FontWeight.bold,
+                              fontSize:
+                                  MediaQuery.of(context).size.height * 0.03)),
                 ),
               ),
               SizedBox(
-                height: 24,
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
             ],
           ),

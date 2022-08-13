@@ -40,6 +40,7 @@ dependencies:
   intl: ^0.17.0
   path_provider: ^2.0.11
   provider: ^6.0.3
+  syncfusion_flutter_pdfviewer: ^20.2.43-beta
   uuid: ^3.0.6
   video_player: ^2.4.6
 

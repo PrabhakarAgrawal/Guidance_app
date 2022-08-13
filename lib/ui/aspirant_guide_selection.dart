@@ -10,122 +10,132 @@ class aspirantGuideSelection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-        child: Center(
-      child: Scaffold(
-        backgroundColor: Color.fromARGB(212, 0, 0, 0),
-        appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 139, 64, 251),
-          leading: IconButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => loginscreen(),
-                ));
-              },
-              icon: Icon(Icons.arrow_back)),
-          title: const Text('Select'),
-          centerTitle: false,
-        ),
-        body: Container(
-          constraints: BoxConstraints.expand(),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                "assets/images/backgroundimg.png",
-              ),
-              opacity: 200.0,
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Are you',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                ),
-              ),
-              SizedBox(
-                height: 24,
-              ),
-              Container(
-                  margin: EdgeInsets.only(
-                      top: 0.0, left: 20, right: 20, bottom: 20),
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      image: const DecorationImage(
-                          image: AssetImage("assets/images/aspirant.png"),
-                          fit: BoxFit.cover))),
-              InkWell(
-                onTap: (() {
+      child: Center(
+        child: Scaffold(
+          backgroundColor: Colors.black,
+          appBar: AppBar(
+            backgroundColor: Color.fromARGB(255, 139, 64, 251),
+            leading: IconButton(
+                onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => aspirantSignup()));
-                }),
-                child: Container(
-                  child: Text(
-                    "Aspirant",
-                    style: TextStyle(color: Color.fromARGB(255, 246, 233, 233)),
+                    builder: (context) => loginscreen(),
+                  ));
+                },
+                icon: Icon(Icons.arrow_back)),
+            title: const Text(
+              'Select',
+              style: TextStyle(fontFamily: 'ananias'),
+            ),
+            centerTitle: false,
+          ),
+          body: Container(
+            constraints: BoxConstraints.expand(),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  "assets/images/backgroundimg.png",
+                ),
+                opacity: 230.0,
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Are you',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: MediaQuery.of(context).size.height * 0.04,
                   ),
-                  height: 40,
-                  width: 140,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.purple[400]),
                 ),
-              ),
-
-              // ],
-              SizedBox(
-                height: 24,
-              ),
-              Text(
-                'Or',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 185, 177, 177),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
                 ),
-              ),
-              SizedBox(
-                height: 24,
-              ),
-              Container(
-                  margin: EdgeInsets.only(
-                      top: 0.0, left: 20, right: 20, bottom: 20),
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      image: const DecorationImage(
-                          image: AssetImage("assets/images/guide.png"),
-                          fit: BoxFit.cover))),
-              InkWell(
-                onTap: (() {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => guideSignup()));
-                }),
-                child: Container(
-                  child: Text(
-                    "Guide",
-                    style: TextStyle(color: Color.fromARGB(255, 246, 233, 233)),
+                Container(
+                    margin: EdgeInsets.only(
+                        top: 0.0, left: 20, right: 20, bottom: 20),
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        image: const DecorationImage(
+                            image: AssetImage("assets/images/aspirant.png"),
+                            fit: BoxFit.cover))),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.005,
+                ),
+                InkWell(
+                  onTap: (() {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => aspirantSignup()));
+                  }),
+                  child: Container(
+                    child: Text(
+                      "Aspirant",
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 246, 233, 233)),
+                    ),
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.purple[400]),
                   ),
-                  height: 40,
-                  width: 140,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.purple[400]),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                ),
+                Text(
+                  'Or',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontWeight: FontWeight.w400,
+                    fontSize: MediaQuery.of(context).size.height * 0.025,
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                ),
+                Container(
+                    margin: EdgeInsets.only(
+                        top: 0.0, left: 20, right: 20, bottom: 20),
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        image: const DecorationImage(
+                            image: AssetImage("assets/images/guide.png"),
+                            fit: BoxFit.cover))),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.005,
+                ),
+                InkWell(
+                  onTap: (() {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => guideSignup()));
+                  }),
+                  child: Container(
+                    child: Text(
+                      "Guide",
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 246, 233, 233)),
+                    ),
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.purple[400]),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    ));
+    );
   }
 }

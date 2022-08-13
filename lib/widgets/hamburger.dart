@@ -76,10 +76,16 @@ class _HamburgerState extends State<Hamburger> {
             padding: EdgeInsets.zero,
             children: [
               Container(
-                color: Colors.grey,
+                color: Color.fromARGB(255, 161, 75, 210),
                 child: UserAccountsDrawerHeader(
-                  accountName: Text(username),
-                  accountEmail: Text(email),
+                  accountName: Text(
+                    username,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                  accountEmail: Text(
+                    email,
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
+                  ),
                   currentAccountPicture: CircleAvatar(
                     child: ClipOval(
                       child: Image.network(
@@ -90,7 +96,8 @@ class _HamburgerState extends State<Hamburger> {
                       ),
                     ),
                   ),
-                  decoration: BoxDecoration(color: Colors.grey),
+                  decoration:
+                      BoxDecoration(color: Color.fromARGB(255, 161, 75, 210)),
                 ),
               ),
               // Container(

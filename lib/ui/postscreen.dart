@@ -139,168 +139,156 @@ class _AddPostState extends State<AddPost> {
   Widget build(BuildContext context) {
     if (_file == null) {
       return Scaffold(
-        backgroundColor: Colors.black,
-        appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 139, 64, 251),
-          title: const Text(
-            'Post',
-            style: TextStyle(fontFamily: 'quick'),
+          backgroundColor: Colors.black,
+          appBar: AppBar(
+            backgroundColor: Color.fromARGB(255, 139, 64, 251),
+            title: const Text('Post', style: TextStyle(fontFamily: 'quick')),
+            centerTitle: false,
           ),
-          centerTitle: false,
-        ),
-        body: Container(
-          child: Center(
-            child: Container(
-              constraints: BoxConstraints.expand(),
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/backgroundimg.png'),
-                  opacity: 200.0,
-                  fit: BoxFit.cover,
+          body: Container(
+            constraints: BoxConstraints.expand(),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  "assets/images/backgroundimg.png",
                 ),
-              ),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: Color.fromARGB(128, 52, 51, 51),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                              height: 100.0,
-                              width: 100.0,
-                              margin: EdgeInsets.only(top: 50.0, bottom: 10.0),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                  color: Color.fromARGB(255, 139, 64, 251)),
-                              child: IconButton(
-                                alignment: Alignment.center,
-                                onPressed: () {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) => selectFile()));
-                                },
-                                icon: Icon(
-                                  Icons.upload_file,
-                                  size: 60.0,
-                                  color: Colors.white,
-                                ),
-                              )),
-                          Container(
-                            padding: EdgeInsets.only(top: 25),
-                            width: 250.0,
-                            alignment: Alignment.center,
-                            child: Text('Upload a File',
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 228, 228, 228),
-                                    fontSize: 20,
-                                    fontFamily: 'ananias')),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: Color.fromARGB(128, 52, 51, 51),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(top: 25),
-                            width: 250.0,
-                            alignment: Alignment.center,
-                            child: Text('Upload a Video',
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 228, 228, 228),
-                                    fontSize: 20,
-                                    fontFamily: 'ananias')),
-                          ),
-                          Container(
-                              height: 100.0,
-                              width: 100.0,
-                              margin: EdgeInsets.only(top: 50.0, bottom: 10.0),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                  color: Color.fromARGB(255, 139, 64, 251)),
-                              child: IconButton(
-                                alignment: Alignment.center,
-                                onPressed: () {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) => selectFile()));
-                                },
-                                icon: Icon(
-                                  Icons.video_call_rounded,
-                                  size: 60.0,
-                                  color: Colors.white,
-                                ),
-                              )),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: Color.fromARGB(128, 52, 51, 51),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                              height: 100.0,
-                              width: 100.0,
-                              margin: EdgeInsets.only(top: 50.0, bottom: 10.0),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                  color: Color.fromARGB(255, 139, 64, 251)),
-                              child: IconButton(
-                                alignment: Alignment.center,
-                                onPressed: () {
-                                  _imageselect(context);
-                                },
-                                icon: Icon(
-                                  Icons.camera_alt_outlined,
-                                  size: 60.0,
-                                  color: Colors.white,
-                                ),
-                              )),
-                          Container(
-                            padding: EdgeInsets.only(top: 20),
-                            width: 250.0,
-                            alignment: Alignment.center,
-                            child: Text('Upload a Quote',
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 228, 228, 228),
-                                    fontSize: 20,
-                                    fontFamily: 'ananias')),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                opacity: 220.0,
+                fit: BoxFit.cover,
               ),
             ),
-          ),
-        ),
-      );
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: Color.fromARGB(255, 72, 72, 72),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                            height: MediaQuery.of(context).size.height * 0.16,
+                            width: MediaQuery.of(context).size.width * 0.18,
+                            margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0),
+                                color: Color.fromARGB(255, 139, 64, 251)),
+                            child: IconButton(
+                              alignment: Alignment.center,
+                              onPressed: () {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) => selectFile()));
+                              },
+                              icon: Icon(
+                                Icons.upload_file,
+                                size: MediaQuery.of(context).size.width * 0.14,
+                                color: Colors.white,
+                              ),
+                            )),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          alignment: Alignment.center,
+                          child: Text('UPLOAD A FILE',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  fontSize: 20,
+                                  fontFamily: 'ananias')),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: Color.fromARGB(255, 72, 72, 72),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          alignment: Alignment.center,
+                          child: Text('Upload a video',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  fontSize: 20,
+                                  fontFamily: 'ananias')),
+                        ),
+                        Container(
+                            height: MediaQuery.of(context).size.height * 0.16,
+                            width: MediaQuery.of(context).size.width * 0.18,
+                            margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0),
+                                color: Color.fromARGB(255, 139, 64, 251)),
+                            child: IconButton(
+                              alignment: Alignment.center,
+                              onPressed: () {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) => selectFile()));
+                              },
+                              icon: Icon(
+                                Icons.video_call_rounded,
+                                size: MediaQuery.of(context).size.width * 0.14,
+                                color: Colors.white,
+                              ),
+                            )),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: Color.fromARGB(255, 72, 72, 72),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                            height: MediaQuery.of(context).size.height * 0.16,
+                            width: MediaQuery.of(context).size.width * 0.18,
+                            margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0),
+                                color: Color.fromARGB(255, 139, 64, 251)),
+                            child: IconButton(
+                              alignment: Alignment.center,
+                              onPressed: () {
+                                _imageselect(context);
+                              },
+                              icon: Icon(
+                                Icons.camera_alt_outlined,
+                                size: MediaQuery.of(context).size.width * 0.14,
+                                color: Colors.white,
+                              ),
+                            )),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          alignment: Alignment.center,
+                          child: Text('Upload a quote',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  fontSize: 20,
+                                  fontFamily: 'ananias')),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ));
     } else {
       return Scaffold(
         backgroundColor: Colors.black,
@@ -317,7 +305,6 @@ class _AddPostState extends State<AddPost> {
           centerTitle: false,
         ),
         body: Container(
-          // color: Colors.black,
           constraints: BoxConstraints.expand(),
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -366,8 +353,8 @@ class _AddPostState extends State<AddPost> {
                     onTap: () => uploadImage(uid, username, profilePic),
                     child: Container(
                       alignment: Alignment.center,
-                      height: 40.0,
-                      width: 100.0,
+                      height: MediaQuery.of(context).size.height * 0.08,
+                      width: MediaQuery.of(context).size.width * 0.18,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadiusDirectional.circular(12.0),
                         color: Color.fromARGB(255, 139, 64, 251),
@@ -378,11 +365,12 @@ class _AddPostState extends State<AddPost> {
                                 color: Colors.white,
                               ),
                             )
-                          : const Text("upload",
+                          : Text("upload",
                               style: TextStyle(
                                 fontFamily: "ananias",
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.035,
                               )),
                     ))
               ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newapp/widgets/listofstudymaterial.dart';
 
 class StudyMaterial extends StatefulWidget {
   const StudyMaterial({Key? key}) : super(key: key);
@@ -8,19 +9,8 @@ class StudyMaterial extends StatefulWidget {
 }
 
 class _StudyMaterialState extends State<StudyMaterial> {
-  String? value;
-  String type = '';
-  final types = ['Books', 'Formulabooks', 'videos'];
   // var current_type = 'Books';
 
-  DropdownMenuItem<String> buildmenuitem(String type) => DropdownMenuItem(
-        value: type,
-        child: Text(
-          type,
-          style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
-        ),
-      );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,32 +44,82 @@ class _StudyMaterialState extends State<StudyMaterial> {
                   child: Text(
                     'Get the Study Material here',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: MediaQuery.of(context).size.height * 0.038,
+                        fontFamily: 'ananias'),
+                  ),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.12,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadiusDirectional.circular(12),
+                    color: Color.fromARGB(255, 161, 75, 210),
+                  ),
+                  width: double.infinity,
+                  margin: EdgeInsets.all(20.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) =>
+                              listOfStudyMaterial(type: 'booksposts')));
+                    },
+                    child: Text(
+                      'Books',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: MediaQuery.of(context).size.height * 0.032),
                     ),
                   ),
                 ),
-                Theme(
-                  data: Theme.of(context).copyWith(canvasColor: Colors.black),
-                  // width: 300,
-                  // margin: EdgeInsets.all(10),
-                  // padding: EdgeInsets.all(10),
-                  child: DropdownButton<String>(
-                    hint: Center(
-                      child: Text(
-                        "Select type of Study Material",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255)),
-                      ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.12,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadiusDirectional.circular(12),
+                    color: Color.fromARGB(255, 161, 75, 210),
+                  ),
+                  width: double.infinity,
+                  margin: EdgeInsets.all(20.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) =>
+                              listOfStudyMaterial(type: 'formulabookposts')));
+                    },
+                    child: Text(
+                      'Formulabooks',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: MediaQuery.of(context).size.height * 0.032),
                     ),
-                    value: value,
-                    items: types.map(buildmenuitem).toList(),
-                    onChanged: (value) => setState(() {
-                      this.value = value;
-                      type = value!;
-                      // Colors.white;
-                    }),
+                  ),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.12,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadiusDirectional.circular(12),
+                    color: Color.fromARGB(255, 161, 75, 210),
+                  ),
+                  width: double.infinity,
+                  margin: EdgeInsets.all(20.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) =>
+                              listOfStudyMaterial(type: 'otherposts')));
+                    },
+                    child: Text(
+                      'Handnotes',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: MediaQuery.of(context).size.height * 0.032),
+                    ),
                   ),
                 ),
               ],

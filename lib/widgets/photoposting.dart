@@ -10,6 +10,7 @@ import 'package:newapp/utils/utils.dart';
 import 'package:video_player/video_player.dart';
 
 import '../resources/firestoreMethods.dart';
+import '../responsive/veiwpdf.dart';
 
 class photoPosting extends StatefulWidget {
   final snap;
@@ -80,11 +81,11 @@ class _photoPostingState extends State<photoPosting> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            margin: EdgeInsets.all(5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Color.fromARGB(255, 101, 101, 101),
+              color: Color.fromARGB(186, 91, 90, 90),
             ),
             child: Column(
               children: [
@@ -122,7 +123,7 @@ class _photoPostingState extends State<photoPosting> {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12,
-                                  color: Color.fromARGB(255, 102, 158, 255)))
+                                  color: Colors.greenAccent))
                         ],
                       ),
                     )),
@@ -154,10 +155,11 @@ class _photoPostingState extends State<photoPosting> {
                 ),
                 Container(
                   width: double.infinity,
+                  margin: EdgeInsets.symmetric(vertical: 10),
                   child: RichText(
                       text: TextSpan(
                           text: widget.snap['additionalText'],
-                          style: TextStyle(color: Colors.white, fontSize: 12))),
+                          style: TextStyle(color: Colors.white, fontSize: 14))),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.37,
@@ -179,7 +181,7 @@ class _photoPostingState extends State<photoPosting> {
                         },
                         icon: Icon(Icons.thumb_up_alt_rounded,
                             color: widget.snap['likes'].contains(uid)
-                                ? Color.fromARGB(255, 173, 135, 231)
+                                ? Colors.greenAccent
                                 : Colors.white)),
                     IconButton(
                         onPressed: () {
@@ -190,12 +192,6 @@ class _photoPostingState extends State<photoPosting> {
                         },
                         icon: Icon(Icons.question_answer_rounded,
                             color: Colors.white)),
-                    Expanded(
-                        child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: IconButton(
-                          onPressed: () {}, icon: Icon(Icons.download)),
-                    ))
                   ],
                 ),
                 Row(
@@ -211,9 +207,8 @@ class _photoPostingState extends State<photoPosting> {
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white))),
                     Container(
-                        width: 45,
-                        padding: EdgeInsets.symmetric(horizontal: 7),
-                        margin: EdgeInsets.only(left: 5),
+                        width: 37,
+                        padding: EdgeInsets.symmetric(horizontal: 5),
                         alignment: Alignment.topLeft,
                         child: Text('$commentcount',
                             style: TextStyle(
@@ -248,7 +243,7 @@ class _photoPostingState extends State<photoPosting> {
             margin: EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Color.fromARGB(255, 101, 101, 101),
+              color: Color.fromARGB(186, 91, 90, 90),
             ),
             child: Column(
               children: [
@@ -286,7 +281,7 @@ class _photoPostingState extends State<photoPosting> {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12,
-                                  color: Color.fromARGB(255, 102, 158, 255)))
+                                  color: Colors.greenAccent))
                         ],
                       ),
                     )),
@@ -318,10 +313,11 @@ class _photoPostingState extends State<photoPosting> {
                 ),
                 Container(
                   width: double.infinity,
+                  margin: EdgeInsets.symmetric(vertical: 10),
                   child: RichText(
                       text: TextSpan(
                           text: widget.snap['additionalText'],
-                          style: TextStyle(color: Colors.white, fontSize: 12))),
+                          style: TextStyle(color: Colors.white, fontSize: 14))),
                 ),
                 Container(
                   width: double.infinity,
@@ -362,7 +358,7 @@ class _photoPostingState extends State<photoPosting> {
                         },
                         icon: Icon(Icons.thumb_up_alt_rounded,
                             color: widget.snap['likes'].contains(uid)
-                                ? Color.fromARGB(255, 173, 135, 231)
+                                ? Colors.greenAccent
                                 : Colors.white)),
                     IconButton(
                         onPressed: () {
@@ -377,7 +373,17 @@ class _photoPostingState extends State<photoPosting> {
                         child: Align(
                       alignment: Alignment.bottomRight,
                       child: IconButton(
-                          onPressed: () {}, icon: Icon(Icons.download)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => loadpdf(
+                                        url: widget.snap['postfileurl'],
+                                      )));
+                        },
+                        icon: Icon(Icons.remove_red_eye),
+                        color: Colors.white,
+                      ),
                     ))
                   ],
                 ),
@@ -394,9 +400,8 @@ class _photoPostingState extends State<photoPosting> {
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white))),
                     Container(
-                        width: 45,
+                        width: 37,
                         padding: EdgeInsets.symmetric(horizontal: 7),
-                        margin: EdgeInsets.only(left: 5),
                         alignment: Alignment.topLeft,
                         child: Text('$commentcount',
                             style: TextStyle(
@@ -425,11 +430,11 @@ class _photoPostingState extends State<photoPosting> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            margin: EdgeInsets.all(5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Color.fromARGB(255, 101, 101, 101),
+              color: Color.fromARGB(186, 91, 90, 90),
             ),
             child: Column(
               children: [
@@ -467,7 +472,7 @@ class _photoPostingState extends State<photoPosting> {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12,
-                                  color: Color.fromARGB(255, 102, 158, 255)))
+                                  color: Colors.greenAccent))
                         ],
                       ),
                     )),
@@ -499,10 +504,11 @@ class _photoPostingState extends State<photoPosting> {
                 ),
                 Container(
                   width: double.infinity,
+                  margin: EdgeInsets.symmetric(vertical: 10),
                   child: RichText(
                       text: TextSpan(
                           text: widget.snap['additionalText'],
-                          style: TextStyle(color: Colors.white, fontSize: 12))),
+                          style: TextStyle(color: Colors.white, fontSize: 14))),
                 ),
                 Container(
                     margin: EdgeInsets.only(top: 10, bottom: 10),
@@ -533,7 +539,7 @@ class _photoPostingState extends State<photoPosting> {
                         },
                         icon: Icon(Icons.thumb_up_alt_rounded,
                             color: widget.snap['likes'].contains(uid)
-                                ? Color.fromARGB(255, 173, 135, 231)
+                                ? Colors.greenAccent
                                 : Colors.white)),
                     IconButton(
                         onPressed: () {
@@ -551,12 +557,6 @@ class _photoPostingState extends State<photoPosting> {
                           ? Icons.pause
                           : Icons.play_arrow_rounded),
                     ),
-                    Expanded(
-                        child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: IconButton(
-                          onPressed: () {}, icon: Icon(Icons.download)),
-                    ))
                   ],
                 ),
                 Row(
@@ -572,9 +572,8 @@ class _photoPostingState extends State<photoPosting> {
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white))),
                     Container(
-                        width: 45,
+                        width: 37,
                         padding: EdgeInsets.symmetric(horizontal: 7),
-                        margin: EdgeInsets.only(left: 5),
                         alignment: Alignment.topLeft,
                         child: Text('$commentcount',
                             style: TextStyle(

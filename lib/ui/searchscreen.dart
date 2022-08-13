@@ -24,18 +24,20 @@ class _searchScreenState extends State<searchScreen> {
     return Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 165, 165, 165),
+          backgroundColor: Color.fromARGB(255, 179, 64, 251),
           title: Container(
+            height: MediaQuery.of(context).size.height * 0.08,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Color.fromARGB(255, 165, 165, 165),
+              color: Color.fromARGB(255, 255, 255, 255),
             ),
-            margin: EdgeInsets.all(10),
+            margin: EdgeInsets.all(20),
             child: TextFormField(
               controller: searchCtrl,
               decoration: const InputDecoration(
-                  labelText: 'Search users',
-                  labelStyle: TextStyle(color: Colors.white)),
+                  labelText: '  Search users',
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 114, 114, 114))),
               onFieldSubmitted: (String _) {
                 setState(() {
                   showUsers = true;
@@ -54,18 +56,11 @@ class _searchScreenState extends State<searchScreen> {
                   if (!snapshot.hasData) {
                     return const Center(child: CircularProgressIndicator());
                   }
-                  return Container(
-                    constraints: BoxConstraints.expand(),
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/backgroundimg.png'),
-                        opacity: 200.0,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: ListView.builder(
-                      itemCount: (snapshot.data! as dynamic).docs.length,
-                      itemBuilder: ((context, index) {
+                  return ListView.builder(
+                    itemCount: (snapshot.data! as dynamic).docs.length,
+                    itemBuilder: ((context, index) {
+                      if ((snapshot.data! as dynamic).docs[index]['person'] ==
+                          'Guide') {
                         return InkWell(
                           onTap: () => Navigator.of(context).push(
                               MaterialPageRoute(
@@ -85,35 +80,44 @@ class _searchScreenState extends State<searchScreen> {
                                   (snapshot.data! as dynamic).docs[index]
                                       ['username'],
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.028,
                                       fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 99, 178, 231)),
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255)),
                                 ),
                                 Text(
                                     (snapshot.data! as dynamic).docs[index]
                                         ['college'],
                                     style: TextStyle(
-                                        fontSize: 11,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.02,
                                         color:
-                                            Color.fromARGB(255, 220, 217, 217)))
+                                            Color.fromARGB(255, 115, 115, 115)))
                               ],
                             ),
                             trailing: Text(
                                 '~ ${(snapshot.data! as dynamic).docs[index]['person']}',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 12,
-                                    color: Color.fromARGB(255, 102, 158, 255))),
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            0.022,
+                                    color: Colors.greenAccent)),
                           ),
                         );
-                      }),
-                    ),
+                      } else {
+                        return Container();
+                      }
+                    }),
                   );
                 })
             : Center(
                 child: Container(
-                    height: 200,
-                    width: 200,
+                    height: MediaQuery.of(context).size.height * 0.32,
+                    width: MediaQuery.of(context).size.width * 0.36,
                     child: Icon(Icons.search_outlined,
                         color: Colors.blueGrey, size: 80)),
               ));

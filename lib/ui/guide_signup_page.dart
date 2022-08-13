@@ -98,7 +98,7 @@ class _guideSignupState extends State<guideSignup> {
             image: AssetImage(
               "assets/images/backgroundimg.png",
             ),
-            opacity: 200.0,
+            opacity: 220.0,
             fit: BoxFit.cover,
           ),
         ),
@@ -112,7 +112,7 @@ class _guideSignupState extends State<guideSignup> {
                 child: Stack(children: [
                   _image != null
                       ? CircleAvatar(
-                          radius: 64,
+                          radius: MediaQuery.of(context).size.height * 1.5,
                           backgroundImage: MemoryImage(_image!),
                         )
                       : const CircleAvatar(
@@ -145,7 +145,7 @@ class _guideSignupState extends State<guideSignup> {
                     textInputType: TextInputType.text),
               ),
               SizedBox(
-                height: 24,
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -159,7 +159,7 @@ class _guideSignupState extends State<guideSignup> {
                     textInputType: TextInputType.emailAddress),
               ),
               SizedBox(
-                height: 24,
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -173,7 +173,7 @@ class _guideSignupState extends State<guideSignup> {
                     textInputType: TextInputType.text),
               ),
               SizedBox(
-                height: 24,
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -187,7 +187,7 @@ class _guideSignupState extends State<guideSignup> {
                     textInputType: TextInputType.text),
               ),
               SizedBox(
-                height: 24,
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -208,14 +208,18 @@ class _guideSignupState extends State<guideSignup> {
                 child: Container(
                   child: Text(
                     "Sign up",
-                    style: TextStyle(color: Color.fromARGB(255, 231, 230, 230)),
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 231, 230, 230),
+                        fontWeight: FontWeight.bold,
+                        fontSize: MediaQuery.of(context).size.height * 0.03),
                   ),
-                  height: 40,
-                  width: 80,
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  width: MediaQuery.of(context).size.width * 0.18,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.purple[400]),
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.purple[400],
+                  ),
                 ),
               ),
               const SizedBox(

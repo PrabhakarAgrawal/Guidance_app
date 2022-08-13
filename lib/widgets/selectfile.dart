@@ -34,10 +34,13 @@ class _selectFileState extends State<selectFile> {
   final items = ['Handwritten notes', 'Formulabook', 'Books', 'Photo', 'Video'];
   DropdownMenuItem<String> buildmenuitem(String item) => DropdownMenuItem(
         value: item,
+        alignment: Alignment.center,
         child: Text(
           item,
           style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: Color.fromARGB(255, 136, 132, 132)),
         ),
       );
 
@@ -110,7 +113,7 @@ class _selectFileState extends State<selectFile> {
                   builder: (context) => MobileScreenLayout()));
             },
             icon: Icon(Icons.arrow_back)),
-        title: const Text('Post'),
+        title: const Text('Post '),
         centerTitle: false,
       ),
       body: Container(
@@ -120,7 +123,7 @@ class _selectFileState extends State<selectFile> {
             image: AssetImage(
               "assets/images/backgroundimg.png",
             ),
-            opacity: 200.0,
+            opacity: 220.0,
             fit: BoxFit.cover,
           ),
         ),
@@ -139,8 +142,8 @@ class _selectFileState extends State<selectFile> {
               //           fit: BoxFit.contain, image: NetworkImage("")),
               //       )),
               Container(
-                width: 50,
-                height: 50,
+                height: MediaQuery.of(context).size.height * 0.08,
+                width: MediaQuery.of(context).size.width * 0.09,
                 child: file != null
                     ? Container(
                         decoration: BoxDecoration(
@@ -155,28 +158,43 @@ class _selectFileState extends State<selectFile> {
                         iconSize: 50,
                       ),
               ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.008,
+              ),
 
               Text(
-                filename,
+                'filename - $filename',
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
               ),
-              Theme(
-                data: Theme.of(context).copyWith(canvasColor: Colors.black),
-                // width: 300,
-
-                child: DropdownButton<String>(
-                  hint: Text(
-                    "Select type of file",
-                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.001,
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: Theme(
+                  data: Theme.of(context).copyWith(canvasColor: Colors.black),
+                  child: DropdownButton<String>(
+                    hint: Text(
+                      "Select type of file",
+                      style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.height * 0.035,
+                        color: Colors.white,
+                      ),
+                    ),
+                    iconDisabledColor: Colors.black,
+                    iconEnabledColor: Colors.black,
+                    value: value,
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.white,
+                    ),
+                    items: items.map(buildmenuitem).toList(),
+                    onChanged: (value) => setState(() {
+                      this.value = value;
+                      type = value!;
+                    }),
                   ),
-                  value: value,
-                  items: items.map(buildmenuitem).toList(),
-                  onChanged: (value) => setState(() {
-                    this.value = value;
-                    type = value!;
-                    // Colors.black;
-                  }),
                 ),
               ),
 
@@ -204,8 +222,8 @@ class _selectFileState extends State<selectFile> {
                       : uploadFile(uid, username, profilePic),
                   child: Container(
                     alignment: Alignment.center,
-                    height: 40.0,
-                    width: 100.0,
+                    height: MediaQuery.of(context).size.height * 0.08,
+                    width: MediaQuery.of(context).size.width * 0.18,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadiusDirectional.circular(12.0),
                       color: Color.fromARGB(255, 139, 64, 251),
@@ -216,11 +234,12 @@ class _selectFileState extends State<selectFile> {
                               color: Colors.white,
                             ),
                           )
-                        : const Text("upload",
+                        : Text("upload",
                             style: TextStyle(
                               fontFamily: "ananias",
                               color: Colors.white,
-                              fontSize: 20,
+                              fontSize:
+                                  MediaQuery.of(context).size.height * 0.035,
                             )),
                   ))
             ],

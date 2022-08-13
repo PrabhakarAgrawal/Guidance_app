@@ -8,6 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:newapp/resources/firestoreMethods.dart';
 import 'package:video_player/video_player.dart';
 
+import '../responsive/veiwpdf.dart';
+
 class searchGuideProfile extends StatefulWidget {
   final String uid;
   const searchGuideProfile({Key? key, required this.uid}) : super(key: key);
@@ -18,6 +20,7 @@ class searchGuideProfile extends StatefulWidget {
 
 class _searchGuideProfileState extends State<searchGuideProfile> {
   String username = '';
+  String email = '';
   String person = '';
   String profilePic = '';
   String bio = '';
@@ -73,6 +76,8 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
       profilePic = (snap.data() as Map<String, dynamic>)["profilePic"];
       bio = (snap.data() as Map<String, dynamic>)["bio"];
       college = (snap.data() as Map<String, dynamic>)["college"];
+      email = (snap.data() as Map<String, dynamic>)["email"];
+
       followers = (snap.data() as Map<String, dynamic>)["followers"];
       isload = false;
     });
@@ -89,10 +94,7 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
             backgroundColor: Colors.black,
             appBar: AppBar(
               backgroundColor: Color.fromARGB(255, 139, 64, 251),
-              title: Text(
-                'Profile',
-                style: TextStyle(fontFamily: 'quick'),
-              ),
+              title: Text('Profile', style: TextStyle(fontFamily: 'ananias')),
               centerTitle: false,
             ),
             body: Container(
@@ -100,7 +102,7 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/backgroundimg.png'),
-                  opacity: 200.0,
+                  opacity: 220.0,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -110,8 +112,8 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        height: 100,
-                        width: 100,
+                        height: MediaQuery.of(context).size.height * 0.16,
+                        width: MediaQuery.of(context).size.width * 0.2,
                         margin: EdgeInsets.all(15),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
@@ -127,45 +129,66 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                           children: [
                             Text(
                               '${person} -',
-                              style:
-                                  TextStyle(fontSize: 30, color: Colors.white),
+                              style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.height * 0.04,
+                                  color: Colors.greenAccent,
+                                  fontFamily: 'ananias'),
                             ),
                             Text(
-                              '${username}',
-                              style:
-                                  TextStyle(fontSize: 30, color: Colors.white),
+                              ' ${username}',
+                              style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.height * 0.04,
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  fontFamily: 'ananias'),
                             ),
                           ],
                         ),
                       ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.008,
+                      ),
                       Container(
-                          height: 30,
-                          width: 200,
+                          height: MediaQuery.of(context).size.height * 0.13,
+                          width: double.infinity,
                           margin:
                               EdgeInsets.symmetric(vertical: 2, horizontal: 15),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: Color.fromARGB(186, 91, 90, 90)),
                           child: Center(
-                              child: Text(college,
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Bio - $bio',
                                   style: TextStyle(
-                                      fontSize: 15, color: Colors.white)))),
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.028,
+                                      color: Colors.white),
+                                ),
+                                Text(
+                                  'College - $college',
+                                  style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.028,
+                                      color: Colors.white),
+                                ),
+                                Text(
+                                  'Email - $email',
+                                  style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.028,
+                                      color: Colors.white),
+                                )
+                              ],
+                            ),
+                          )),
                       SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                          height: 60,
-                          width: double.infinity,
-                          margin:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 15),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: Color.fromARGB(234, 255, 255, 255)),
-                          child: Center(
-                              child:
-                                  Text(bio, style: TextStyle(fontSize: 15)))),
-                      SizedBox(
-                        height: 10,
+                        height: MediaQuery.of(context).size.height * 0.008,
                       ),
                       Container(
                           height: 45,
@@ -182,41 +205,94 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                               Column(
                                 children: [
                                   Container(
-                                      width: 45,
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 7),
+                                      width: MediaQuery.of(context).size.width *
+                                          0.15,
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.02),
                                       child: Text('${followers.length}',
                                           style: TextStyle(
-                                              fontSize: 16,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.03,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white))),
                                   Container(
-                                      width: 90,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.065),
                                       alignment: Alignment.topLeft,
                                       child: Text('Followers',
                                           style: TextStyle(
-                                              fontSize: 12,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.02,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white))),
                                 ],
                               ),
-                              TextButton(
-                                  onPressed: () async {
-                                    firestoreMethods().follow(
+                              Column(
+                                children: [
+                                  Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.15,
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.02),
+                                      alignment: Alignment.topLeft,
+                                      child: Text('${postlength}',
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.03,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white))),
+                                  Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.085),
+                                      alignment: Alignment.topLeft,
+                                      child: Text('Posts',
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.02,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white))),
+                                ],
+                              ),
+                              InkWell(
+                                  onTap: () async {
+                                    await firestoreMethods().follow(
                                         FirebaseAuth.instance.currentUser!.uid,
                                         widget.uid,
                                         followers);
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
-                                    width: 80,
-                                    height: 30,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.06,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.14,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
-                                        color: followers.contains(FirebaseAuth
-                                                .instance.currentUser!.uid)
-                                            ? Colors.blue
-                                            : Colors.grey),
+                                        color: Colors.greenAccent),
                                     child: followers.contains(FirebaseAuth
                                             .instance.currentUser!.uid)
                                         ? Text('Unfollow',
@@ -230,48 +306,8 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.white)),
                                   )),
-                              Column(
-                                children: [
-                                  Container(
-                                      width: 45,
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 7),
-                                      alignment: Alignment.topLeft,
-                                      child: Text('${postlength}',
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white))),
-                                  Container(
-                                      width: 60,
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 7),
-                                      alignment: Alignment.topLeft,
-                                      child: Text('Posts',
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white))),
-                                ],
-                              ),
-                              TextButton(
-                                  onPressed: () {},
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    width: 120,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
-                                        color: Colors.blue),
-                                    child: Text('Ask question?',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white)),
-                                  )),
                             ],
                           )),
-                      Divider(),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -283,42 +319,24 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                                 },
                                 child: Container(
                                     alignment: Alignment.center,
-                                    height: 40,
-                                    width: 90,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.07,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.2,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
                                       color: type == 'photoposts'
                                           ? Color.fromARGB(255, 139, 64, 251)
-                                          : Colors.white,
+                                          : Color.fromARGB(186, 91, 90, 90),
                                     ),
                                     child: Text('Photos',
                                         style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.03,
                                             fontWeight: FontWeight.bold,
-                                            color: Color.fromARGB(
-                                                255, 0, 0, 0))))),
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    type = 'videoposts';
-                                  });
-                                },
-                                child: Container(
-                                    alignment: Alignment.center,
-                                    height: 40,
-                                    width: 90,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: type == 'videoposts'
-                                          ? Color.fromARGB(255, 139, 64, 251)
-                                          : Color.fromARGB(255, 255, 255, 255),
-                                    ),
-                                    child: Text('Videos',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color.fromARGB(
-                                                255, 0, 0, 0))))),
+                                            color: Colors.white)))),
                             InkWell(
                                 onTap: () {
                                   setState(() {
@@ -327,20 +345,24 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                                 },
                                 child: Container(
                                     alignment: Alignment.center,
-                                    height: 40,
-                                    width: 90,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.07,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.2,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
                                       color: type == 'booksposts'
                                           ? Color.fromARGB(255, 139, 64, 251)
-                                          : Color.fromARGB(255, 255, 255, 255),
+                                          : Color.fromARGB(186, 91, 90, 90),
                                     ),
                                     child: Text('Books',
                                         style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.03,
                                             fontWeight: FontWeight.bold,
-                                            color: Color.fromARGB(
-                                                255, 0, 0, 0))))),
+                                            color: Colors.white)))),
                             InkWell(
                                 onTap: () {
                                   setState(() {
@@ -349,20 +371,24 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                                 },
                                 child: Container(
                                     alignment: Alignment.center,
-                                    height: 40,
-                                    width: 95,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.07,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.2,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
                                       color: type == 'formulabookposts'
                                           ? Color.fromARGB(255, 139, 64, 251)
-                                          : Color.fromARGB(255, 255, 255, 255),
+                                          : Color.fromARGB(186, 91, 90, 90),
                                     ),
                                     child: Text('Formulabooks',
                                         style: TextStyle(
-                                            fontSize: 12,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.025,
                                             fontWeight: FontWeight.bold,
-                                            color: Color.fromARGB(
-                                                255, 0, 0, 0))))),
+                                            color: Colors.white)))),
                             InkWell(
                                 onTap: () {
                                   setState(() {
@@ -371,20 +397,24 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                                 },
                                 child: Container(
                                     alignment: Alignment.center,
-                                    height: 40,
-                                    width: 90,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.07,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.2,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
                                       color: type == 'otherposts'
                                           ? Color.fromARGB(255, 139, 64, 251)
-                                          : Color.fromARGB(255, 255, 255, 255),
+                                          : Color.fromARGB(186, 91, 90, 90),
                                     ),
                                     child: Text('others',
                                         style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.03,
                                             fontWeight: FontWeight.bold,
-                                            color: Color.fromARGB(
-                                                255, 0, 0, 0))))),
+                                            color: Colors.white)))),
                           ]),
                       FutureBuilder(
                           future: FirebaseFirestore.instance
@@ -409,7 +439,7 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                                   crossAxisCount: 1,
                                   crossAxisSpacing: 0,
                                   mainAxisSpacing: 0,
-                                  childAspectRatio: 0.5,
+                                  childAspectRatio: 0.9,
                                 ),
                                 itemBuilder: (context, index) {
                                   DocumentSnapshot snap =
@@ -485,12 +515,8 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                                                                     FontWeight
                                                                         .bold,
                                                                 fontSize: 12,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        102,
-                                                                        158,
-                                                                        255)))
+                                                                color: Colors
+                                                                    .greenAccent))
                                                       ],
                                                     ),
                                                   )),
@@ -527,6 +553,8 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                                               ),
                                               Container(
                                                 width: double.infinity,
+                                                margin: EdgeInsets.only(
+                                                    bottom: 10, top: 10),
                                                 child: RichText(
                                                     text: TextSpan(
                                                         text: snap[
@@ -566,223 +594,8 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                                                                       184)),
                                                         )),
                                                   ),
-                                                  Expanded(
-                                                      child: Align(
-                                                    alignment:
-                                                        Alignment.bottomRight,
-                                                    child: IconButton(
-                                                        onPressed: () {},
-                                                        icon: Icon(
-                                                            Icons.download)),
-                                                  ))
                                                 ],
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  } else if (snap['type'] == 'Video') {
-                                    void initState() {
-                                      // TODO: implement initState
-                                      super.initState();
-                                      _videoPlayerController =
-                                          VideoPlayerController.network(
-                                              snap['postfileurl'])
-                                            ..initialize().then((_) {
-                                              setState(() {});
-                                            });
-                                    }
-
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 5, horizontal: 15),
-                                          margin: EdgeInsets.all(10),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            color: Color.fromARGB(
-                                                255, 101, 101, 101),
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  CircleAvatar(
-                                                    radius: 17,
-                                                    backgroundImage:
-                                                        NetworkImage(
-                                                            snap['profilePic']),
-                                                  ),
-                                                  Expanded(
-                                                      child: Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 16.0),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              snap['username'],
-                                                              style: TextStyle(
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                            Text(
-                                                                snap['college'],
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        11,
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            218,
-                                                                            216,
-                                                                            216)))
-                                                          ],
-                                                        ),
-                                                        Text(
-                                                            '~ ${snap['person']}',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 12,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        102,
-                                                                        158,
-                                                                        255)))
-                                                      ],
-                                                    ),
-                                                  )),
-                                                  IconButton(
-                                                      onPressed: () {
-                                                        showDialog(
-                                                            context: context,
-                                                            builder: (context) =>
-                                                                Dialog(
-                                                                    child:
-                                                                        Container(
-                                                                  height: 45,
-                                                                  child:
-                                                                      ListView(
-                                                                    children: [
-                                                                      'Report'
-                                                                    ]
-                                                                        .map((e) =>
-                                                                            InkWell(
-                                                                              onTap: () {},
-                                                                              child: Container(
-                                                                                padding: EdgeInsets.symmetric(vertical: 13, horizontal: 17),
-                                                                                child: Text(e),
-                                                                              ),
-                                                                            ))
-                                                                        .toList(),
-                                                                  ),
-                                                                )));
-                                                      },
-                                                      icon: Icon(Icons
-                                                          .more_vert_rounded),
-                                                      color: Colors.white)
-                                                ],
-                                              ),
-                                              Container(
-                                                width: double.infinity,
-                                                child: RichText(
-                                                    text: TextSpan(
-                                                        text: snap[
-                                                            'additionalText'],
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 12))),
-                                              ),
-                                              Container(
-                                                  margin: EdgeInsets.only(
-                                                      top: 10, bottom: 10),
-                                                  child: _videoPlayerController !=
-                                                              null &&
-                                                          _videoPlayerController!
-                                                              .value
-                                                              .isInitialized
-                                                      ? AspectRatio(
-                                                          aspectRatio:
-                                                              _videoPlayerController!
-                                                                  .value
-                                                                  .aspectRatio,
-                                                          child: VideoPlayer(
-                                                            _videoPlayerController!,
-                                                          ),
-                                                        )
-                                                      : Container(
-                                                          child: Text(
-                                                            "Error...can't load video",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white),
-                                                          ),
-                                                        )),
-                                              Row(
-                                                children: [
-                                                  FloatingActionButton(
-                                                    onPressed: buttonpressed,
-                                                    child: Icon(_videoPlayerController !=
-                                                                null &&
-                                                            _videoPlayerController!
-                                                                .value.isPlaying
-                                                        ? Icons.pause
-                                                        : Icons
-                                                            .play_arrow_rounded),
-                                                  ),
-                                                  Expanded(
-                                                      child: Align(
-                                                    alignment:
-                                                        Alignment.bottomRight,
-                                                    child: IconButton(
-                                                        onPressed: () {},
-                                                        icon: Icon(
-                                                            Icons.download)),
-                                                  ))
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Expanded(
-                                                    child: Container(
-                                                        alignment:
-                                                            Alignment.topRight,
-                                                        child: Text(
-                                                          DateFormat.yMMMd()
-                                                              .format(snap[
-                                                                      'date']
-                                                                  .toDate()),
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      184,
-                                                                      184,
-                                                                      184)),
-                                                        )),
-                                                  )
-                                                ],
-                                              )
                                             ],
                                           ),
                                         ),
@@ -858,12 +671,8 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                                                                     FontWeight
                                                                         .bold,
                                                                 fontSize: 12,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        102,
-                                                                        158,
-                                                                        255)))
+                                                                color: Colors
+                                                                    .greenAccent))
                                                       ],
                                                     ),
                                                   )),
@@ -900,6 +709,8 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                                               ),
                                               Container(
                                                 width: double.infinity,
+                                                margin: EdgeInsets.only(
+                                                    bottom: 10, top: 10),
                                                 child: RichText(
                                                     text: TextSpan(
                                                         text: snap[
@@ -955,9 +766,21 @@ class _searchGuideProfileState extends State<searchGuideProfile> {
                                                     alignment:
                                                         Alignment.bottomRight,
                                                     child: IconButton(
-                                                        onPressed: () {},
-                                                        icon: Icon(
-                                                            Icons.download)),
+                                                      onPressed: () {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        loadpdf(
+                                                                          url: snap[
+                                                                              'postfileurl'],
+                                                                        )));
+                                                      },
+                                                      icon: Icon(Icons
+                                                          .remove_red_eye_sharp),
+                                                      color: Colors.white,
+                                                    ),
                                                   ))
                                                 ],
                                               ),
