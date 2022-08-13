@@ -21,4 +21,4 @@ The following are the Salient Features of this app:
 •	It allows aspirants to ask questions directly to IIT/NIT students using the chat feature.
 •	The search feature helps aspirants to follow a guide and access their uploaded study material.
 
-GET OUR APP HERE : 
+GET OUR APP HERE : https://drive.google.com/drive/folders/1Fn4fnaPmB84yBsAvf14yAHPqp_cG5diq?usp=sharing
