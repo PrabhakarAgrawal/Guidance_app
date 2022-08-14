@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newapp/ui/contentpage.dart';
 import 'package:newapp/widgets/listofstudymaterial.dart';
 
 class StudyMaterial extends StatefulWidget {
@@ -16,6 +17,13 @@ class _StudyMaterialState extends State<StudyMaterial> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
+        leading: IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => contentPage(),
+                  ));
+                },
+                icon: Icon(Icons.arrow_back)),
         title: Text(
           'Study Material',
           style: TextStyle(fontFamily: 'ananias'),

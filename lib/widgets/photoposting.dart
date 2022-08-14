@@ -79,6 +79,7 @@ class _photoPostingState extends State<photoPosting> {
     if (widget.snap['type'] == 'Photo') {
       return Column(
         mainAxisSize: MainAxisSize.min,
+        
         children: [
           Container(
             padding: EdgeInsets.symmetric(vertical: 5, horizontal: 2),

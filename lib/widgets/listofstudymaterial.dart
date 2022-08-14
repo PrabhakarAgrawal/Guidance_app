@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:newapp/responsive/veiwpdf.dart';
+import 'package:newapp/ui/study_material.dart';
 
 class listOfStudyMaterial extends StatefulWidget {
   final type;
@@ -18,8 +19,15 @@ class _listOfStudyMaterialState extends State<listOfStudyMaterial> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
+        leading: IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => StudyMaterial(),
+                  ));
+                },
+                icon: Icon(Icons.arrow_back)),
         title: Text(
-          'Study Matrial',
+          'Study Material',
           style: TextStyle(fontFamily: 'ananias'),
         ),
         centerTitle: false,
