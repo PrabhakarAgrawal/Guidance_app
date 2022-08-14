@@ -127,7 +127,9 @@ class _loginscreenState extends State<loginscreen> {
                         hintText: 'Enter Your Password',
                         isPass: hidepassword,
                         textEditingController: _passwordController,
-                        textInputType: TextInputType.emailAddress),
+                        textInputType: TextInputType.emailAddress
+                        ),
+                        
                     InkWell(
                       onTap: togglepassword,
                       child: Icon(

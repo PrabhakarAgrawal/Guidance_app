@@ -109,7 +109,7 @@ class _selectFileState extends State<selectFile> {
         leading: IconButton(
             onPressed: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => MobileScreenLayout()));
+                  builder: (context) => AddPost()));
             },
             icon: Icon(Icons.arrow_back)),
         title: const Text(

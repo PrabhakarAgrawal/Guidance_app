@@ -84,51 +84,87 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
       person = (snap.data() as Map<String, dynamic>)["person"];
     });
   }
+  Future<bool?> showWarning(BuildContext context) async => showDialog<bool>(
+      context: context,
+      builder: (context) =>  AlertDialog(
+            title: Text("Do you want to exit the app?", style: TextStyle(fontFamily: "Ananias", fontSize: 16.0),),
+            alignment: Alignment.center,
+            actions: [
+              ElevatedButton(
+                onPressed: ()=>Navigator.pop(context, false), child: const Text("No", style: TextStyle(fontFamily: "Ananias", fontSize: 14),),style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+      (Set<MaterialState> states) {
+        if (states.contains(MaterialState.pressed))
+          return Theme.of(context).colorScheme.primary.withOpacity(0.5);
+        return null; // Use the component's default.
+      },
+    ),
+  ),
+                ),
+              ElevatedButton(child: Text("Yes",style: TextStyle(fontFamily: "Ananias", fontSize: 14),), onPressed: ()=>Navigator.pop(context, true),style:ButtonStyle(
+    backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+      (Set<MaterialState> states) {
+        if (states.contains(MaterialState.pressed))
+          return Theme.of(context).colorScheme.primary.withOpacity(0.5);
+        return null; // Use the component's default.
+      },
+    ),
+  ), )
+            ],
+          )
+          );
 
   @override
   Widget build(BuildContext context) {
     if (person == 'Guide') {
-      return Material(
-        child: Scaffold(
-          body: PageView(
-            children: homeScreenItems1,
-            physics: NeverScrollableScrollPhysics(),
-            controller: pageController,
-            onPageChanged: onPageChanged,
-          ),
-          bottomNavigationBar: CupertinoTabBar(
-            items: [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.home,
-                      color: _page == 0
-                          ? Colors.white
-                          : Color.fromARGB(255, 197, 194, 194),
-                      size: 30.0),
-                  label: ''),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.search_rounded,
-                      color: _page == 1
-                          ? Colors.white
-                          : Color.fromARGB(255, 197, 194, 194),
-                      size: 30.0),
-                  label: ''),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.add_circle_outline,
-                      color: _page == 2
-                          ? Colors.white
-                          : Color.fromARGB(255, 197, 194, 194),
-                      size: 30.0),
-                  label: ''),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person,
-                      color: _page == 3
-                          ? Colors.white
-                          : Color.fromARGB(255, 197, 194, 194),
-                      size: 30.0),
-                  label: ''),
-            ],
-            backgroundColor: Color.fromARGB(255, 139, 64, 251),
-            onTap: navigationTapped,
+      return WillPopScope(
+        onWillPop: () async {
+        print("quit button pressed");
+        final shouldpop = await showWarning(context);
+
+        return shouldpop??false;},
+        child: Material(
+          child: Scaffold(
+            body: PageView(
+              children: homeScreenItems1,
+              physics: NeverScrollableScrollPhysics(),
+              controller: pageController,
+              onPageChanged: onPageChanged,
+            ),
+            bottomNavigationBar: CupertinoTabBar(
+              items: [
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.home,
+                        color: _page == 0
+                            ? Colors.white
+                            : Color.fromARGB(255, 197, 194, 194),
+                        size: 30.0),
+                    label: ''),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.search_rounded,
+                        color: _page == 1
+                            ? Colors.white
+                            : Color.fromARGB(255, 197, 194, 194),
+                        size: 30.0),
+                    label: ''),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.add_circle_outline,
+                        color: _page == 2
+                            ? Colors.white
+                            : Color.fromARGB(255, 197, 194, 194),
+                        size: 30.0),
+                    label: ''),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.person,
+                        color: _page == 3
+                            ? Colors.white
+                            : Color.fromARGB(255, 197, 194, 194),
+                        size: 30.0),
+                    label: ''),
+              ],
+              backgroundColor: Color.fromARGB(255, 139, 64, 251),
+              onTap: navigationTapped,
+            ),
           ),
         ),
       );
