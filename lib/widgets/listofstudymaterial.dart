@@ -45,7 +45,7 @@ class _listOfStudyMaterialState extends State<listOfStudyMaterial> {
               );
             }
             return GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: AlwaysScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: (snapshot.data! as dynamic).docs.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

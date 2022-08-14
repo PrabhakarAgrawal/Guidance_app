@@ -49,7 +49,6 @@ class _commentScreenState extends State<commentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
         title: const Text(
@@ -58,99 +57,117 @@ class _commentScreenState extends State<commentScreen> {
         ),
         centerTitle: false,
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          constraints: BoxConstraints.expand(),
-          decoration: const BoxDecoration(
-            color: Colors.black,
-            image: DecorationImage(
-              image: AssetImage('assets/images/backgroundimg.png'),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('posts')
-                .doc(widget.snap['postId'])
-                .collection('comments')
-                .orderBy('datePublished', descending: true)
-                .snapshots(),
-            builder: (context,
-                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-
-              return ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) => commentPosting(
-                  snap: snapshot.data!.docs[index].data(),
-                ),
-              );
-            },
+      body: Container(
+        constraints: BoxConstraints.expand(),
+        decoration: const BoxDecoration(
+          color: Colors.black,
+          image: DecorationImage(
+            image: AssetImage('assets/images/backgroundimg.png'),
+            fit: BoxFit.cover,
           ),
         ),
-      ),
-      bottomNavigationBar: Container(
-        color: Colors.black,
-        height: MediaQuery.of(context).size.height * 0.10,
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-          margin: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Color.fromARGB(84, 101, 101, 101),
-          ),
-          child: Row(
+        child: SingleChildScrollView(
+          reverse: true,
+          child: Column(
             children: [
-              CircleAvatar(
-                backgroundImage: NetworkImage(profilePic),
-                radius: 20,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 8),
-                  child: TextField(
-                    controller: _commentctrl,
-                    decoration: InputDecoration(
-                      hintText: 'Type your answer',
-                      hintStyle:
-                          TextStyle(color: Color.fromARGB(157, 255, 255, 255)),
-                      border: InputBorder.none,
-                    ),
-                    style: TextStyle(color: Color.fromARGB(255, 212, 211, 211)),
-                  ),
+              Container(
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('posts')
+                      .doc(widget.snap['postId'])
+                      .collection('comments')
+                      .orderBy('datePublished', descending: true)
+                      .snapshots(),
+                  builder: (context,
+                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                          snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.80,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      child: ListView.builder(
+                        physics: AlwaysScrollableScrollPhysics(),
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) => commentPosting(
+                          snap: snapshot.data!.docs[index].data(),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
-              InkWell(
-                onTap: () async {
-                  await firestoreMethods().postComment(widget.snap['postId'],
-                      _commentctrl.text, uid, username, profilePic, person);
-                  setState(() {
-                    _commentctrl.text = '';
-                  });
-                },
+              Container(
+                color: Colors.black,
+                height: MediaQuery.of(context).size.height * 0.10,
                 child: Container(
-                  alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height * 0.06,
-                  width: MediaQuery.of(context).size.height * 0.10,
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Color.fromARGB(255, 139, 64, 251),
+                    borderRadius: BorderRadius.circular(8),
+                    color: Color.fromARGB(84, 101, 101, 101),
                   ),
-                  child: const Text(
-                    'Post',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(profilePic),
+                        radius: 20,
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16, right: 8),
+                          child: TextField(
+                            controller: _commentctrl,
+                            decoration: InputDecoration(
+                              hintText: 'Type your answer',
+                              hintStyle: TextStyle(
+                                  color: Color.fromARGB(157, 255, 255, 255)),
+                              border: InputBorder.none,
+                            ),
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 212, 211, 211)),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          await firestoreMethods().postComment(
+                              widget.snap['postId'],
+                              _commentctrl.text,
+                              uid,
+                              username,
+                              profilePic,
+                              person);
+                          setState(() {
+                            _commentctrl.text = '';
+                          });
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: MediaQuery.of(context).size.height * 0.06,
+                          width: MediaQuery.of(context).size.height * 0.10,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Color.fromARGB(255, 139, 64, 251),
+                          ),
+                          child: const Text(
+                            'Post',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

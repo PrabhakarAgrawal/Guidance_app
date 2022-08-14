@@ -66,6 +66,7 @@ class _searchScreenState extends State<searchScreen> {
                         return const Center(child: CircularProgressIndicator());
                       }
                       return ListView.builder(
+                        physics: AlwaysScrollableScrollPhysics(),
                         itemCount: (snapshot.data! as dynamic).docs.length,
                         itemBuilder: ((context, index) {
                           if ((snapshot.data! as dynamic).docs[index]

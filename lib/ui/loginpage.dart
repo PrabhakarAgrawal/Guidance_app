@@ -71,7 +71,6 @@ class _loginscreenState extends State<loginscreen> {
   Widget build(BuildContext context) {
     final fsize = MediaQuery.of(context).size.width;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: Container(
         constraints: BoxConstraints.expand(),
@@ -87,6 +86,7 @@ class _loginscreenState extends State<loginscreen> {
             horizontal: MediaQuery.of(context).size.width * 0.06),
         width: double.infinity,
         child: SingleChildScrollView(
+          reverse: true,
           child: Column(
             children: [
               Container(

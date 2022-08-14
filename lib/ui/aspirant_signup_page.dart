@@ -80,7 +80,6 @@ class _aspirantSignupState extends State<aspirantSignup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
         leading: IconButton(
@@ -110,6 +109,7 @@ class _aspirantSignupState extends State<aspirantSignup> {
         ),
         width: double.infinity,
         child: SingleChildScrollView(
+          reverse: true,
           child: Column(
             children: [
               Padding(

@@ -87,7 +87,6 @@ class _guideSignupState extends State<guideSignup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 139, 64, 251),
         leading: IconButton(
@@ -117,6 +116,7 @@ class _guideSignupState extends State<guideSignup> {
         padding: EdgeInsets.symmetric(horizontal: 32),
         width: double.infinity,
         child: SingleChildScrollView(
+          reverse: true,
           child: Column(
             children: [
               Padding(
